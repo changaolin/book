@@ -1,0 +1,10 @@
+[book]
+title = "Hello World"
+authors = ["Changaolin"]
+description = "The example book covers examples."
+multilingual = false
+src = "src"
+
+[output.html.playground]
+editable = false
+mathjax-support = true
