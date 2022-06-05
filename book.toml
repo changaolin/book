@@ -1,7 +1,7 @@
 [book]
-title = "Hello World"
-authors = ["Changaolin"]
-description = "The example book covers examples."
+title = "梦北"
+authors = ["changaolin"]
+description = "学习笔记"
 multilingual = false
 src = "src"
 
