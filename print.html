@@ -383,6 +383,85 @@ success
 <a class="header" href="print.html#7-直播相关" id="7-直播相关"><h2>7. 直播相关</h2></a>
 <a class="header" href="print.html#8-滤镜" id="8-滤镜"><h2>8. 滤镜</h2></a>
 <a class="header" href="print.html#cmake-模板" id="cmake-模板"><h1>CMAKE 模板</h1></a>
+<a class="header" href="print.html#a-hrefhttpscmakeorgcmakehelpv319modulefindpkgconfightmlhighlightpkgcommandpkg_check_modulescmakepkga" id="a-hrefhttpscmakeorgcmakehelpv319modulefindpkgconfightmlhighlightpkgcommandpkg_check_modulescmakepkga"><h2><a href="https://cmake.org/cmake/help/v3.19/module/FindPkgConfig.html?highlight=pkg#command:pkg_check_modules">CMake+Pkg</a></h2></a>
+<ul>
+<li>
+<p><code>&lt;XXX&gt;_FOUND</code></p>
+<p>set to 1 if module(s) exist</p>
+</li>
+<li>
+<p><code>&lt;XXX&gt;_LIBRARIES</code></p>
+<p>only the libraries (without the ‘-l’)</p>
+</li>
+<li>
+<p><code>&lt;XXX&gt;_LINK_LIBRARIES</code></p>
+<p>the libraries and their absolute paths</p>
+</li>
+<li>
+<p><code>&lt;XXX&gt;_LIBRARY_DIRS</code></p>
+<p>the paths of the libraries (without the ‘-L’)</p>
+</li>
+<li>
+<p><code>&lt;XXX&gt;_LDFLAGS</code></p>
+<p>all required linker flags</p>
+</li>
+<li>
+<p><code>&lt;XXX&gt;_LDFLAGS_OTHER</code></p>
+<p>all other linker flags</p>
+</li>
+<li>
+<p><code>&lt;XXX&gt;_INCLUDE_DIRS</code></p>
+<p>the ‘-I’ preprocessor flags (without the ‘-I’)</p>
+</li>
+<li>
+<p><code>&lt;XXX&gt;_CFLAGS</code></p>
+<p>all required cflags</p>
+</li>
+<li>
+<p><code>&lt;XXX&gt;_CFLAGS_OTHER</code></p>
+<p>the other compiler flags</p>
+</li>
+</ul>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.19)
+project(player)
+
+set(CMAKE_CXX_STANDARD 11)
+list(APPEND SOURCE
+    src/main.c)
+set(ENV{PKG_CONFIG_PATH} 
+    /usr/local/sdl2/lib/pkgconfig:/usr/local/ffmpeg/lib/pkgconfig
+)
+find_package(PkgConfig)
+pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET libavcodec libavformat libavutil)
+pkg_check_modules(SDL2 REQUIRED IMPORTED_TARGET sdl2)
+add_executable(${PROJECT_NAME} ${SOURCE})
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    PkgConfig::FFMPEG
+    PkgConfig::SDL2
+    )
+</code></pre>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.19)
+project(player)
+
+set(CMAKE_CXX_STANDARD 11)
+list(APPEND SOURCE
+    src/main.c)
+set(ENV{PKG_CONFIG_PATH} 
+    /usr/local/sdl2/lib/pkgconfig:/usr/local/ffmpeg/lib/pkgconfig
+)
+find_package(PkgConfig)
+pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET libavcodec libavformat libavutil)
+pkg_check_modules(SDL2 REQUIRED IMPORTED_TARGET sdl2)
+add_executable(player ${SOURCE})
+include_directories(
+    ${FFMPEG_INCLUDE_DIRS}
+    ${SDL2_INCLUDE_DIRS}
+    )
+target_link_libraries(player PRIVATE
+    ${FFMPEG_LDFLAGS}
+    ${SDL2_LDFLAGS}
+    )
+</code></pre>
 
                     </main>
 
@@ -417,6 +496,21 @@ success
             }
         </script>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         
