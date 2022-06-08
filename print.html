@@ -224,7 +224,7 @@
 </ul>
 <a class="header" href="print.html#程序员笔记" id="程序员笔记"><h1>程序员笔记</h1></a>
 <a class="header" href="print.html#流媒体笔记" id="流媒体笔记"><h1>流媒体笔记</h1></a>
-<a class="header" href="print.html#ffmpeg-命令行学习笔记" id="ffmpeg-命令行学习笔记"><h1>FFMPEG 命令行学习笔记</h1></a>
+<a class="header" href="print.html#ffmpeg-命令行学习" id="ffmpeg-命令行学习"><h1>FFMPEG 命令行学习</h1></a>
 <a class="header" href="print.html#a-hrefhttpffmpegorgffmpeghtml命令分类a" id="a-hrefhttpffmpegorgffmpeghtml命令分类a"><h1><a href="http://ffmpeg.org/ffmpeg.html">命令分类</a></h1></a>
 <a class="header" href="print.html#0-基本格式" id="0-基本格式"><h2>0. 基本格式</h2></a>
 <pre><code class="language-shell">ffmpeg [global_options] {[input_file_options] -i input_url} ... {[output_file_options] output_url} ...
@@ -416,21 +416,6 @@ success
             }
         </script>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         
