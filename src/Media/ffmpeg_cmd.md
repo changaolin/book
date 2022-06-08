@@ -1,4 +1,4 @@
-# FFMPEG 命令行学习笔记
+# FFMPEG 命令行学习
 
 # [命令分类](http://ffmpeg.org/ffmpeg.html)
 
