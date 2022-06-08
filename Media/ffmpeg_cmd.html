@@ -2,13 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>梦北</title>
+        <title>FFMPEG 命令行学习笔记 - 梦北</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="学习笔记">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <base href="">
+        <base href="../">
 
         <link rel="stylesheet" href="book.css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -73,7 +73,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li></ol></li></ol>
+            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html" class="active"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -119,117 +119,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="print.html#readme" id="readme"><h1>README</h1></a>
-<a class="header" href="print.html#cpp学习笔记" id="cpp学习笔记"><h1>CPP学习笔记</h1></a>
-<a class="header" href="print.html#基于类对象" id="基于类对象"><h1>基于类（对象）</h1></a>
-<ul>
-<li>
-<p>类是<font color='red'><strong>数据</strong></font>和数据的处理函数的一种组织形式。</p>
-</li>
-<li>
-<p>类的设计要点（优先考虑<font color='red'><strong>数据</strong></font>的设计）：</p>
-<ul>
-<li>
-<p>类Header 和 类Body</p>
-</li>
-<li>
-<p>类分为无指针类，和有指针类（拷贝构造，delete []等）</p>
-</li>
-<li>
-<p>构造函数无返回值，尽量使用构造参数列表形式。</p>
-<ul>
-<li>拷贝构造：String(const String&amp; str)</li>
-<li>拷贝赋值：String&amp; operator=(const String&amp; str)  || return *this</li>
-<li>委托构造</li>
-</ul>
-</li>
-<li>
-<p>函数构造需要考虑（名称-参数（类型，权限）-返回值（类型，权限））：</p>
-<ul>
-<li>函数分为类内函数和全局函数（const 放在 成员函数上，不放在全局函数上）</li>
-<li>参数类型，仅可能的使用引用传递</li>
-<li>考虑是否使用const 修饰入参</li>
-<li>返回值尽可能使用引用返回</li>
-<li>考虑返回值是否使用const</li>
-</ul>
-</li>
-<li>
-<p>static</p>
-<ul>
-<li>静态函数只能处理静态数据</li>
-<li>static 数据只有一份：instance</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<a class="header" href="print.html#面向对象" id="面向对象"><h1>面向对象</h1></a>
-<ul>
-<li>复合 （内存 has a， Container / Component）
-<ul>
-<li>构造由内到外</li>
-<li>析构由外到内</li>
-</ul>
-</li>
-<li>委托（复合 by reference，Handle / Body）
-<ul>
-<li>共享，引用计数</li>
-</ul>
-</li>
-<li>继承（is a，子类中有一部分父类的信息，继承数据，继承函数的调用权）
-<ul>
-<li>构造由内（父类）而外</li>
-<li>析构由外而内</li>
-<li>虚函数（virtual）
-<ul>
-<li>非虚函数：override 不希望子类重写</li>
-<li>虚函数：希望子类override 重写，已经有默认实现</li>
-<li>纯虚函数：子类必须override vitual func = 0;，没有默认实现</li>
-<li>虚指针 &amp;&amp; 虚表（静态绑定-- call某个地址 ｜ 动态--绑定看调用方，多态）
-<ul>
-<li>一定是指针调用触发 虚链路（多态）</li>
-<li>三个条件：指针，虚函数，向上转型</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<a class="header" href="print.html#1-零散" id="1-零散"><h1>1 零散</h1></a>
-<a class="header" href="print.html#转换函数" id="转换函数"><h2>转换函数</h2></a>
-<a class="header" href="print.html#explict明白的明确的" id="explict明白的明确的"><h2>explict（明白的，明确的）</h2></a>
-<ul>
-<li>non-explict-one-argument ctor</li>
-</ul>
-<a class="header" href="print.html#pointer-likeclass智能指针迭代器" id="pointer-likeclass智能指针迭代器"><h2>Pointer-likeClass（智能指针，迭代器）</h2></a>
-<a class="header" href="print.html#function-likeclass仿函数" id="function-likeclass仿函数"><h2>Function-likeClass（仿函数）</h2></a>
-<a class="header" href="print.html#类模板" id="类模板"><h2>类模板</h2></a>
-<ul>
-<li>使用时指定类型</li>
-</ul>
-<a class="header" href="print.html#函数模板" id="函数模板"><h2>函数模板</h2></a>
-<a class="header" href="print.html#成员模板" id="成员模板"><h2>成员模板</h2></a>
-<a class="header" href="print.html#模板特化全偏特化-范围个数缩小" id="模板特化全偏特化-范围个数缩小"><h2>模板特化（全/偏特化-范围｜个数缩小）</h2></a>
-<a class="header" href="print.html#模板模板参数" id="模板模板参数"><h2>模板模板参数</h2></a>
-<a class="header" href="print.html#数量不定的模板参数typename-typessizeofargs" id="数量不定的模板参数typename-typessizeofargs"><h2>数量不定的模板参数：typename... Types：sizeof...(args)</h2></a>
-<a class="header" href="print.html#auto编译时推理" id="auto编译时推理"><h2>auto（编译时推理）</h2></a>
-<ul>
-<li>声明时需要定义</li>
-</ul>
-<a class="header" href="print.html#objectmodel" id="objectmodel"><h2>ObjectModel</h2></a>
-<ul>
-<li>虚指针（vptr）</li>
-<li>虚表（vtbl）</li>
-</ul>
-<a class="header" href="print.html#程序员笔记" id="程序员笔记"><h1>程序员笔记</h1></a>
-<a class="header" href="print.html#流媒体笔记" id="流媒体笔记"><h1>流媒体笔记</h1></a>
-<a class="header" href="print.html#ffmpeg-命令行学习笔记" id="ffmpeg-命令行学习笔记"><h1>FFMPEG 命令行学习笔记</h1></a>
-<a class="header" href="print.html#a-hrefhttpffmpegorgffmpeghtml命令分类a" id="a-hrefhttpffmpegorgffmpeghtml命令分类a"><h1><a href="http://ffmpeg.org/ffmpeg.html">命令分类</a></h1></a>
-<a class="header" href="print.html#0-基本格式" id="0-基本格式"><h2>0. 基本格式</h2></a>
+                        <a class="header" href="Media/ffmpeg_cmd.html#ffmpeg-命令行学习笔记" id="ffmpeg-命令行学习笔记"><h1>FFMPEG 命令行学习笔记</h1></a>
+<a class="header" href="Media/ffmpeg_cmd.html#a-hrefhttpffmpegorgffmpeghtml命令分类a" id="a-hrefhttpffmpegorgffmpeghtml命令分类a"><h1><a href="http://ffmpeg.org/ffmpeg.html">命令分类</a></h1></a>
+<a class="header" href="Media/ffmpeg_cmd.html#0-基本格式" id="0-基本格式"><h2>0. 基本格式</h2></a>
 <pre><code class="language-shell">ffmpeg [global_options] {[input_file_options] -i input_url} ... {[output_file_options] output_url} ...
 </code></pre>
-<a class="header" href="print.html#input_url--i" id="input_url--i"><h2>Input_url (-i)</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#input_url--i" id="input_url--i"><h2>Input_url (-i)</h2></a>
 <ul>
 <li>regular files</li>
 <li>pipes</li>
@@ -238,7 +133,7 @@
 <li>Based 0 numbers</li>
 <li>...</li>
 </ul>
-<a class="header" href="print.html#input-or-output-data-types" id="input-or-output-data-types"><h2>Input or output data types</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#input-or-output-data-types" id="input-or-output-data-types"><h2>Input or output data types</h2></a>
 <ul>
 <li>video</li>
 <li>audios</li>
@@ -246,8 +141,8 @@
 <li>attachment</li>
 <li>data</li>
 </ul>
-<a class="header" href="print.html#stream" id="stream"><h2>Stream</h2></a>
-<a class="header" href="print.html#selection" id="selection"><h3>selection</h3></a>
+<a class="header" href="Media/ffmpeg_cmd.html#stream" id="stream"><h2>Stream</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#selection" id="selection"><h3>selection</h3></a>
 <ul>
 <li>-map (attachment streams can only use map)</li>
 <li>-vn</li>
@@ -255,11 +150,11 @@
 <li>-sn</li>
 <li>-dn</li>
 </ul>
-<a class="header" href="print.html#handling" id="handling"><h3>handling</h3></a>
+<a class="header" href="Media/ffmpeg_cmd.html#handling" id="handling"><h3>handling</h3></a>
 <ul>
 <li>-codec</li>
 </ul>
-<a class="header" href="print.html#example" id="example"><h3>example</h3></a>
+<a class="header" href="Media/ffmpeg_cmd.html#example" id="example"><h3>example</h3></a>
 <pre><code>input file 'A.avi'
       stream 0: video 640x360
       stream 1: audio 2 channels
@@ -304,7 +199,7 @@ fail
         -map '[outv2]' -map 1:a:0 out3.mkv
 success
 </code></pre>
-<a class="header" href="print.html#基本流程" id="基本流程"><h2>基本流程</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#基本流程" id="基本流程"><h2>基本流程</h2></a>
 <pre><code> _______              ______________
 |       |            |              |
 | input |  demuxer   | encoded data |   decoder
@@ -324,8 +219,8 @@ success
 
 
 </code></pre>
-<a class="header" href="print.html#filtering-vf-or--af" id="filtering-vf-or--af"><h2>Filtering（-vf or -af）</h2></a>
-<a class="header" href="print.html#simple-filtergraphs" id="simple-filtergraphs"><h3>simple filtergraphs</h3></a>
+<a class="header" href="Media/ffmpeg_cmd.html#filtering-vf-or--af" id="filtering-vf-or--af"><h2>Filtering（-vf or -af）</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#simple-filtergraphs" id="simple-filtergraphs"><h3>simple filtergraphs</h3></a>
 <pre><code> _________                        ______________
 |         |                      |              |
 | decoded |                      | encoded data |
@@ -338,14 +233,14 @@ success
                 |__________|
 
 </code></pre>
-<a class="header" href="print.html#filter-for-video" id="filter-for-video"><h3>filter for video</h3></a>
+<a class="header" href="Media/ffmpeg_cmd.html#filter-for-video" id="filter-for-video"><h3>filter for video</h3></a>
 <pre><code> _______        _____________        _______        ________
 |       |      |             |      |       |      |        |
 | input | ---&gt; | deinterlace | ---&gt; | scale | ---&gt; | output |
 |_______|      |_____________|      |_______|      |________|
 
 </code></pre>
-<a class="header" href="print.html#complex-filter-graphs" id="complex-filter-graphs"><h2>Complex filter graphs</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#complex-filter-graphs" id="complex-filter-graphs"><h2>Complex filter graphs</h2></a>
 <pre><code> _________
 |         |
 | input 0 |\                    __________
@@ -364,7 +259,7 @@ success
 |_________|
 
 </code></pre>
-<a class="header" href="print.html#stream-copy" id="stream-copy"><h2>Stream Copy</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#stream-copy" id="stream-copy"><h2>Stream Copy</h2></a>
 <pre><code> _______              ______________            ________
 |       |            |              |          |        |
 | input |  demuxer   | encoded data |  muxer   | output |
@@ -372,21 +267,25 @@ success
 |_______|            |______________|          |________|
 
 </code></pre>
-<a class="header" href="print.html#options" id="options"><h2>Options</h2></a>
-<a class="header" href="print.html#stream-specifiers" id="stream-specifiers"><h3>Stream specifiers</h3></a>
-<a class="header" href="print.html#1-基本查询命令" id="1-基本查询命令"><h2>1. 基本查询命令</h2></a>
-<a class="header" href="print.html#2-录制命令" id="2-录制命令"><h2>2. 录制命令</h2></a>
-<a class="header" href="print.html#3-分解复用" id="3-分解复用"><h2>3. 分解/复用</h2></a>
-<a class="header" href="print.html#4-处理原始数据" id="4-处理原始数据"><h2>4. 处理原始数据</h2></a>
-<a class="header" href="print.html#5-裁剪与合并" id="5-裁剪与合并"><h2>5. 裁剪与合并</h2></a>
-<a class="header" href="print.html#6-图片视频互转" id="6-图片视频互转"><h2>6. 图片/视频互转</h2></a>
-<a class="header" href="print.html#7-直播相关" id="7-直播相关"><h2>7. 直播相关</h2></a>
-<a class="header" href="print.html#8-滤镜" id="8-滤镜"><h2>8. 滤镜</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#options" id="options"><h2>Options</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#stream-specifiers" id="stream-specifiers"><h3>Stream specifiers</h3></a>
+<a class="header" href="Media/ffmpeg_cmd.html#1-基本查询命令" id="1-基本查询命令"><h2>1. 基本查询命令</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#2-录制命令" id="2-录制命令"><h2>2. 录制命令</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#3-分解复用" id="3-分解复用"><h2>3. 分解/复用</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#4-处理原始数据" id="4-处理原始数据"><h2>4. 处理原始数据</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#5-裁剪与合并" id="5-裁剪与合并"><h2>5. 裁剪与合并</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#6-图片视频互转" id="6-图片视频互转"><h2>6. 图片/视频互转</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#7-直播相关" id="7-直播相关"><h2>7. 直播相关</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#8-滤镜" id="8-滤镜"><h2>8. 滤镜</h2></a>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="Media/README.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
                         
 
                         
@@ -397,6 +296,10 @@ success
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="Media/README.html" class="nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
                 
 
                 
@@ -437,12 +340,6 @@ success
 
         
 
-        
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                window.print();
-            })
-        </script>
         
 
         <script src="highlight.js"></script>
