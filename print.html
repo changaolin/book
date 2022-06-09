@@ -73,7 +73,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo</a></li></ol></li></ol>
+            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -753,6 +753,75 @@ int main(int argc, char* argv[])
     return 0;
 }
 </code></pre>
+<a class="header" href="print.html#pcmplayer-democ" id="pcmplayer-democ"><h1>PCMPLayer Demo(C)</h1></a>
+<pre><code class="language-C">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;SDL.h&gt;
+#include &lt;pthread.h&gt;
+#define BLOCK_SIZE 4096000
+unsigned char* audio_buf = NULL;
+unsigned char* audio_pos = NULL;
+size_t buffer_len = 0;
+void read_audio_data(void* userdatai, Uint8* stream, int len)
+{
+    if (buffer_len == 0) {
+        return;
+    }
+    SDL_memset(stream, 0, len);
+    len = (len &lt; buffer_len) ? len : buffer_len;
+    SDL_MixAudio(stream, audio_pos, len, SDL_MIX_MAXVOLUME);
+    audio_pos += len;
+    buffer_len -= len;
+}
+int main(int argc, char* argv[])
+{
+    if (SDL_Init(SDL_INIT_AUDIO) != 0) {
+        SDL_Log(&quot;init fail!\n&quot;);
+        return -1;
+    }
+    const char* path = &quot;1.pcm&quot;;
+    FILE* audio_fd = fopen(path, &quot;r&quot;);
+    if (audio_fd == NULL) {
+        SDL_Log(&quot;open fail!\n&quot;);
+        SDL_Quit();
+        return -1;
+    }
+    audio_buf = malloc(BLOCK_SIZE);
+    if (audio_buf == NULL) {
+        SDL_Log(&quot;malloc fail!\n&quot;);
+        fclose(audio_fd);
+        SDL_Quit();
+    }
+    SDL_AudioSpec spec;
+    spec.freq = 48000;
+    spec.channels = 2;
+    spec.format = AUDIO_S16SYS;
+    spec.callback = read_audio_data;
+    spec.userdata = NULL;
+    if (SDL_OpenAudio(&amp;spec, NULL) != 0) {
+        SDL_Log(&quot;open audio fail!\n&quot;);
+        fclose(audio_fd);
+        free(audio_buf);
+        SDL_Quit();
+        return -1;
+    }
+    SDL_PauseAudio(0);
+    do {
+        buffer_len = fread(audio_buf, 1, BLOCK_SIZE, audio_fd);
+        audio_pos = audio_buf;
+        while (audio_pos &lt; (audio_buf + buffer_len)) {
+            SDL_Delay(1);
+        }
+    } while(buffer_len != 0);
+
+    SDL_CloseAudio();
+    fclose(audio_fd);
+    free(audio_buf);
+    SDL_Quit();
+    return 0;
+}	
+</code></pre>
 
                     </main>
 
@@ -787,6 +856,21 @@ int main(int argc, char* argv[])
             }
         </script>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3001");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload(true); // force reload from server (not from cache)
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         
