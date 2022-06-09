@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>流媒体笔记 - 梦北</title>
+        <title>YUVPLayer Demo - 梦北</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="学习笔记">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,7 +73,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><a href="Media/README.html" class="active"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo</a></li></ol></li></ol>
+            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html" class="active"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo</a></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -119,22 +119,148 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="Media/README.html#流媒体笔记" id="流媒体笔记"><h1>流媒体笔记</h1></a>
+                        <a class="header" href="Media/yuvplayer.html#yuvplayer-demo" id="yuvplayer-demo"><h1>YUVPLayer Demo</h1></a>
+<pre><code class="language-C">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;SDL.h&gt;
+#include &lt;pthread.h&gt;
+#define REFRESH_EVENT (SDL_USEREVENT + 1)
+#define QUIT_EVENT (SDL_USEREVENT + 2)
+bool thread_exit = false;
+int refresh()
+{
+    thread_exit = false;
+    while (!thread_exit) {
+        SDL_Event event;
+        event.type = REFRESH_EVENT;
+        SDL_PushEvent(&amp;event);
+        SDL_Delay(40);
+    }
+    thread_exit = true;
+
+    SDL_Event event;
+    event.type = QUIT_EVENT;
+    SDL_PushEvent(&amp;event);
+    return 0;
+}
+int main(int argc, char* argv[])
+{
+    FILE* video_fd = NULL;
+
+    SDL_Event event = {0};
+    SDL_Rect rect = {0};
+
+    unsigned int pixformat = 0;
+    
+    SDL_Window* window = NULL;
+    SDL_Renderer* renderer = NULL;
+    SDL_Texture* texture = NULL;
+    SDL_Thread* timer_thread = NULL;
+
+    int win_w = 1920;
+    int win_h = 1080;
+    const int video_w = win_w;
+    const int video_h = win_h;
+    
+    unsigned char* video_pos = NULL;
+    unsigned char* video_end = NULL;
+
+    unsigned int remain_len = 0;
+    size_t video_buffer_len = 0;
+    size_t blank_space_len = 0;
+    unsigned char* video_buf = NULL;
+
+    const char* path = &quot;1.yuv&quot;;
+    const unsigned int yuv_frame_len = video_w * video_h * 12 / 8;
+    unsigned int tmp_yuv_frame_len = yuv_frame_len;
+
+    if (yuv_frame_len &amp; 0xF) {
+        tmp_yuv_frame_len = (yuv_frame_len &amp; 0xFFF0) + 0x10;
+    }
+
+    if (SDL_Init(SDL_INIT_VIDEO)) {
+        printf(&quot;SDL INIT Fail!\n&quot;);
+        return -1;
+    }
+    window = SDL_CreateWindow(
+            &quot;YUV Player&quot;,
+            SDL_WINDOWPOS_UNDEFINED,
+            SDL_WINDOWPOS_UNDEFINED,
+            win_w, win_h,
+            SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
+    );
+    if (window == NULL) {
+        printf(&quot;Window create Fail!\n&quot;);
+        // TODO 资源释放
+        return -1;
+    } 
+    renderer = SDL_CreateRenderer(window, -1, 0);
+    // IYVU: Y + U + V (3 planes)
+    // YV12: Y + V + U (3 planes)
+    pixformat = SDL_PIXELFORMAT_IYUV;
+    texture = SDL_CreateTexture(
+                            renderer,
+                            pixformat,
+                            SDL_TEXTUREACCESS_STREAMING,
+                            video_w, video_h
+                            );
+
+    video_buf = (unsigned char*) malloc(tmp_yuv_frame_len);
+    if (video_buf == NULL) {
+        // TODO 资源释放
+        return -1;
+    }
+    video_fd = fopen(path, &quot;r&quot;);
+    video_buffer_len = fread(video_buf, 1, yuv_frame_len, video_fd);
+    if (video_buffer_len &lt;= 0) {
+        return -1;
+    }
+    video_pos = video_buf;
+    timer_thread = SDL_CreateThread(
+        refresh,
+        &quot;thread&quot;,
+        NULL
+    );
+    do {
+        SDL_WaitEvent(&amp;event);
+        if (event.type == REFRESH_EVENT) {
+            SDL_UpdateTexture(texture, NULL, video_pos, video_w);
+            rect.x = 0;
+            rect.y = 0;
+            rect.w = win_w;
+            rect.h = win_h;
+            SDL_RenderCopy(renderer, texture, NULL, &amp;rect);
+            SDL_RenderPresent(renderer);
+
+            video_buffer_len = fread(video_buf, 1, yuv_frame_len, video_fd);
+            if (video_buffer_len &lt;= 0) {
+                thread_exit = true;
+                continue;
+            }
+        } else if (event.type == SDL_WINDOWEVENT) {
+            SDL_GetWindowSize(window, &amp;win_w, &amp;win_h);
+        } else if (event.type == SDL_QUIT) {
+            thread_exit = true;
+        } else if (event.type == QUIT_EVENT) {
+            break;
+        }
+    } while(1);
+    return 0;
+}
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="Programmer/README.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="Media/cmake.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
-                        
-                            <a rel="next" href="Media/ffmpeg_cmd.html" class="mobile-nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
                         
 
                         <div style="clear: both"></div>
@@ -144,15 +270,11 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="Programmer/README.html" class="nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="Media/cmake.html" class="nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
-                
-                    <a href="Media/ffmpeg_cmd.html" class="nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
                 
             </nav>
 

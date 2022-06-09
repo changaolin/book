@@ -73,7 +73,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html" class="active"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li></ol></li></ol>
+            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html" class="active"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo</a></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -267,16 +267,176 @@ success
 |_______|            |______________|          |________|
 
 </code></pre>
-<a class="header" href="Media/ffmpeg_cmd.html#options" id="options"><h2>Options</h2></a>
-<a class="header" href="Media/ffmpeg_cmd.html#stream-specifiers" id="stream-specifiers"><h3>Stream specifiers</h3></a>
-<a class="header" href="Media/ffmpeg_cmd.html#1-基本查询命令" id="1-基本查询命令"><h2>1. 基本查询命令</h2></a>
-<a class="header" href="Media/ffmpeg_cmd.html#2-录制命令" id="2-录制命令"><h2>2. 录制命令</h2></a>
-<a class="header" href="Media/ffmpeg_cmd.html#3-分解复用" id="3-分解复用"><h2>3. 分解/复用</h2></a>
-<a class="header" href="Media/ffmpeg_cmd.html#4-处理原始数据" id="4-处理原始数据"><h2>4. 处理原始数据</h2></a>
-<a class="header" href="Media/ffmpeg_cmd.html#5-裁剪与合并" id="5-裁剪与合并"><h2>5. 裁剪与合并</h2></a>
-<a class="header" href="Media/ffmpeg_cmd.html#6-图片视频互转" id="6-图片视频互转"><h2>6. 图片/视频互转</h2></a>
-<a class="header" href="Media/ffmpeg_cmd.html#7-直播相关" id="7-直播相关"><h2>7. 直播相关</h2></a>
-<a class="header" href="Media/ffmpeg_cmd.html#8-滤镜" id="8-滤镜"><h2>8. 滤镜</h2></a>
+<a class="header" href="Media/ffmpeg_cmd.html#1-通用查询参数" id="1-通用查询参数"><h2>1. 通用查询参数</h2></a>
+<ul>
+<li>-formats</li>
+</ul>
+<p>​   Show available formats (including devices).</p>
+<ul>
+<li>-demuxers</li>
+</ul>
+<p>​   Show available demuxers.</p>
+<ul>
+<li>-muxers</li>
+</ul>
+<p>​   Show available muxers.</p>
+<ul>
+<li>-devices</li>
+</ul>
+<p>​   Show available devices.</p>
+<ul>
+<li>-codecs</li>
+</ul>
+<p>​   Show all codecs known to libavcodec.</p>
+<ul>
+<li>-decoders</li>
+</ul>
+<p>​   Show available decoders.</p>
+<ul>
+<li>-encoders</li>
+</ul>
+<p>​   Show all available encoders.</p>
+<ul>
+<li>-bsfs</li>
+</ul>
+<p>​   Show available bitstream filters.</p>
+<ul>
+<li>-protocols</li>
+</ul>
+<p>​   Show available protocols.</p>
+<ul>
+<li>-filters</li>
+</ul>
+<p>​   Show available libavfilter filters.</p>
+<ul>
+<li>-pix_fmts</li>
+</ul>
+<p>​   Show available pixel formats.</p>
+<ul>
+<li>-sample_fmts</li>
+</ul>
+<p>​   Show available sample formats.</p>
+<ul>
+<li>-layouts</li>
+</ul>
+<p>​   Show channel names and standard channel layouts.</p>
+<a class="header" href="Media/ffmpeg_cmd.html#2-av参数" id="2-av参数"><h2>2. AV参数</h2></a>
+<ul>
+<li>
+<p>-f fmt (<em>input/output</em>)</p>
+<p>Force input or output file format. The format is normally auto detected for input files and guessed from the file extension for output files, so this option is not needed in most cases.</p>
+</li>
+<li>
+<p>-i url (<em>input</em>)</p>
+<p>input file url</p>
+</li>
+<li>
+<p>-c[:stream_specifier] codec (<em>input/output,per-stream</em>)</p>
+<p>-codec[:stream_specifier] codec (<em>input/output,per-stream</em>)</p>
+<p>Select an encoder (when used before an output file) or a decoder (when used before an input file) for one or more streams. codec is the name of a decoder/encoder or a special value <code>copy</code> (output only) to indicate that the stream is not to be re-encoded.</p>
+</li>
+<li>
+<p>-t duration (<em>input/output</em>)</p>
+<p>When used as an input option (before <code>-i</code>), limit the duration of data read from the input file.</p>
+<p>When used as an output option (before an output url), stop writing the output after its duration reaches duration.</p>
+<p>duration must be a time duration specification, see <a href="http://ffmpeg.org/ffmpeg-utils.html#time-duration-syntax">(ffmpeg-utils)the Time duration section in the ffmpeg-utils(1) manual</a>.</p>
+<p>-to and -t are mutually exclusive and -t has priority.</p>
+</li>
+<li>
+<p>-to position (<em>input/output</em>)</p>
+<p>Stop writing the output or reading the input at position. position must be a time duration specification, see <a href="http://ffmpeg.org/ffmpeg-utils.html#time-duration-syntax">(ffmpeg-utils)the Time duration section in the ffmpeg-utils(1) manual</a>.</p>
+<p>-to and -t are mutually exclusive and -t has priority.</p>
+</li>
+<li>
+<p>-ss position (<em>input/output</em>)</p>
+<p>When used as an input option (before <code>-i</code>), seeks in this input file to position. Note that in most formats it is not possible to seek exactly, so <code>ffmpeg</code> will seek to the closest seek point before position. When transcoding and -accurate_seek is enabled (the default), this extra segment between the seek point and position will be decoded and discarded. When doing stream copy or when -noaccurate_seek is used, it will be preserved.</p>
+<p>When used as an output option (before an output url), decodes but discards input until the timestamps reach position.</p>
+</li>
+<li>
+<p>-filter[:stream_specifier] filtergraph (<em>output,per-stream</em>)</p>
+<p>Create the filtergraph specified by filtergraph and use it to filter the stream.</p>
+<p>filtergraph is a description of the filtergraph to apply to the stream, and must have a single input and a single output of the same type of the stream. In the filtergraph, the input is associated to the label <code>in</code>, and the output to the label <code>out</code>. See the ffmpeg-filters manual for more information about the filtergraph syntax.</p>
+<p>See the <a href="http://ffmpeg.org/ffmpeg.html#filter_005fcomplex_005foption">-filter_complex option</a> if you want to create filtergraphs with multiple inputs and/or outputs.</p>
+</li>
+<li>
+<p>ffmpeg -f avfoundation -list_devices true -i &quot;&quot;</p>
+</li>
+</ul>
+<a class="header" href="Media/ffmpeg_cmd.html#3-video参数" id="3-video参数"><h2>3. Video参数</h2></a>
+<ul>
+<li>
+<p>-r[:stream_specifier] fps (<em>input/output,per-stream</em>)</p>
+<p>Set frame rate (Hz value, fraction or abbreviation).</p>
+<p>As an input option, ignore any timestamps stored in the file and instead generate timestamps assuming constant frame rate fps. This is not the same as the -framerate option used for some input formats like image2 or v4l2 (it used to be the same in older versions of FFmpeg). If in doubt use -framerate instead of the input option -r.</p>
+<p>As an output option, duplicate or drop input frames to achieve constant output frame rate fps.</p>
+</li>
+<li>
+<p>-fpsmax[:stream_specifier] fps (<em>output,per-stream</em>)</p>
+<p>Set maximum frame rate (Hz value, fraction or abbreviation).</p>
+<p>Clamps output frame rate when output framerate is auto-set and is higher than this value. Useful in batch processing or when input framerate is wrongly detected as very high. It cannot be set together with <code>-r</code>. It is ignored during streamcopy.</p>
+</li>
+<li>
+<p>-s[:stream_specifier] size (<em>input/output,per-stream</em>)</p>
+<p>Set frame size.</p>
+<p>As an input option, this is a shortcut for the video_size private option, recognized by some demuxers for which the frame size is either not stored in the file or is configurable – e.g. raw video or video grabbers.</p>
+<p>As an output option, this inserts the <code>scale</code> video filter to the <em>end</em> of the corresponding filtergraph. Please use the <code>scale</code> filter directly to insert it at the beginning or some other place.</p>
+<p>The format is ‘wxh’ (default - same as source).</p>
+</li>
+<li>
+<p>-vn (<em>input/output</em>)</p>
+<p>As an input option, blocks all video streams of a file from being filtered or being automatically selected or mapped for any output. See <code>-discard</code> option to disable streams individually.</p>
+<p>As an output option, disables video recording i.e. automatic selection or mapping of any video stream. For full manual control see the <code>-map</code> option.</p>
+</li>
+<li>
+<p>-vcodec codec (<em>output</em>)</p>
+<p>Set the video codec. This is an alias for <code>-codec:v</code>.</p>
+</li>
+<li>
+<p>-vf filtergraph (<em>output</em>)</p>
+<p>Create the filtergraph specified by filtergraph and use it to filter the stream.</p>
+<p>This is an alias for <code>-filter:v</code>, see the <a href="http://ffmpeg.org/ffmpeg.html#filter_005foption">-filter option</a>.</p>
+</li>
+<li>
+<p>-pix_fmt[:stream_specifier] format (<em>input/output,per-stream</em>)</p>
+<p>-pixel_format</p>
+<p>Set pixel format. Use <code>-pix_fmts</code> to show all the supported pixel formats. If the selected pixel format can not be selected, ffmpeg will print a warning and select the best pixel format supported by the encoder. If pix_fmt is prefixed by a <code>+</code>, ffmpeg will exit with an error if the requested pixel format can not be selected, and automatic conversions inside filtergraphs are disabled. If pix_fmt is a single <code>+</code>, ffmpeg selects the same pixel format as the input (or graph output) and automatic conversions are disabled.</p>
+</li>
+</ul>
+<a class="header" href="Media/ffmpeg_cmd.html#4-audio参数" id="4-audio参数"><h2>4. Audio参数</h2></a>
+<ul>
+<li>
+<p>-aq q (<em>output</em>)</p>
+<p>Set the audio quality (codec-specific, VBR). This is an alias for -q:a.</p>
+</li>
+<li>
+<p>-ac[:stream_specifier] channels (<em>input/output,per-stream</em>)</p>
+<p>Set the number of audio channels. For output streams it is set by default to the number of input audio channels. For input streams this option only makes sense for audio grabbing devices and raw demuxers and is mapped to the corresponding demuxer options.</p>
+</li>
+<li>
+<p>-an (<em>input/output</em>)</p>
+<p>As an input option, blocks all audio streams of a file from being filtered or being automatically selected or mapped for any output. See <code>-discard</code> option to disable streams individually.</p>
+<p>As an output option, disables audio recording i.e. automatic selection or mapping of any audio stream. For full manual control see the <code>-map</code> option.</p>
+</li>
+<li>
+<p>-acodec codec (<em>input/output</em>)</p>
+<p>Set the audio codec. This is an alias for <code>-codec:a</code>.</p>
+</li>
+<li>
+<p>-sample_fmt[:stream_specifier] sample_fmt (<em>output,per-stream</em>)</p>
+<p>Set the audio sample format. Use <code>-sample_fmts</code> to get a list of supported sample formats.</p>
+</li>
+<li>
+<p>-af filtergraph (<em>output</em>)</p>
+<p>Create the filtergraph specified by filtergraph and use it to filter the stream.</p>
+<p>This is an alias for <code>-filter:a</code>, see the <a href="http://ffmpeg.org/ffmpeg.html#filter_005foption">-filter option</a>.</p>
+</li>
+<li>
+<p>-ar</p>
+</li>
+<li>
+<p>-f sl6le</p>
+</li>
+</ul>
 
                     </main>
 
@@ -327,21 +487,6 @@ success
             }
         </script>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         
