@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>CMAKE 模板 - 梦北</title>
+        <title>PKG-CONFIG - 梦北</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="学习笔记">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -73,7 +73,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html" class="active"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
+            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html" class="active"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -119,85 +119,21 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="Media/cmake.html#cmake-模板" id="cmake-模板"><h1>CMAKE 模板</h1></a>
-<a class="header" href="Media/cmake.html#a-hrefhttpscmakeorgcmakehelpv319modulefindpkgconfightmlhighlightpkgcommandpkg_check_modulescmakepkga" id="a-hrefhttpscmakeorgcmakehelpv319modulefindpkgconfightmlhighlightpkgcommandpkg_check_modulescmakepkga"><h2><a href="https://cmake.org/cmake/help/v3.19/module/FindPkgConfig.html?highlight=pkg#command:pkg_check_modules">CMake+Pkg</a></h2></a>
-<ul>
-<li>
-<p><code>&lt;XXX&gt;_FOUND</code></p>
-<p>set to 1 if module(s) exist</p>
-</li>
-<li>
-<p><code>&lt;XXX&gt;_LIBRARIES</code></p>
-<p>only the libraries (without the ‘-l’)</p>
-</li>
-<li>
-<p><code>&lt;XXX&gt;_LINK_LIBRARIES</code></p>
-<p>the libraries and their absolute paths</p>
-</li>
-<li>
-<p><code>&lt;XXX&gt;_LIBRARY_DIRS</code></p>
-<p>the paths of the libraries (without the ‘-L’)</p>
-</li>
-<li>
-<p><code>&lt;XXX&gt;_LDFLAGS</code></p>
-<p>all required linker flags</p>
-</li>
-<li>
-<p><code>&lt;XXX&gt;_LDFLAGS_OTHER</code></p>
-<p>all other linker flags</p>
-</li>
-<li>
-<p><code>&lt;XXX&gt;_INCLUDE_DIRS</code></p>
-<p>the ‘-I’ preprocessor flags (without the ‘-I’)</p>
-</li>
-<li>
-<p><code>&lt;XXX&gt;_CFLAGS</code></p>
-<p>all required cflags</p>
-</li>
-<li>
-<p><code>&lt;XXX&gt;_CFLAGS_OTHER</code></p>
-<p>the other compiler flags</p>
-</li>
-</ul>
-<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.19)
-project(player)
-
-set(CMAKE_CXX_STANDARD 11)
-list(APPEND SOURCE
-    src/main.c)
-set(ENV{PKG_CONFIG_PATH} 
-    /usr/local/sdl2/lib/pkgconfig:/usr/local/ffmpeg/lib/pkgconfig
-)
-find_package(PkgConfig)
-pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET libavcodec libavformat libavutil)
-pkg_check_modules(SDL2 REQUIRED IMPORTED_TARGET sdl2)
-add_executable(${PROJECT_NAME} ${SOURCE})
-target_link_libraries(${PROJECT_NAME} PRIVATE
-    PkgConfig::FFMPEG
-    PkgConfig::SDL2
-    )
+                        <a class="header" href="Programmer/pkg_config.html#pkg-config" id="pkg-config"><h1>PKG-CONFIG</h1></a>
+<a class="header" href="Programmer/pkg_config.html#地址-httpswwwfreedesktoporgwikisoftwarepkg-config" id="地址-httpswwwfreedesktoporgwikisoftwarepkg-config"><h2>地址: https://www.freedesktop.org/wiki/Software/pkg-config/</h2></a>
+<a class="header" href="Programmer/pkg_config.html#一般用法" id="一般用法"><h2>一般用法</h2></a>
+<pre><code class="language-shell"> gcc -o test test.c `pkg-config --libs --cflags glib-2.0`
 </code></pre>
-<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.19)
-project(player)
+<a class="header" href="Programmer/pkg_config.html#环境变量" id="环境变量"><h2>环境变量</h2></a>
+<pre><code class="language-C">export PKG_CONGIG_PATH=$PKG_CONFIG_PATH
+</code></pre>
+<a class="header" href="Programmer/pkg_config.html#常用参数" id="常用参数"><h2>常用参数</h2></a>
+<pre><code>--cflags # -I/usr/include/***
 
-set(CMAKE_CXX_STANDARD 11)
-list(APPEND SOURCE
-    src/main.c)
-set(ENV{PKG_CONFIG_PATH} 
-    /usr/local/sdl2/lib/pkgconfig:/usr/local/ffmpeg/lib/pkgconfig
-)
-find_package(PkgConfig)
-pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET libavcodec libavformat libavutil)
-pkg_check_modules(SDL2 REQUIRED IMPORTED_TARGET sdl2)
-add_executable(player ${SOURCE})
-include_directories(
-    ${FFMPEG_INCLUDE_DIRS}
-    ${SDL2_INCLUDE_DIRS}
-    )
-target_link_libraries(player PRIVATE
-    ${FFMPEG_LDFLAGS}
-    ${SDL2_LDFLAGS}
-    )
+--libs # -L/usr/lib/***
+
+--list-all # 查看所有模块信息
+
 </code></pre>
 
                     </main>
@@ -205,13 +141,13 @@ target_link_libraries(player PRIVATE
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="Media/ffmpeg_cmd.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="Programmer/README.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="Media/yuvplayer.html" class="mobile-nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="Media/README.html" class="mobile-nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -223,13 +159,13 @@ target_link_libraries(player PRIVATE
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a href="Media/ffmpeg_cmd.html" class="nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                    <a href="Programmer/README.html" class="nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a href="Media/yuvplayer.html" class="nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                    <a href="Media/README.html" class="nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 

@@ -73,7 +73,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
+            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -223,6 +223,22 @@
 <li>虚表（vtbl）</li>
 </ul>
 <a class="header" href="print.html#程序员笔记" id="程序员笔记"><h1>程序员笔记</h1></a>
+<a class="header" href="print.html#pkg-config" id="pkg-config"><h1>PKG-CONFIG</h1></a>
+<a class="header" href="print.html#地址-httpswwwfreedesktoporgwikisoftwarepkg-config" id="地址-httpswwwfreedesktoporgwikisoftwarepkg-config"><h2>地址: https://www.freedesktop.org/wiki/Software/pkg-config/</h2></a>
+<a class="header" href="print.html#一般用法" id="一般用法"><h2>一般用法</h2></a>
+<pre><code class="language-shell"> gcc -o test test.c `pkg-config --libs --cflags glib-2.0`
+</code></pre>
+<a class="header" href="print.html#环境变量" id="环境变量"><h2>环境变量</h2></a>
+<pre><code class="language-C">export PKG_CONGIG_PATH=$PKG_CONFIG_PATH
+</code></pre>
+<a class="header" href="print.html#常用参数" id="常用参数"><h2>常用参数</h2></a>
+<pre><code>--cflags # -I/usr/include/***
+
+--libs # -L/usr/lib/***
+
+--list-all # 查看所有模块信息
+
+</code></pre>
 <a class="header" href="print.html#流媒体笔记" id="流媒体笔记"><h1>流媒体笔记</h1></a>
 <a class="header" href="print.html#ffmpeg-命令行学习" id="ffmpeg-命令行学习"><h1>FFMPEG 命令行学习</h1></a>
 <a class="header" href="print.html#a-hrefhttpffmpegorgffmpeghtml命令分类a" id="a-hrefhttpffmpegorgffmpeghtml命令分类a"><h1><a href="http://ffmpeg.org/ffmpeg.html">命令分类</a></h1></a>
