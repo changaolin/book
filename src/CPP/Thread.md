@@ -1,6 +1,6 @@
 # Thread
 
-# 一、线程的创建和中止
+# 一、主要函数
 
 ```C
  #include <pthread.h>
@@ -17,7 +17,7 @@ pthread_t pthread_self(void)
 
 ```
 
-# 二、线程的创建和中止
+# 二、具体功能
 
 ## 2.1 线程的创建
 
@@ -131,13 +131,21 @@ pthread_t pthread_self(void)
 - 不加锁
 - rw
 
-### 2.8.4 条件变量
+### 2.8.4 条件变量（专为生产消费者设计）
 
 - 与互斥锁一起使用
+
 - pthread_cond_wait() 等待被唤醒
-- pthread_cond_timedwait() 等待被唤醒，带超时机制
-- pthread_cond_signal() 唤醒一个等待中的线程
-- pthread_cond_broadcast() 唤醒全部等待中的线程
+
+  - 把互斥锁解锁
+  - 阻塞，等待信号唤醒
+  - 条件被触发+互斥锁加锁 （原子操作）
+
+  ```c
+  pthread_cond_timedwait();  // 等待被唤醒，带超时机制
+  pthread_cond_signal();  // 唤醒一个等待中的线程
+  pthread_cond_broadcast(); // 唤醒全部等待中的线程
+  ```
 
 ### 2.8.5 （匿名）信号量
 
@@ -159,3 +167,9 @@ pthread_t pthread_self(void)
   ```
 
 ### 2.8.6 生产消费者模型
+
+- 基本概念
+- 互斥锁 + 条件变量实现生产消费者模型
+  - 在线程清理函数中需要释放 互斥锁
+- 信号量 实现生产消费者模型
+  - 需要手动加锁解锁（或者使用信号量代替互斥锁）
