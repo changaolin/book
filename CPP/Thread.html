@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Thread - 梦北</title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <base href="../">
+
+        <link rel="stylesheet" href="book.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <link rel="shortcut icon" href="favicon.png">
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme -->
+        
+
+        
+
+        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
+        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
+        <script>
+            if (typeof Clipboard == 'undefined') {
+                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
+            }
+        </script>
+
+    </head>
+    <body class="light">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
+            if (theme === null || theme === undefined) { theme = 'light'; }
+            document.body.className = theme;
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            document.querySelector('html').classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li><a href="CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li><a href="CPP/Thread.html" class="active"><strong aria-hidden="true">1.3.</strong> Thread</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="submenu">
+                                <li><button class="theme" id="light">Light <span class="default">(default)</span></button></li>
+                                <li><button class="theme" id="rust">Rust</button></li>
+                                <li><button class="theme" id="coal">Coal</button></li>
+                                <li><button class="theme" id="navy">Navy</button></li>
+                                <li><button class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                        </div>
+
+                        <h1 class="menu-title">梦北</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <a class="header" href="CPP/Thread.html#thread" id="thread"><h1>Thread</h1></a>
+<a class="header" href="CPP/Thread.html#一线程的创建和中止" id="一线程的创建和中止"><h1>一、线程的创建和中止</h1></a>
+<pre><code class="language-C"> #include &lt;pthread.h&gt;
+
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg)
+int pthread_join(pthread_t thread, void **value_ptr)
+ # ps -Lf pid 
+int pthread_cancel(pthread_t thread)
+int pthread_detach(pthread_t thread)
+void pthread_exit(void *value_ptr)
+int pthread_kill(pthread_t thread, int sig)
+int pthread_once(pthread_once_t *once_control, void (*init_routine)(void))
+pthread_t pthread_self(void)
+
+</code></pre>
+<a class="header" href="CPP/Thread.html#二线程的创建和中止" id="二线程的创建和中止"><h1>二、线程的创建和中止</h1></a>
+<a class="header" href="CPP/Thread.html#21-线程的创建" id="21-线程的创建"><h2>2.1 线程的创建</h2></a>
+<a class="header" href="CPP/Thread.html#22-线程的中止" id="22-线程的中止"><h2>2.2 线程的中止</h2></a>
+<a class="header" href="CPP/Thread.html#221-异常终止" id="221-异常终止"><h3>2.2.1 异常终止</h3></a>
+<ul>
+<li>主线程退出，子线程被强行终止</li>
+<li>子线程中调用 exit()，则整个<strong>进程</strong>全部退出</li>
+<li>缺省行为是终止程序的信号，会终止整个<strong>进程</strong></li>
+</ul>
+<a class="header" href="CPP/Thread.html#222-正常终止" id="222-正常终止"><h3>2.2.2 正常终止</h3></a>
+<ul>
+<li>线程使用 return 返回，return 0 无需转换，return (void*) 1; 返回值是线程的结束码。</li>
+<li>线程可以被同一进程的其他线程调用 pthread_cancel() 结束。</li>
+<li>在线程中调用 pthread_exit((void*)1) 退出</li>
+</ul>
+<a class="header" href="CPP/Thread.html#23-线程的参数传递" id="23-线程的参数传递"><h2>2.3 线程的参数传递</h2></a>
+<ul>
+<li>线程创建顺序和线程运行顺序并不保证一致。</li>
+<li>全局变量不能代替线程的参数传递</li>
+<li>参数需要类型类型强制转换</li>
+<li>传递整型参数
+<ul>
+<li>pthread_create(&amp;pid, NULL, func, (void*)(long) number))</li>
+<li>printf(&quot;%d&quot;, (int)(long)arg)</li>
+</ul>
+</li>
+<li>传递地址参数(需要给每个线程传递一个单独的地址，不能使用同一个地址：全局变量)
+<ul>
+<li>int* var1 = new int; <em>var = 1;</em>)arg;</li>
+</ul>
+</li>
+<li>线程退出状态
+<ul>
+<li>void* pv = 0;</li>
+<li>pthread_join(pid, &amp;pv);</li>
+<li>pv 保存线程 返回的值。</li>
+</ul>
+</li>
+</ul>
+<a class="header" href="CPP/Thread.html#24-线程资源的回收" id="24-线程资源的回收"><h2>2.4 线程资源的回收</h2></a>
+<ul>
+<li>线程分离
+<ul>
+<li>joinable(默认状态)，在线程结束时，之后不会释放全部的资源，而是等待join，join之后资源才会释放（因此只能join一次）
+<ul>
+<li>pthread_join()</li>
+<li>pthread_tryjoin_np()</li>
+<li>pthread_timedjoin_np()</li>
+</ul>
+</li>
+<li>unjoinable（不可分离）
+<ul>
+<li>pthread_detach(tid);
+<ul>
+<li>可以放在线程函数中 pthread_detach(pthread_self());</li>
+</ul>
+</li>
+<li>创建线程前，调用pthread_attr_setdetachstat()设置线程属性。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线程清理函数释放资源
+<ul>
+<li>pthread_cleanup_push(func)</li>
+<li>pthread_cleanup_pop(1)
+<ul>
+<li>填 0 标识 只退出不执行清理函数</li>
+<li>非 0 则会退出并执行清理函数</li>
+</ul>
+</li>
+<li>可以有多个线程清理函数，但必须push和pop成对在<strong>同一语句块</strong>中出现</li>
+<li>在线程退出时 会调用线程清理函数。
+<ul>
+<li>pthread_exit()</li>
+<li>return</li>
+<li>Pthread_cancel()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a class="header" href="CPP/Thread.html#25-线程取消" id="25-线程取消"><h2>2.5 线程取消</h2></a>
+<ul>
+<li>可以被join</li>
+<li>返回值 为 PTHREAD_CANCELED ，即 -1</li>
+<li>pthread_setcancelstate() 设置线程的取消状态
+<ul>
+<li>只能放在线程的主函数中</li>
+<li>可以被取消</li>
+<li>不可以被取消</li>
+</ul>
+</li>
+<li>pthread_setcacheltype() 设置线程的取消类型
+<ul>
+<li>立即取消</li>
+<li>执行到 取消点是进行取消（默认）
+<ul>
+<li>accept()</li>
+<li>close()</li>
+<li>pthread_testcancel()； 设置取消点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a class="header" href="CPP/Thread.html#26-线程与信号" id="26-线程与信号"><h2>2.6 线程与信号</h2></a>
+<ul>
+<li>在多线程程序中，外部向进程发送信号不会中断系统调用</li>
+<li>在多线程程序中，信号的处理是所有线程共享的</li>
+<li>进程中的信号可以送达单个线程，会中断系统调用
+<ul>
+<li>pthread_kill(tid, sig)</li>
+</ul>
+</li>
+<li>如果某个线程因为信号被终止，则整个进程都会被终止</li>
+</ul>
+<a class="header" href="CPP/Thread.html#27-线程安全" id="27-线程安全"><h2>2.7 线程安全</h2></a>
+<ul>
+<li>原子性，可见行，顺序性
+<ul>
+<li>volatile
+<ul>
+<li>不从缓存中读取数据，而是从内存中读取</li>
+<li>禁止代码重排序</li>
+<li>不是原子的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>原子操作
+<ul>
+<li>原子操作函数</li>
+<li>CAS执行</li>
+<li>原子类型 std::atomic&lt;int&gt; var;</li>
+</ul>
+</li>
+<li>线程同步锁</li>
+</ul>
+<a class="header" href="CPP/Thread.html#28-线程同步" id="28-线程同步"><h2>2.8 线程同步</h2></a>
+<a class="header" href="CPP/Thread.html#281-互斥锁" id="281-互斥锁"><h3>2.8.1 互斥锁</h3></a>
+<ul>
+<li>加锁解锁，其他等待</li>
+<li>mutex</li>
+</ul>
+<a class="header" href="CPP/Thread.html#282-自旋锁" id="282-自旋锁"><h3>2.8.2 自旋锁</h3></a>
+<ul>
+<li>加锁解锁，其他不等待</li>
+<li>spin</li>
+<li>共享标志</li>
+</ul>
+<a class="header" href="CPP/Thread.html#283-读写锁" id="283-读写锁"><h3>2.8.3 读写锁</h3></a>
+<ul>
+<li>读模式加锁（可以多个持有读锁）</li>
+<li>写模式加锁（只有不加锁的时候才能申请写锁，只能有一个持有写锁）</li>
+<li>不加锁</li>
+<li>rw</li>
+</ul>
+<a class="header" href="CPP/Thread.html#284-条件变量" id="284-条件变量"><h3>2.8.4 条件变量</h3></a>
+<ul>
+<li>与互斥锁一起使用</li>
+<li>pthread_cond_wait() 等待被唤醒</li>
+<li>pthread_cond_timedwait() 等待被唤醒，带超时机制</li>
+<li>pthread_cond_signal() 唤醒一个等待中的线程</li>
+<li>pthread_cond_broadcast() 唤醒全部等待中的线程</li>
+</ul>
+<a class="header" href="CPP/Thread.html#285-匿名信号量" id="285-匿名信号量"><h3>2.8.5 （匿名）信号量</h3></a>
+<ul>
+<li>
+<p>一个整数计数器，数值表示空闲的临界资源的数量</p>
+</li>
+<li>
+<p>申请资源时，信号量减少</p>
+</li>
+<li>
+<p>释放资源后，信号量增加</p>
+<pre><code class="language-C">sem_t sem;
+int sem_init();
+int sem_destroy();
+int sem_wait(sem_t* sem); //P操作
+int sem_trywait(sem_t* sem); // P操作，不阻塞
+int sem_timedwait(sem_t* sem); // P操作，超时
+int sem_post(sem_t* sem); //V操作
+int sem_getvalue(); // 获取信号想的值
+</code></pre>
+</li>
+</ul>
+<a class="header" href="CPP/Thread.html#286-生产消费者模型" id="286-生产消费者模型"><h3>2.8.6 生产消费者模型</h3></a>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="CPP/STL.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="Programmer/README.html" class="mobile-nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="CPP/STL.html" class="nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="Programmer/README.html" class="nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+
+        <!-- Local fallback for Font Awesome -->
+        <script>
+            if (getComputedStyle(document.querySelector(".fa")).fontFamily !== "FontAwesome") {
+                var link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.type = 'text/css';
+                link.href = '_FontAwesome/css/font-awesome.css';
+                document.head.insertBefore(link, document.head.firstChild)
+            }
+        </script>
+
+        
+
+        
+
+        
+
+        
+
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS script -->
+        
+
+    </body>
+</html>

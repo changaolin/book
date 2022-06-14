@@ -73,7 +73,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
+            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li><a href="CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li><a href="CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -222,14 +222,256 @@
 <li>虚指针（vptr）</li>
 <li>虚表（vtbl）</li>
 </ul>
+<a class="header" href="print.html#stl" id="stl"><h1>STL</h1></a>
+<a class="header" href="print.html#容器container" id="容器container"><h1>容器（Container）</h1></a>
+<a class="header" href="print.html#结构与分类" id="结构与分类"><h2>结构与分类</h2></a>
+<ul>
+<li>序列容器
+<ul>
+<li>Array(固定空间)</li>
+<li>Vector</li>
+<li>Deque</li>
+<li>List
+<ul>
+<li>Forward-List（单向链表）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>关联容器（key:value）
+<ul>
+<li>Set/Multiset
+<ul>
+<li>Unordered Set/Multiset</li>
+</ul>
+</li>
+<li>Map/Multimap
+<ul>
+<li>Unordered Map/Multimap</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a class="header" href="print.html#分配器allocators" id="分配器allocators"><h1>分配器（Allocators）</h1></a>
+<a class="header" href="print.html#算法algorithms" id="算法algorithms"><h1>算法（Algorithms）</h1></a>
+<ul>
+<li>所有的算法，最终的行为无非就是比大小。</li>
+</ul>
+<a class="header" href="print.html#迭代器iterators" id="迭代器iterators"><h1>迭代器（Iterators）</h1></a>
+<a class="header" href="print.html#适配器adapters" id="适配器adapters"><h1>适配器（Adapters）</h1></a>
+<a class="header" href="print.html#仿函数functors" id="仿函数functors"><h1>仿函数（Functors）</h1></a>
+<a class="header" href="print.html#thread" id="thread"><h1>Thread</h1></a>
+<a class="header" href="print.html#一线程的创建和中止" id="一线程的创建和中止"><h1>一、线程的创建和中止</h1></a>
+<pre><code class="language-C"> #include &lt;pthread.h&gt;
+
+int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg)
+int pthread_join(pthread_t thread, void **value_ptr)
+ # ps -Lf pid 
+int pthread_cancel(pthread_t thread)
+int pthread_detach(pthread_t thread)
+void pthread_exit(void *value_ptr)
+int pthread_kill(pthread_t thread, int sig)
+int pthread_once(pthread_once_t *once_control, void (*init_routine)(void))
+pthread_t pthread_self(void)
+
+</code></pre>
+<a class="header" href="print.html#二线程的创建和中止" id="二线程的创建和中止"><h1>二、线程的创建和中止</h1></a>
+<a class="header" href="print.html#21-线程的创建" id="21-线程的创建"><h2>2.1 线程的创建</h2></a>
+<a class="header" href="print.html#22-线程的中止" id="22-线程的中止"><h2>2.2 线程的中止</h2></a>
+<a class="header" href="print.html#221-异常终止" id="221-异常终止"><h3>2.2.1 异常终止</h3></a>
+<ul>
+<li>主线程退出，子线程被强行终止</li>
+<li>子线程中调用 exit()，则整个<strong>进程</strong>全部退出</li>
+<li>缺省行为是终止程序的信号，会终止整个<strong>进程</strong></li>
+</ul>
+<a class="header" href="print.html#222-正常终止" id="222-正常终止"><h3>2.2.2 正常终止</h3></a>
+<ul>
+<li>线程使用 return 返回，return 0 无需转换，return (void*) 1; 返回值是线程的结束码。</li>
+<li>线程可以被同一进程的其他线程调用 pthread_cancel() 结束。</li>
+<li>在线程中调用 pthread_exit((void*)1) 退出</li>
+</ul>
+<a class="header" href="print.html#23-线程的参数传递" id="23-线程的参数传递"><h2>2.3 线程的参数传递</h2></a>
+<ul>
+<li>线程创建顺序和线程运行顺序并不保证一致。</li>
+<li>全局变量不能代替线程的参数传递</li>
+<li>参数需要类型类型强制转换</li>
+<li>传递整型参数
+<ul>
+<li>pthread_create(&amp;pid, NULL, func, (void*)(long) number))</li>
+<li>printf(&quot;%d&quot;, (int)(long)arg)</li>
+</ul>
+</li>
+<li>传递地址参数(需要给每个线程传递一个单独的地址，不能使用同一个地址：全局变量)
+<ul>
+<li>int* var1 = new int; <em>var = 1;</em>)arg;</li>
+</ul>
+</li>
+<li>线程退出状态
+<ul>
+<li>void* pv = 0;</li>
+<li>pthread_join(pid, &amp;pv);</li>
+<li>pv 保存线程 返回的值。</li>
+</ul>
+</li>
+</ul>
+<a class="header" href="print.html#24-线程资源的回收" id="24-线程资源的回收"><h2>2.4 线程资源的回收</h2></a>
+<ul>
+<li>线程分离
+<ul>
+<li>joinable(默认状态)，在线程结束时，之后不会释放全部的资源，而是等待join，join之后资源才会释放（因此只能join一次）
+<ul>
+<li>pthread_join()</li>
+<li>pthread_tryjoin_np()</li>
+<li>pthread_timedjoin_np()</li>
+</ul>
+</li>
+<li>unjoinable（不可分离）
+<ul>
+<li>pthread_detach(tid);
+<ul>
+<li>可以放在线程函数中 pthread_detach(pthread_self());</li>
+</ul>
+</li>
+<li>创建线程前，调用pthread_attr_setdetachstat()设置线程属性。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>线程清理函数释放资源
+<ul>
+<li>pthread_cleanup_push(func)</li>
+<li>pthread_cleanup_pop(1)
+<ul>
+<li>填 0 标识 只退出不执行清理函数</li>
+<li>非 0 则会退出并执行清理函数</li>
+</ul>
+</li>
+<li>可以有多个线程清理函数，但必须push和pop成对在<strong>同一语句块</strong>中出现</li>
+<li>在线程退出时 会调用线程清理函数。
+<ul>
+<li>pthread_exit()</li>
+<li>return</li>
+<li>Pthread_cancel()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a class="header" href="print.html#25-线程取消" id="25-线程取消"><h2>2.5 线程取消</h2></a>
+<ul>
+<li>可以被join</li>
+<li>返回值 为 PTHREAD_CANCELED ，即 -1</li>
+<li>pthread_setcancelstate() 设置线程的取消状态
+<ul>
+<li>只能放在线程的主函数中</li>
+<li>可以被取消</li>
+<li>不可以被取消</li>
+</ul>
+</li>
+<li>pthread_setcacheltype() 设置线程的取消类型
+<ul>
+<li>立即取消</li>
+<li>执行到 取消点是进行取消（默认）
+<ul>
+<li>accept()</li>
+<li>close()</li>
+<li>pthread_testcancel()； 设置取消点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<a class="header" href="print.html#26-线程与信号" id="26-线程与信号"><h2>2.6 线程与信号</h2></a>
+<ul>
+<li>在多线程程序中，外部向进程发送信号不会中断系统调用</li>
+<li>在多线程程序中，信号的处理是所有线程共享的</li>
+<li>进程中的信号可以送达单个线程，会中断系统调用
+<ul>
+<li>pthread_kill(tid, sig)</li>
+</ul>
+</li>
+<li>如果某个线程因为信号被终止，则整个进程都会被终止</li>
+</ul>
+<a class="header" href="print.html#27-线程安全" id="27-线程安全"><h2>2.7 线程安全</h2></a>
+<ul>
+<li>原子性，可见行，顺序性
+<ul>
+<li>volatile
+<ul>
+<li>不从缓存中读取数据，而是从内存中读取</li>
+<li>禁止代码重排序</li>
+<li>不是原子的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>原子操作
+<ul>
+<li>原子操作函数</li>
+<li>CAS执行</li>
+<li>原子类型 std::atomic&lt;int&gt; var;</li>
+</ul>
+</li>
+<li>线程同步锁</li>
+</ul>
+<a class="header" href="print.html#28-线程同步" id="28-线程同步"><h2>2.8 线程同步</h2></a>
+<a class="header" href="print.html#281-互斥锁" id="281-互斥锁"><h3>2.8.1 互斥锁</h3></a>
+<ul>
+<li>加锁解锁，其他等待</li>
+<li>mutex</li>
+</ul>
+<a class="header" href="print.html#282-自旋锁" id="282-自旋锁"><h3>2.8.2 自旋锁</h3></a>
+<ul>
+<li>加锁解锁，其他不等待</li>
+<li>spin</li>
+<li>共享标志</li>
+</ul>
+<a class="header" href="print.html#283-读写锁" id="283-读写锁"><h3>2.8.3 读写锁</h3></a>
+<ul>
+<li>读模式加锁（可以多个持有读锁）</li>
+<li>写模式加锁（只有不加锁的时候才能申请写锁，只能有一个持有写锁）</li>
+<li>不加锁</li>
+<li>rw</li>
+</ul>
+<a class="header" href="print.html#284-条件变量" id="284-条件变量"><h3>2.8.4 条件变量</h3></a>
+<ul>
+<li>与互斥锁一起使用</li>
+<li>pthread_cond_wait() 等待被唤醒</li>
+<li>pthread_cond_timedwait() 等待被唤醒，带超时机制</li>
+<li>pthread_cond_signal() 唤醒一个等待中的线程</li>
+<li>pthread_cond_broadcast() 唤醒全部等待中的线程</li>
+</ul>
+<a class="header" href="print.html#285-匿名信号量" id="285-匿名信号量"><h3>2.8.5 （匿名）信号量</h3></a>
+<ul>
+<li>
+<p>一个整数计数器，数值表示空闲的临界资源的数量</p>
+</li>
+<li>
+<p>申请资源时，信号量减少</p>
+</li>
+<li>
+<p>释放资源后，信号量增加</p>
+<pre><code class="language-C">sem_t sem;
+int sem_init();
+int sem_destroy();
+int sem_wait(sem_t* sem); //P操作
+int sem_trywait(sem_t* sem); // P操作，不阻塞
+int sem_timedwait(sem_t* sem); // P操作，超时
+int sem_post(sem_t* sem); //V操作
+int sem_getvalue(); // 获取信号想的值
+</code></pre>
+</li>
+</ul>
+<a class="header" href="print.html#286-生产消费者模型" id="286-生产消费者模型"><h3>2.8.6 生产消费者模型</h3></a>
 <a class="header" href="print.html#程序员笔记" id="程序员笔记"><h1>程序员笔记</h1></a>
 <a class="header" href="print.html#pkg-config" id="pkg-config"><h1>PKG-CONFIG</h1></a>
-<a class="header" href="print.html#地址-httpswwwfreedesktoporgwikisoftwarepkg-config" id="地址-httpswwwfreedesktoporgwikisoftwarepkg-config"><h2>地址: https://www.freedesktop.org/wiki/Software/pkg-config/</h2></a>
+<a class="header" href="print.html#a-hrefhttpswwwfreedesktoporgwikisoftwarepkg-config地址a" id="a-hrefhttpswwwfreedesktoporgwikisoftwarepkg-config地址a"><h2><a href="https://www.freedesktop.org/wiki/Software/pkg-config/">地址</a></h2></a>
 <a class="header" href="print.html#一般用法" id="一般用法"><h2>一般用法</h2></a>
 <pre><code class="language-shell"> gcc -o test test.c `pkg-config --libs --cflags glib-2.0`
 </code></pre>
 <a class="header" href="print.html#环境变量" id="环境变量"><h2>环境变量</h2></a>
-<pre><code class="language-C">export PKG_CONGIG_PATH=$PKG_CONFIG_PATH
+<pre><code class="language-shell">export PKG_CONGIG_PATH=$PKG_CONFIG_PATH
 </code></pre>
 <a class="header" href="print.html#常用参数" id="常用参数"><h2>常用参数</h2></a>
 <pre><code>--cflags # -I/usr/include/***
@@ -872,21 +1114,6 @@ int main(int argc, char* argv[])
             }
         </script>
 
-        
-        <!-- Livereload script (if served using the cli tool) -->
-        <script type="text/javascript">
-            var socket = new WebSocket("ws://localhost:3001");
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload(true); // force reload from server (not from cache)
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
         
 
         
