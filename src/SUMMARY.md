@@ -2,6 +2,8 @@
 [README](README.md)
 - [CPP学习笔记](CPP/README.md)
 	- [类](CPP/Object.md)
+	- [STL](CPP/STL.md)
+	- [Thread](CPP/Thread.md)
 - [程序员笔记](Programmer/README.md)
 	- [PKG-CONFIG](Programmer/pkg_config.md)
 - [流媒体笔记](Media/README.md)
