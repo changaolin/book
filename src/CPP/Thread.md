@@ -14,7 +14,7 @@ void pthread_exit(void *value_ptr)
 int pthread_kill(pthread_t thread, int sig)
 int pthread_once(pthread_once_t *once_control, void (*init_routine)(void))
 pthread_t pthread_self(void)
-
+pthread_equal(tid1, tid2)
 ```
 
 # 二、具体功能
