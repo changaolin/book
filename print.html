@@ -254,6 +254,15 @@
 </li>
 </ul>
 <a class="header" href="print.html#分配器allocators" id="分配器allocators"><h1>分配器（Allocators）</h1></a>
+<ul>
+<li>VC6 的分配器没有特殊设计，调用的是 malloc和free</li>
+<li>BC5 的分配器也没有特殊设计</li>
+<li>GCC
+<ul>
+<li>&lt;stl_alloc.h&gt;</li>
+</ul>
+</li>
+</ul>
 <a class="header" href="print.html#算法algorithms" id="算法algorithms"><h1>算法（Algorithms）</h1></a>
 <ul>
 <li>所有的算法，最终的行为无非就是比大小。</li>
@@ -487,6 +496,12 @@ int sem_getvalue(); // 获取信号想的值
 </ul>
 </li>
 </ul>
+<a class="header" href="print.html#287-多线程程序" id="287-多线程程序"><h3>2.8.7 多线程程序</h3></a>
+<ul>
+<li>全局变量的线程安全</li>
+<li>是否有不可重入函数</li>
+</ul>
+<p><img src="Thread.assets/%E6%88%AA%E5%B1%8F2022-06-15%2012.37.24.png" alt="截屏2022-06-15 12.37.24" /></p>
 <a class="header" href="print.html#程序员笔记" id="程序员笔记"><h1>程序员笔记</h1></a>
 <a class="header" href="print.html#pkg-config" id="pkg-config"><h1>PKG-CONFIG</h1></a>
 <a class="header" href="print.html#a-hrefhttpswwwfreedesktoporgwikisoftwarepkg-config地址a" id="a-hrefhttpswwwfreedesktoporgwikisoftwarepkg-config地址a"><h2><a href="https://www.freedesktop.org/wiki/Software/pkg-config/">地址</a></h2></a>
