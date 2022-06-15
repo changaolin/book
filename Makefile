@@ -1,6 +1,7 @@
 .PHONY: deploy
 deploy: book
 	@echo "====> deploying to github"
+	mdbook build
 	rm -rf /tmp/book
 	git worktree add -f /tmp/book gh-pages
 	rm -rf /tmp/book/*
