@@ -18,6 +18,11 @@
 
 # 分配器（Allocators）
 
+- VC6 的分配器没有特殊设计，调用的是 malloc和free
+- BC5 的分配器也没有特殊设计
+- GCC
+  - <stl_alloc.h>
+
 # 算法（Algorithms）
 
 - 所有的算法，最终的行为无非就是比大小。
