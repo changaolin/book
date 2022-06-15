@@ -262,7 +262,7 @@
 <a class="header" href="print.html#适配器adapters" id="适配器adapters"><h1>适配器（Adapters）</h1></a>
 <a class="header" href="print.html#仿函数functors" id="仿函数functors"><h1>仿函数（Functors）</h1></a>
 <a class="header" href="print.html#thread" id="thread"><h1>Thread</h1></a>
-<a class="header" href="print.html#一线程的创建和中止" id="一线程的创建和中止"><h1>一、线程的创建和中止</h1></a>
+<a class="header" href="print.html#一主要函数" id="一主要函数"><h1>一、主要函数</h1></a>
 <pre><code class="language-C"> #include &lt;pthread.h&gt;
 
 int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg)
@@ -276,7 +276,7 @@ int pthread_once(pthread_once_t *once_control, void (*init_routine)(void))
 pthread_t pthread_self(void)
 
 </code></pre>
-<a class="header" href="print.html#二线程的创建和中止" id="二线程的创建和中止"><h1>二、线程的创建和中止</h1></a>
+<a class="header" href="print.html#二具体功能" id="二具体功能"><h1>二、具体功能</h1></a>
 <a class="header" href="print.html#21-线程的创建" id="21-线程的创建"><h2>2.1 线程的创建</h2></a>
 <a class="header" href="print.html#22-线程的中止" id="22-线程的中止"><h2>2.2 线程的中止</h2></a>
 <a class="header" href="print.html#221-异常终止" id="221-异常终止"><h3>2.2.1 异常终止</h3></a>
@@ -434,13 +434,23 @@ pthread_t pthread_self(void)
 <li>不加锁</li>
 <li>rw</li>
 </ul>
-<a class="header" href="print.html#284-条件变量" id="284-条件变量"><h3>2.8.4 条件变量</h3></a>
+<a class="header" href="print.html#284-条件变量专为生产消费者设计" id="284-条件变量专为生产消费者设计"><h3>2.8.4 条件变量（专为生产消费者设计）</h3></a>
 <ul>
-<li>与互斥锁一起使用</li>
-<li>pthread_cond_wait() 等待被唤醒</li>
-<li>pthread_cond_timedwait() 等待被唤醒，带超时机制</li>
-<li>pthread_cond_signal() 唤醒一个等待中的线程</li>
-<li>pthread_cond_broadcast() 唤醒全部等待中的线程</li>
+<li>
+<p>与互斥锁一起使用</p>
+</li>
+<li>
+<p>pthread_cond_wait() 等待被唤醒</p>
+<ul>
+<li>把互斥锁解锁</li>
+<li>阻塞，等待信号唤醒</li>
+<li>条件被触发+互斥锁加锁 （原子操作）</li>
+</ul>
+<pre><code class="language-c">pthread_cond_timedwait();  // 等待被唤醒，带超时机制
+pthread_cond_signal();  // 唤醒一个等待中的线程
+pthread_cond_broadcast(); // 唤醒全部等待中的线程
+</code></pre>
+</li>
 </ul>
 <a class="header" href="print.html#285-匿名信号量" id="285-匿名信号量"><h3>2.8.5 （匿名）信号量</h3></a>
 <ul>
@@ -464,6 +474,19 @@ int sem_getvalue(); // 获取信号想的值
 </li>
 </ul>
 <a class="header" href="print.html#286-生产消费者模型" id="286-生产消费者模型"><h3>2.8.6 生产消费者模型</h3></a>
+<ul>
+<li>基本概念</li>
+<li>互斥锁 + 条件变量实现生产消费者模型
+<ul>
+<li>在线程清理函数中需要释放 互斥锁</li>
+</ul>
+</li>
+<li>信号量 实现生产消费者模型
+<ul>
+<li>需要手动加锁解锁（或者使用信号量代替互斥锁）</li>
+</ul>
+</li>
+</ul>
 <a class="header" href="print.html#程序员笔记" id="程序员笔记"><h1>程序员笔记</h1></a>
 <a class="header" href="print.html#pkg-config" id="pkg-config"><h1>PKG-CONFIG</h1></a>
 <a class="header" href="print.html#a-hrefhttpswwwfreedesktoporgwikisoftwarepkg-config地址a" id="a-hrefhttpswwwfreedesktoporgwikisoftwarepkg-config地址a"><h2><a href="https://www.freedesktop.org/wiki/Software/pkg-config/">地址</a></h2></a>
