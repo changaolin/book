@@ -2,6 +2,8 @@
 
 # 容器（Container）
 
+前闭后开
+
 ## 结构与分类
 
 - 序列容器
@@ -16,6 +18,10 @@
   - Map/Multimap
     - Unordered Map/Multimap
 
+## List
+
+- 双向链表
+
 # 分配器（Allocators）
 
 - VC6 的分配器没有特殊设计，调用的是 malloc和free
@@ -28,6 +34,18 @@
 - 所有的算法，最终的行为无非就是比大小。
 
 # 迭代器（Iterators）
+
+## 1. 五种相关类型
+
+- iterator_category （分类）
+- distance（两个iterator之间的距离的类型）
+- value_type（数据类型）
+- reference
+- pointer
+
+## 2. traits（中间层）
+
+- 用于封装原生指针，用以实现上述五种类型的数据。
 
 # 适配器（Adapters）
 
