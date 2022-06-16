@@ -73,7 +73,7 @@
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li><a href="CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li><a href="CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
+            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li><a href="CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li><a href="CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li><a href="CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
@@ -224,6 +224,7 @@
 </ul>
 <a class="header" href="print.html#stl" id="stl"><h1>STL</h1></a>
 <a class="header" href="print.html#容器container" id="容器container"><h1>容器（Container）</h1></a>
+<p>前闭后开</p>
 <a class="header" href="print.html#结构与分类" id="结构与分类"><h2>结构与分类</h2></a>
 <ul>
 <li>序列容器
@@ -253,6 +254,10 @@
 </ul>
 </li>
 </ul>
+<a class="header" href="print.html#list" id="list"><h2>List</h2></a>
+<ul>
+<li>双向链表</li>
+</ul>
 <a class="header" href="print.html#分配器allocators" id="分配器allocators"><h1>分配器（Allocators）</h1></a>
 <ul>
 <li>VC6 的分配器没有特殊设计，调用的是 malloc和free</li>
@@ -268,6 +273,18 @@
 <li>所有的算法，最终的行为无非就是比大小。</li>
 </ul>
 <a class="header" href="print.html#迭代器iterators" id="迭代器iterators"><h1>迭代器（Iterators）</h1></a>
+<a class="header" href="print.html#1-五种相关类型" id="1-五种相关类型"><h2>1. 五种相关类型</h2></a>
+<ul>
+<li>iterator_category （分类）</li>
+<li>distance（两个iterator之间的距离的类型）</li>
+<li>value_type（数据类型）</li>
+<li>reference</li>
+<li>pointer</li>
+</ul>
+<a class="header" href="print.html#2-traits中间层" id="2-traits中间层"><h2>2. traits（中间层）</h2></a>
+<ul>
+<li>用于封装原生指针，用以实现上述五种类型的数据。</li>
+</ul>
 <a class="header" href="print.html#适配器adapters" id="适配器adapters"><h1>适配器（Adapters）</h1></a>
 <a class="header" href="print.html#仿函数functors" id="仿函数functors"><h1>仿函数（Functors）</h1></a>
 <a class="header" href="print.html#thread" id="thread"><h1>Thread</h1></a>
@@ -502,6 +519,7 @@ int sem_getvalue(); // 获取信号想的值
 <li>是否有不可重入函数</li>
 </ul>
 <p><img src="../assets/%E5%AE%89%E5%85%A8%E5%87%BD%E6%95%B0.png" alt="安全函数" /></p>
+<a class="header" href="print.html#tcp_socket" id="tcp_socket"><h1>TCP_Socket</h1></a>
 <a class="header" href="print.html#程序员笔记" id="程序员笔记"><h1>程序员笔记</h1></a>
 <a class="header" href="print.html#pkg-config" id="pkg-config"><h1>PKG-CONFIG</h1></a>
 <a class="header" href="print.html#a-hrefhttpswwwfreedesktoporgwikisoftwarepkg-config地址a" id="a-hrefhttpswwwfreedesktoporgwikisoftwarepkg-config地址a"><h2><a href="https://www.freedesktop.org/wiki/Software/pkg-config/">地址</a></h2></a>
