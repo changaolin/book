@@ -120,6 +120,8 @@
                 <div id="content" class="content">
                     <main>
                         <a class="header" href="CPP/STL.html#stl" id="stl"><h1>STL</h1></a>
+<p><a href="../resource/Slide.pdf">参考资料</a></p>
+<p><a href="../resource/sample.cpp">源码</a></p>
 <a class="header" href="CPP/STL.html#容器container" id="容器container"><h1>容器（Container）</h1></a>
 <p>前闭后开</p>
 <a class="header" href="CPP/STL.html#结构与分类" id="结构与分类"><h2>结构与分类</h2></a>
@@ -154,6 +156,28 @@
 <a class="header" href="CPP/STL.html#list" id="list"><h2>List</h2></a>
 <ul>
 <li>双向链表</li>
+<li>迭代器是class，</li>
+</ul>
+<a class="header" href="CPP/STL.html#vector" id="vector"><h2>Vector</h2></a>
+<ul>
+<li>2倍动态增长</li>
+<li>不能原地扩充</li>
+<li>迭代器是原始指针</li>
+</ul>
+<a class="header" href="CPP/STL.html#deque" id="deque"><h2>Deque</h2></a>
+<ul>
+<li>分段Buffer</li>
+<li>双向扩充</li>
+<li>begin</li>
+<li>end</li>
+<li>iterator
+<ul>
+<li>cur</li>
+<li>first</li>
+<li>end</li>
+<li>node</li>
+</ul>
+</li>
 </ul>
 <a class="header" href="CPP/STL.html#分配器allocators" id="分配器allocators"><h1>分配器（Allocators）</h1></a>
 <ul>
@@ -169,7 +193,13 @@
 <ul>
 <li>所有的算法，最终的行为无非就是比大小。</li>
 </ul>
+<a class="header" href="CPP/STL.html#1-算法是一个函数模板" id="1-算法是一个函数模板"><h2>1. 算法是一个函数模板</h2></a>
+<pre><code>- 从语言层次来讲，算法是一个函数模板
+- 其余部件都是一个类模板
+</code></pre>
+<a class="header" href="CPP/STL.html#2-处理迭代器" id="2-处理迭代器"><h2>2. 处理迭代器</h2></a>
 <a class="header" href="CPP/STL.html#迭代器iterators" id="迭代器iterators"><h1>迭代器（Iterators）</h1></a>
+<p><img src="../assets/%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%B1%BB%E5%9E%8B.png" alt="截屏2022-06-22 12.52.02" /></p>
 <a class="header" href="CPP/STL.html#1-五种相关类型" id="1-五种相关类型"><h2>1. 五种相关类型</h2></a>
 <ul>
 <li>iterator_category （分类）</li>
@@ -184,6 +214,7 @@
 </ul>
 <a class="header" href="CPP/STL.html#适配器adapters" id="适配器adapters"><h1>适配器（Adapters）</h1></a>
 <a class="header" href="CPP/STL.html#仿函数functors" id="仿函数functors"><h1>仿函数（Functors）</h1></a>
+<a class="header" href="CPP/STL.html#标准库其他" id="标准库其他"><h1>标准库其他</h1></a>
 
                     </main>
 
