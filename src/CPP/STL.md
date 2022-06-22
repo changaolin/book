@@ -4,6 +4,8 @@
 
 [源码](../resource/sample.cpp)
 
+![截屏2022-06-22 20.23.54](../assets/STL.png)
+
 # 容器（Container）
 
 前闭后开
@@ -55,6 +57,7 @@
 # 算法（Algorithms）
 
 - 所有的算法，最终的行为无非就是比大小。
+- 算法问迭代器问题
 
 ## 1. 算法是一个函数模板
 
@@ -62,6 +65,20 @@
 	- 其余部件都是一个类模板
 
 ## 2. 处理迭代器
+
+## 3. 实例
+
+- accumulate（累计）
+- for_each
+- replace
+  - replace_if
+  - replace_copy
+- count
+  - count_if
+- find
+  - find_if
+- sort
+- binary_search
 
 # 迭代器（Iterators）
 
@@ -81,9 +98,29 @@
 
 # 适配器（Adapters）
 
+- 容器的适配器
+  - stack
+  - queue
+- 函数适配器
+  - bind2nd
+    - binder2nd
+  - nto1（取反）
+- 新形式的适配器
+  - bind
+
 # 仿函数（Functors）
 
+- STL 的仿函数必须public继承binary_function或者unary_function之后才能被适配器适配
 
+## 1. 算术类（+/-）
+
+## 2. 逻辑运算类（&& ||）
+
+## 3. 相对关系类( < | >=)
+
+## 4. binary_function:（两个操作数）
+
+## 5. unary_function（一个操作数）
 
 # 标准库其他
 
