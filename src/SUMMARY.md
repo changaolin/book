@@ -5,6 +5,7 @@
 	- [STL](CPP/STL.md)
 	- [Thread](CPP/Thread.md)
 	- [TCP_Socket](CPP/TCP_socket.md)
+	- [C++11](CPP/C++11.md)
 - [程序员笔记](Programmer/README.md)
 	- [PKG-CONFIG](Programmer/pkg_config.md)
 - [流媒体笔记](Media/README.md)
