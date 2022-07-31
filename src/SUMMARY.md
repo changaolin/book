@@ -10,6 +10,7 @@
 	- [PKG-CONFIG](Programmer/pkg_config.md)
 - [流媒体笔记](Media/README.md)
 	- [FFMPEG 命令行学习笔记](Media/ffmpeg_cmd.md)
+	- [FFMPEG 安装 MACOS](Media/ffmpeg_install.md)
 	- [CMAKE 模板](Media/cmake.md)
 	- [YUVPLayer Demo(C)](Media/yuvplayer.md)
 	- [PCMPLayer Demo(C)](Media/pcmplayer.md)
