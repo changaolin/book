@@ -30,7 +30,7 @@ template<typename T>
 void f(T& param); // param是个引用
 
 int X = 27;  // x的型别是int
-const int ex= x;  // ex 的型别是 const int
+const int cx = x;  // cx 的型别是 const int
 const int& rx = x; // rx 是 x 的型别为 const int 的引用
 
 f(x); // T 的型别是 int. param 的型别是 int&
@@ -50,11 +50,11 @@ template<typename T>
 void f(T&& param); // param现在是个万能引用
 
 int X = 27;
-const int ex= x;
+const int ex = x;
 const int& rx = x;
 
 f(x);  // X 是个左值，所以 T 的型别是 int&, param 的 型别也是 int&
-f(cx); // ex 是个左值，所以 T 的型别是 const int&, param 的型别也是 const int&
+f(cx); // cx 是个左值，所以 T 的型别是 const int&, param 的型别也是 const int&
 f(rx); // rx 是个左值，所以 T 的型别是 const int&, param 的型别也是 const int&
 f(27); //27 是个右值，所以 T 的型别是 int, 这么 一来, param的型别就成 int&&
 ```
@@ -69,14 +69,18 @@ template<typename T>
 void f(T param); // param现在是按值传递
 
 intX =27;
-const int cx= x; 
+const int cx = x; 
 const int& rx = x;
 
 f(x); // T 和 param 的节别都是 int
 f(cx); //T 和 param 的型别还都是 int
 f(rx); //T 和 param 的型别仍都是 int
 /*
-请注意，即使 cx 和 rx 代表 const 值， param 仍然不具有 const 型别。这是合理的 。 param 是个完全独立千 cx 和 rx 存在的对象 cx 和 rx 的 一 个副本。从而 cx 和 rx 不可修改这一事实并不能说明 param是否可以修改。正是由于这一原因， expr 的常址 性以及挥发性 (volatileness, 若有)可以在推导 param 的型别时加以忽略:仅仅由千 expr 不可修改，并不能断定其副本也不可修改。
+请注意，即使 cx 和 rx 代表 const 值， param 仍然不具有 const 型别。这是合理的 。 
+param 是个完全独立千 cx 和 rx 存在的对象 cx 和 rx 的 一 个副本。
+从而 cx 和 rx 不可修改这一事实并不能说明 param是否可以修改。
+正是由于这一原因， expr 的常址 性以及挥发性 (volatileness, 若有)可以在推导 param 的型别时加以忽略:
+仅仅由千 expr 不可修改，并不能断定其副本也不可修改。
 */
 ```
 
