@@ -1,43 +1,44 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>FFMPEG 命令行学习笔记 - 梦北</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="学习笔记">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <base href="../">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-        <link rel="stylesheet" href="book.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-        <link rel="shortcut icon" href="favicon.png">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
-
-        <!-- Custom theme -->
-        
-
-        
-
-        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
-        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
-        <script>
-            if (typeof Clipboard == 'undefined') {
-                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
-            }
-        </script>
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body class="light">
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script type="text/javascript">
             try {
@@ -57,54 +58,76 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script type="text/javascript">
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
-            if (theme === null || theme === undefined) { theme = 'light'; }
-            document.body.className = theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script type="text/javascript">
+            var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             }
-            document.querySelector('html').classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li><a href="CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li><a href="CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li><a href="CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li><a href="CPP/C++11.html"><strong aria-hidden="true">1.5.</strong> C++11</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html" class="active"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">README</a></li><li class="chapter-item expanded "><a href="../CPP/index.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li class="chapter-item expanded "><a href="../CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li class="chapter-item expanded "><a href="../CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li class="chapter-item expanded "><a href="../CPP/C++11.html"><strong aria-hidden="true">1.5.</strong> C++11</a></li><li class="chapter-item expanded "><a href="../CPP/EMC++.html"><strong aria-hidden="true">1.6.</strong> Effective Modern C++</a></li></ol></li><li class="chapter-item expanded "><a href="../Programmer/index.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li class="chapter-item expanded "><a href="../Media/index.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Media/ffmpeg_cmd.html" class="active"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li class="chapter-item expanded "><a href="../Media/ffmpeg_install.html"><strong aria-hidden="true">3.2.</strong> FFMPEG 安装 MACOS</a></li><li class="chapter-item expanded "><a href="../Media/cmake.html"><strong aria-hidden="true">3.3.</strong> CMAKE 模板</a></li><li class="chapter-item expanded "><a href="../Media/yuvplayer.html"><strong aria-hidden="true">3.4.</strong> YUVPLayer Demo(C)</a></li><li class="chapter-item expanded "><a href="../Media/pcmplayer.html"><strong aria-hidden="true">3.5.</strong> PCMPLayer Demo(C)</a></li></ol></li><li class="chapter-item expanded "><a href="../Redis/index.html"><strong aria-hidden="true">4.</strong> Redis</a></li><li class="chapter-item expanded "><a href="../NET/index.html"><strong aria-hidden="true">5.</strong> NET</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="submenu">
-                                <li><button class="theme" id="light">Light <span class="default">(default)</span></button></li>
-                                <li><button class="theme" id="rust">Rust</button></li>
-                                <li><button class="theme" id="coal">Coal</button></li>
-                                <li><button class="theme" id="navy">Navy</button></li>
-                                <li><button class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                        </div>
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
 
-                        <h1 class="menu-title">梦北</h1>
+                    <h1 class="menu-title">梦北</h1>
 
-                        <div class="right-buttons">
-                            <a href="print.html" title="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                        </div>
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
                     </div>
                 </div>
 
@@ -119,12 +142,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="Media/ffmpeg_cmd.html#ffmpeg-命令行学习" id="ffmpeg-命令行学习"><h1>FFMPEG 命令行学习</h1></a>
-<a class="header" href="Media/ffmpeg_cmd.html#a-hrefhttpffmpegorgffmpeghtml命令分类a" id="a-hrefhttpffmpegorgffmpeghtml命令分类a"><h1><a href="http://ffmpeg.org/ffmpeg.html">命令分类</a></h1></a>
-<a class="header" href="Media/ffmpeg_cmd.html#0-基本格式" id="0-基本格式"><h2>0. 基本格式</h2></a>
+                        <h1 id="ffmpeg-命令行学习"><a class="header" href="#ffmpeg-命令行学习">FFMPEG 命令行学习</a></h1>
+<h1 id="命令分类"><a class="header" href="#命令分类"><a href="http://ffmpeg.org/ffmpeg.html">命令分类</a></a></h1>
+<h2 id="0-基本格式"><a class="header" href="#0-基本格式">0. 基本格式</a></h2>
 <pre><code class="language-shell">ffmpeg [global_options] {[input_file_options] -i input_url} ... {[output_file_options] output_url} ...
 </code></pre>
-<a class="header" href="Media/ffmpeg_cmd.html#input_url--i" id="input_url--i"><h2>Input_url (-i)</h2></a>
+<h2 id="input_url--i"><a class="header" href="#input_url--i">Input_url (-i)</a></h2>
 <ul>
 <li>regular files</li>
 <li>pipes</li>
@@ -133,7 +156,7 @@
 <li>Based 0 numbers</li>
 <li>...</li>
 </ul>
-<a class="header" href="Media/ffmpeg_cmd.html#input-or-output-data-types" id="input-or-output-data-types"><h2>Input or output data types</h2></a>
+<h2 id="input-or-output-data-types"><a class="header" href="#input-or-output-data-types">Input or output data types</a></h2>
 <ul>
 <li>video</li>
 <li>audios</li>
@@ -141,8 +164,8 @@
 <li>attachment</li>
 <li>data</li>
 </ul>
-<a class="header" href="Media/ffmpeg_cmd.html#stream" id="stream"><h2>Stream</h2></a>
-<a class="header" href="Media/ffmpeg_cmd.html#selection" id="selection"><h3>selection</h3></a>
+<h2 id="stream"><a class="header" href="#stream">Stream</a></h2>
+<h3 id="selection"><a class="header" href="#selection">selection</a></h3>
 <ul>
 <li>-map (attachment streams can only use map)</li>
 <li>-vn</li>
@@ -150,11 +173,11 @@
 <li>-sn</li>
 <li>-dn</li>
 </ul>
-<a class="header" href="Media/ffmpeg_cmd.html#handling" id="handling"><h3>handling</h3></a>
+<h3 id="handling"><a class="header" href="#handling">handling</a></h3>
 <ul>
 <li>-codec</li>
 </ul>
-<a class="header" href="Media/ffmpeg_cmd.html#example" id="example"><h3>example</h3></a>
+<h3 id="example"><a class="header" href="#example">example</a></h3>
 <pre><code>input file 'A.avi'
       stream 0: video 640x360
       stream 1: audio 2 channels
@@ -199,7 +222,7 @@ fail
         -map '[outv2]' -map 1:a:0 out3.mkv
 success
 </code></pre>
-<a class="header" href="Media/ffmpeg_cmd.html#基本流程" id="基本流程"><h2>基本流程</h2></a>
+<h2 id="基本流程"><a class="header" href="#基本流程">基本流程</a></h2>
 <pre><code> _______              ______________
 |       |            |              |
 | input |  demuxer   | encoded data |   decoder
@@ -219,8 +242,8 @@ success
 
 
 </code></pre>
-<a class="header" href="Media/ffmpeg_cmd.html#filtering-vf-or--af" id="filtering-vf-or--af"><h2>Filtering（-vf or -af）</h2></a>
-<a class="header" href="Media/ffmpeg_cmd.html#simple-filtergraphs" id="simple-filtergraphs"><h3>simple filtergraphs</h3></a>
+<h2 id="filtering-vf-or--af"><a class="header" href="#filtering-vf-or--af">Filtering（-vf or -af）</a></h2>
+<h3 id="simple-filtergraphs"><a class="header" href="#simple-filtergraphs">simple filtergraphs</a></h3>
 <pre><code> _________                        ______________
 |         |                      |              |
 | decoded |                      | encoded data |
@@ -233,14 +256,14 @@ success
                 |__________|
 
 </code></pre>
-<a class="header" href="Media/ffmpeg_cmd.html#filter-for-video" id="filter-for-video"><h3>filter for video</h3></a>
+<h3 id="filter-for-video"><a class="header" href="#filter-for-video">filter for video</a></h3>
 <pre><code> _______        _____________        _______        ________
 |       |      |             |      |       |      |        |
 | input | ---&gt; | deinterlace | ---&gt; | scale | ---&gt; | output |
 |_______|      |_____________|      |_______|      |________|
 
 </code></pre>
-<a class="header" href="Media/ffmpeg_cmd.html#complex-filter-graphs" id="complex-filter-graphs"><h2>Complex filter graphs</h2></a>
+<h2 id="complex-filter-graphs"><a class="header" href="#complex-filter-graphs">Complex filter graphs</a></h2>
 <pre><code> _________
 |         |
 | input 0 |\                    __________
@@ -259,7 +282,7 @@ success
 |_________|
 
 </code></pre>
-<a class="header" href="Media/ffmpeg_cmd.html#stream-copy" id="stream-copy"><h2>Stream Copy</h2></a>
+<h2 id="stream-copy"><a class="header" href="#stream-copy">Stream Copy</a></h2>
 <pre><code> _______              ______________            ________
 |       |            |              |          |        |
 | input |  demuxer   | encoded data |  muxer   | output |
@@ -267,60 +290,60 @@ success
 |_______|            |______________|          |________|
 
 </code></pre>
-<a class="header" href="Media/ffmpeg_cmd.html#1-通用查询参数" id="1-通用查询参数"><h2>1. 通用查询参数</h2></a>
+<h2 id="1-通用查询参数"><a class="header" href="#1-通用查询参数">1. 通用查询参数</a></h2>
 <ul>
 <li>-formats</li>
 </ul>
-<p>​   Show available formats (including devices).</p>
+<p>​	Show available formats (including devices).</p>
 <ul>
 <li>-demuxers</li>
 </ul>
-<p>​   Show available demuxers.</p>
+<p>​	Show available demuxers.</p>
 <ul>
 <li>-muxers</li>
 </ul>
-<p>​   Show available muxers.</p>
+<p>​	Show available muxers.</p>
 <ul>
 <li>-devices</li>
 </ul>
-<p>​   Show available devices.</p>
+<p>​	Show available devices.</p>
 <ul>
 <li>-codecs</li>
 </ul>
-<p>​   Show all codecs known to libavcodec.</p>
+<p>​	Show all codecs known to libavcodec.</p>
 <ul>
 <li>-decoders</li>
 </ul>
-<p>​   Show available decoders.</p>
+<p>​	Show available decoders.</p>
 <ul>
 <li>-encoders</li>
 </ul>
-<p>​   Show all available encoders.</p>
+<p>​	Show all available encoders.</p>
 <ul>
 <li>-bsfs</li>
 </ul>
-<p>​   Show available bitstream filters.</p>
+<p>​	Show available bitstream filters.</p>
 <ul>
 <li>-protocols</li>
 </ul>
-<p>​   Show available protocols.</p>
+<p>​	Show available protocols.</p>
 <ul>
 <li>-filters</li>
 </ul>
-<p>​   Show available libavfilter filters.</p>
+<p>​	Show available libavfilter filters.</p>
 <ul>
 <li>-pix_fmts</li>
 </ul>
-<p>​   Show available pixel formats.</p>
+<p>​	Show available pixel formats.</p>
 <ul>
 <li>-sample_fmts</li>
 </ul>
-<p>​   Show available sample formats.</p>
+<p>​	Show available sample formats.</p>
 <ul>
 <li>-layouts</li>
 </ul>
-<p>​   Show channel names and standard channel layouts.</p>
-<a class="header" href="Media/ffmpeg_cmd.html#2-av参数" id="2-av参数"><h2>2. AV参数</h2></a>
+<p>​	Show channel names and standard channel layouts.</p>
+<h2 id="2-av参数"><a class="header" href="#2-av参数">2. AV参数</a></h2>
 <ul>
 <li>
 <p>-f fmt (<em>input/output</em>)</p>
@@ -362,7 +385,7 @@ success
 <p>ffmpeg -f avfoundation -list_devices true -i &quot;&quot;</p>
 </li>
 </ul>
-<a class="header" href="Media/ffmpeg_cmd.html#3-video参数" id="3-video参数"><h2>3. Video参数</h2></a>
+<h2 id="3-video参数"><a class="header" href="#3-video参数">3. Video参数</a></h2>
 <ul>
 <li>
 <p>-r[:stream_specifier] fps (<em>input/output,per-stream</em>)</p>
@@ -402,7 +425,7 @@ success
 <p>Set pixel format. Use <code>-pix_fmts</code> to show all the supported pixel formats. If the selected pixel format can not be selected, ffmpeg will print a warning and select the best pixel format supported by the encoder. If pix_fmt is prefixed by a <code>+</code>, ffmpeg will exit with an error if the requested pixel format can not be selected, and automatic conversions inside filtergraphs are disabled. If pix_fmt is a single <code>+</code>, ffmpeg selects the same pixel format as the input (or graph output) and automatic conversions are disabled.</p>
 </li>
 </ul>
-<a class="header" href="Media/ffmpeg_cmd.html#4-audio参数" id="4-audio参数"><h2>4. Audio参数</h2></a>
+<h2 id="4-audio参数"><a class="header" href="#4-audio参数">4. Audio参数</a></h2>
 <ul>
 <li>
 <p>-aq q (<em>output</em>)</p>
@@ -442,17 +465,13 @@ success
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
-                            <a rel="prev" href="Media/README.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../Media/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
-                            <a rel="next" href="Media/cmake.html" class="mobile-nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../Media/ffmpeg_install.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -460,46 +479,35 @@ success
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
-                    <a href="Media/README.html" class="nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../Media/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
-                    <a href="Media/cmake.html" class="nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../Media/ffmpeg_install.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
 
-        <!-- Local fallback for Font Awesome -->
-        <script>
-            if (getComputedStyle(document.querySelector(".fa")).fontFamily !== "FontAwesome") {
-                var link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.type = 'text/css';
-                link.href = '_FontAwesome/css/font-awesome.css';
-                document.head.insertBefore(link, document.head.firstChild)
-            }
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
         </script>
 
-        
 
-        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
 
-        
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
-        
+        <!-- Custom JS scripts -->
 
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
-
-        <!-- Custom JS script -->
-        
 
     </body>
 </html>

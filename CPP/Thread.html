@@ -1,43 +1,44 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Thread - 梦北</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="学习笔记">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <base href="../">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-        <link rel="stylesheet" href="book.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-        <link rel="shortcut icon" href="favicon.png">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
-
-        <!-- Custom theme -->
-        
-
-        
-
-        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
-        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
-        <script>
-            if (typeof Clipboard == 'undefined') {
-                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
-            }
-        </script>
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body class="light">
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script type="text/javascript">
             try {
@@ -57,54 +58,76 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script type="text/javascript">
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
-            if (theme === null || theme === undefined) { theme = 'light'; }
-            document.body.className = theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script type="text/javascript">
+            var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             }
-            document.querySelector('html').classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li><a href="CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li><a href="CPP/Thread.html" class="active"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li><a href="CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li><a href="CPP/C++11.html"><strong aria-hidden="true">1.5.</strong> C++11</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">README</a></li><li class="chapter-item expanded "><a href="../CPP/index.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li class="chapter-item expanded "><a href="../CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li class="chapter-item expanded "><a href="../CPP/Thread.html" class="active"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li class="chapter-item expanded "><a href="../CPP/C++11.html"><strong aria-hidden="true">1.5.</strong> C++11</a></li><li class="chapter-item expanded "><a href="../CPP/EMC++.html"><strong aria-hidden="true">1.6.</strong> Effective Modern C++</a></li></ol></li><li class="chapter-item expanded "><a href="../Programmer/index.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li class="chapter-item expanded "><a href="../Media/index.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li class="chapter-item expanded "><a href="../Media/ffmpeg_install.html"><strong aria-hidden="true">3.2.</strong> FFMPEG 安装 MACOS</a></li><li class="chapter-item expanded "><a href="../Media/cmake.html"><strong aria-hidden="true">3.3.</strong> CMAKE 模板</a></li><li class="chapter-item expanded "><a href="../Media/yuvplayer.html"><strong aria-hidden="true">3.4.</strong> YUVPLayer Demo(C)</a></li><li class="chapter-item expanded "><a href="../Media/pcmplayer.html"><strong aria-hidden="true">3.5.</strong> PCMPLayer Demo(C)</a></li></ol></li><li class="chapter-item expanded "><a href="../Redis/index.html"><strong aria-hidden="true">4.</strong> Redis</a></li><li class="chapter-item expanded "><a href="../NET/index.html"><strong aria-hidden="true">5.</strong> NET</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="submenu">
-                                <li><button class="theme" id="light">Light <span class="default">(default)</span></button></li>
-                                <li><button class="theme" id="rust">Rust</button></li>
-                                <li><button class="theme" id="coal">Coal</button></li>
-                                <li><button class="theme" id="navy">Navy</button></li>
-                                <li><button class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                        </div>
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
 
-                        <h1 class="menu-title">梦北</h1>
+                    <h1 class="menu-title">梦北</h1>
 
-                        <div class="right-buttons">
-                            <a href="print.html" title="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                        </div>
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
                     </div>
                 </div>
 
@@ -119,8 +142,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="CPP/Thread.html#thread" id="thread"><h1>Thread</h1></a>
-<a class="header" href="CPP/Thread.html#一主要函数" id="一主要函数"><h1>一、主要函数</h1></a>
+                        <h1 id="thread"><a class="header" href="#thread">Thread</a></h1>
+<h1 id="一主要函数"><a class="header" href="#一主要函数">一、主要函数</a></h1>
 <pre><code class="language-C"> #include &lt;pthread.h&gt;
 
 int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg)
@@ -134,22 +157,22 @@ int pthread_once(pthread_once_t *once_control, void (*init_routine)(void))
 pthread_t pthread_self(void)
 pthread_equal(tid1, tid2)
 </code></pre>
-<a class="header" href="CPP/Thread.html#二具体功能" id="二具体功能"><h1>二、具体功能</h1></a>
-<a class="header" href="CPP/Thread.html#21-线程的创建" id="21-线程的创建"><h2>2.1 线程的创建</h2></a>
-<a class="header" href="CPP/Thread.html#22-线程的中止" id="22-线程的中止"><h2>2.2 线程的中止</h2></a>
-<a class="header" href="CPP/Thread.html#221-异常终止" id="221-异常终止"><h3>2.2.1 异常终止</h3></a>
+<h1 id="二具体功能"><a class="header" href="#二具体功能">二、具体功能</a></h1>
+<h2 id="21-线程的创建"><a class="header" href="#21-线程的创建">2.1 线程的创建</a></h2>
+<h2 id="22-线程的中止"><a class="header" href="#22-线程的中止">2.2 线程的中止</a></h2>
+<h3 id="221-异常终止"><a class="header" href="#221-异常终止">2.2.1 异常终止</a></h3>
 <ul>
 <li>主线程退出，子线程被强行终止</li>
 <li>子线程中调用 exit()，则整个<strong>进程</strong>全部退出</li>
 <li>缺省行为是终止程序的信号，会终止整个<strong>进程</strong></li>
 </ul>
-<a class="header" href="CPP/Thread.html#222-正常终止" id="222-正常终止"><h3>2.2.2 正常终止</h3></a>
+<h3 id="222-正常终止"><a class="header" href="#222-正常终止">2.2.2 正常终止</a></h3>
 <ul>
 <li>线程使用 return 返回，return 0 无需转换，return (void*) 1; 返回值是线程的结束码。</li>
 <li>线程可以被同一进程的其他线程调用 pthread_cancel() 结束。</li>
 <li>在线程中调用 pthread_exit((void*)1) 退出</li>
 </ul>
-<a class="header" href="CPP/Thread.html#23-线程的参数传递" id="23-线程的参数传递"><h2>2.3 线程的参数传递</h2></a>
+<h2 id="23-线程的参数传递"><a class="header" href="#23-线程的参数传递">2.3 线程的参数传递</a></h2>
 <ul>
 <li>线程创建顺序和线程运行顺序并不保证一致。</li>
 <li>全局变量不能代替线程的参数传递</li>
@@ -162,7 +185,10 @@ pthread_equal(tid1, tid2)
 </li>
 <li>传递地址参数(需要给每个线程传递一个单独的地址，不能使用同一个地址：全局变量)
 <ul>
-<li>int* var1 = new int; <em>var = 1;</em>)arg;</li>
+<li>int* var1 = new int; *var = 1;</li>
+<li>pthread_create(&amp;pid, NULL, func, var1))</li>
+<li>printf(&quot;%xx&quot;, *(int*)arg)</li>
+<li>var1 需要在线程中释放内存。 delete  (int*)arg;</li>
 </ul>
 </li>
 <li>线程退出状态
@@ -173,7 +199,7 @@ pthread_equal(tid1, tid2)
 </ul>
 </li>
 </ul>
-<a class="header" href="CPP/Thread.html#24-线程资源的回收" id="24-线程资源的回收"><h2>2.4 线程资源的回收</h2></a>
+<h2 id="24-线程资源的回收"><a class="header" href="#24-线程资源的回收">2.4 线程资源的回收</a></h2>
 <ul>
 <li>线程分离
 <ul>
@@ -216,7 +242,7 @@ pthread_equal(tid1, tid2)
 </ul>
 </li>
 </ul>
-<a class="header" href="CPP/Thread.html#25-线程取消" id="25-线程取消"><h2>2.5 线程取消</h2></a>
+<h2 id="25-线程取消"><a class="header" href="#25-线程取消">2.5 线程取消</a></h2>
 <ul>
 <li>可以被join</li>
 <li>返回值 为 PTHREAD_CANCELED ，即 -1</li>
@@ -240,7 +266,7 @@ pthread_equal(tid1, tid2)
 </ul>
 </li>
 </ul>
-<a class="header" href="CPP/Thread.html#26-线程与信号" id="26-线程与信号"><h2>2.6 线程与信号</h2></a>
+<h2 id="26-线程与信号"><a class="header" href="#26-线程与信号">2.6 线程与信号</a></h2>
 <ul>
 <li>在多线程程序中，外部向进程发送信号不会中断系统调用</li>
 <li>在多线程程序中，信号的处理是所有线程共享的</li>
@@ -251,7 +277,7 @@ pthread_equal(tid1, tid2)
 </li>
 <li>如果某个线程因为信号被终止，则整个进程都会被终止</li>
 </ul>
-<a class="header" href="CPP/Thread.html#27-线程安全" id="27-线程安全"><h2>2.7 线程安全</h2></a>
+<h2 id="27-线程安全"><a class="header" href="#27-线程安全">2.7 线程安全</a></h2>
 <ul>
 <li>原子性，可见行，顺序性
 <ul>
@@ -273,26 +299,26 @@ pthread_equal(tid1, tid2)
 </li>
 <li>线程同步锁</li>
 </ul>
-<a class="header" href="CPP/Thread.html#28-线程同步" id="28-线程同步"><h2>2.8 线程同步</h2></a>
-<a class="header" href="CPP/Thread.html#281-互斥锁" id="281-互斥锁"><h3>2.8.1 互斥锁</h3></a>
+<h2 id="28-线程同步"><a class="header" href="#28-线程同步">2.8 线程同步</a></h2>
+<h3 id="281-互斥锁"><a class="header" href="#281-互斥锁">2.8.1 互斥锁</a></h3>
 <ul>
 <li>加锁解锁，其他等待</li>
 <li>mutex</li>
 </ul>
-<a class="header" href="CPP/Thread.html#282-自旋锁" id="282-自旋锁"><h3>2.8.2 自旋锁</h3></a>
+<h3 id="282-自旋锁"><a class="header" href="#282-自旋锁">2.8.2 自旋锁</a></h3>
 <ul>
 <li>加锁解锁，其他不等待</li>
 <li>spin</li>
 <li>共享标志</li>
 </ul>
-<a class="header" href="CPP/Thread.html#283-读写锁" id="283-读写锁"><h3>2.8.3 读写锁</h3></a>
+<h3 id="283-读写锁"><a class="header" href="#283-读写锁">2.8.3 读写锁</a></h3>
 <ul>
 <li>读模式加锁（可以多个持有读锁）</li>
 <li>写模式加锁（只有不加锁的时候才能申请写锁，只能有一个持有写锁）</li>
 <li>不加锁</li>
 <li>rw</li>
 </ul>
-<a class="header" href="CPP/Thread.html#284-条件变量专为生产消费者设计" id="284-条件变量专为生产消费者设计"><h3>2.8.4 条件变量（专为生产消费者设计）</h3></a>
+<h3 id="284-条件变量专为生产消费者设计"><a class="header" href="#284-条件变量专为生产消费者设计">2.8.4 条件变量（专为生产消费者设计）</a></h3>
 <ul>
 <li>
 <p>与互斥锁一起使用</p>
@@ -310,7 +336,7 @@ pthread_cond_broadcast(); // 唤醒全部等待中的线程
 </code></pre>
 </li>
 </ul>
-<a class="header" href="CPP/Thread.html#285-匿名信号量" id="285-匿名信号量"><h3>2.8.5 （匿名）信号量</h3></a>
+<h3 id="285-匿名信号量"><a class="header" href="#285-匿名信号量">2.8.5 （匿名）信号量</a></h3>
 <ul>
 <li>
 <p>一个整数计数器，数值表示空闲的临界资源的数量</p>
@@ -331,7 +357,7 @@ int sem_getvalue(); // 获取信号想的值
 </code></pre>
 </li>
 </ul>
-<a class="header" href="CPP/Thread.html#286-生产消费者模型" id="286-生产消费者模型"><h3>2.8.6 生产消费者模型</h3></a>
+<h3 id="286-生产消费者模型"><a class="header" href="#286-生产消费者模型">2.8.6 生产消费者模型</a></h3>
 <ul>
 <li>基本概念</li>
 <li>互斥锁 + 条件变量实现生产消费者模型
@@ -345,7 +371,7 @@ int sem_getvalue(); // 获取信号想的值
 </ul>
 </li>
 </ul>
-<a class="header" href="CPP/Thread.html#287-多线程程序" id="287-多线程程序"><h3>2.8.7 多线程程序</h3></a>
+<h3 id="287-多线程程序"><a class="header" href="#287-多线程程序">2.8.7 多线程程序</a></h3>
 <ul>
 <li>全局变量的线程安全</li>
 <li>是否有不可重入函数</li>
@@ -356,17 +382,13 @@ int sem_getvalue(); // 获取信号想的值
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
-                            <a rel="prev" href="CPP/STL.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../CPP/STL.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
-                            <a rel="next" href="CPP/TCP_socket.html" class="mobile-nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../CPP/TCP_socket.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -374,46 +396,35 @@ int sem_getvalue(); // 获取信号想的值
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
-                    <a href="CPP/STL.html" class="nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../CPP/STL.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
-                    <a href="CPP/TCP_socket.html" class="nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../CPP/TCP_socket.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
 
-        <!-- Local fallback for Font Awesome -->
-        <script>
-            if (getComputedStyle(document.querySelector(".fa")).fontFamily !== "FontAwesome") {
-                var link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.type = 'text/css';
-                link.href = '_FontAwesome/css/font-awesome.css';
-                document.head.insertBefore(link, document.head.firstChild)
-            }
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
         </script>
 
-        
 
-        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
 
-        
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
-        
+        <!-- Custom JS scripts -->
 
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
-
-        <!-- Custom JS script -->
-        
 
     </body>
 </html>

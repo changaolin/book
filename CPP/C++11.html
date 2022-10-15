@@ -1,43 +1,44 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>C++11 - 梦北</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="学习笔记">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <base href="../">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-        <link rel="stylesheet" href="book.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-        <link rel="shortcut icon" href="favicon.png">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
-
-        <!-- Custom theme -->
-        
-
-        
-
-        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
-        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
-        <script>
-            if (typeof Clipboard == 'undefined') {
-                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
-            }
-        </script>
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body class="light">
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script type="text/javascript">
             try {
@@ -57,54 +58,76 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script type="text/javascript">
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
-            if (theme === null || theme === undefined) { theme = 'light'; }
-            document.body.className = theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script type="text/javascript">
+            var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             }
-            document.querySelector('html').classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li><a href="CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li><a href="CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li><a href="CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li><a href="CPP/C++11.html" class="active"><strong aria-hidden="true">1.5.</strong> C++11</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">README</a></li><li class="chapter-item expanded "><a href="../CPP/index.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li class="chapter-item expanded "><a href="../CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li class="chapter-item expanded "><a href="../CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li class="chapter-item expanded "><a href="../CPP/C++11.html" class="active"><strong aria-hidden="true">1.5.</strong> C++11</a></li><li class="chapter-item expanded "><a href="../CPP/EMC++.html"><strong aria-hidden="true">1.6.</strong> Effective Modern C++</a></li></ol></li><li class="chapter-item expanded "><a href="../Programmer/index.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li class="chapter-item expanded "><a href="../Media/index.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li class="chapter-item expanded "><a href="../Media/ffmpeg_install.html"><strong aria-hidden="true">3.2.</strong> FFMPEG 安装 MACOS</a></li><li class="chapter-item expanded "><a href="../Media/cmake.html"><strong aria-hidden="true">3.3.</strong> CMAKE 模板</a></li><li class="chapter-item expanded "><a href="../Media/yuvplayer.html"><strong aria-hidden="true">3.4.</strong> YUVPLayer Demo(C)</a></li><li class="chapter-item expanded "><a href="../Media/pcmplayer.html"><strong aria-hidden="true">3.5.</strong> PCMPLayer Demo(C)</a></li></ol></li><li class="chapter-item expanded "><a href="../Redis/index.html"><strong aria-hidden="true">4.</strong> Redis</a></li><li class="chapter-item expanded "><a href="../NET/index.html"><strong aria-hidden="true">5.</strong> NET</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="submenu">
-                                <li><button class="theme" id="light">Light <span class="default">(default)</span></button></li>
-                                <li><button class="theme" id="rust">Rust</button></li>
-                                <li><button class="theme" id="coal">Coal</button></li>
-                                <li><button class="theme" id="navy">Navy</button></li>
-                                <li><button class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                        </div>
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
 
-                        <h1 class="menu-title">梦北</h1>
+                    <h1 class="menu-title">梦北</h1>
 
-                        <div class="right-buttons">
-                            <a href="print.html" title="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                        </div>
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
                     </div>
                 </div>
 
@@ -119,25 +142,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="CPP/C++11.html#c11语言" id="c11语言"><h1>C++11语言</h1></a>
-<a class="header" href="CPP/C++11.html#0-关键字" id="0-关键字"><h2>0. 关键字</h2></a>
+                        <h1 id="c11语言"><a class="header" href="#c11语言">C++11语言</a></h1>
+<h2 id="0-关键字"><a class="header" href="#0-关键字">0. 关键字</a></h2>
 <p><img src="../assets/C11%E5%85%B3%E9%94%AE%E5%AD%97.png" alt="截屏2022-06-30 22.15.35" /></p>
-<a class="header" href="CPP/C++11.html#01-explcit" id="01-explcit"><h3>0.1 explcit</h3></a>
-<a class="header" href="CPP/C++11.html#02-noexcept" id="02-noexcept"><h3>0.2 noexcept</h3></a>
-<a class="header" href="CPP/C++11.html#03-const" id="03-const"><h3>0.3 const...</h3></a>
-<a class="header" href="CPP/C++11.html#04-const" id="04-const"><h3>0.4 const</h3></a>
-<a class="header" href="CPP/C++11.html#05-static" id="05-static"><h3>0.5 static</h3></a>
-<a class="header" href="CPP/C++11.html#06-typeplate" id="06-typeplate"><h3>0.6 typeplate</h3></a>
-<a class="header" href="CPP/C++11.html#07-tpyename" id="07-tpyename"><h3>0.7 tpyename</h3></a>
-<a class="header" href="CPP/C++11.html#08-class" id="08-class"><h3>0.8 class</h3></a>
-<a class="header" href="CPP/C++11.html#09-decltype" id="09-decltype"><h3>0.9 decltype</h3></a>
-<a class="header" href="CPP/C++11.html#010-auto" id="010-auto"><h3>0.10 auto</h3></a>
-<a class="header" href="CPP/C++11.html#011-public" id="011-public"><h3>0.11 public</h3></a>
-<a class="header" href="CPP/C++11.html#012-private" id="012-private"><h3>0.12 private</h3></a>
-<a class="header" href="CPP/C++11.html#013-proteced" id="013-proteced"><h3>0.13 proteced</h3></a>
-<a class="header" href="CPP/C++11.html#014-virtual" id="014-virtual"><h3>0.14 virtual</h3></a>
-<a class="header" href="CPP/C++11.html#015" id="015"><h2>0.15</h2></a>
-<a class="header" href="CPP/C++11.html#1-lambda" id="1-lambda"><h2>1. lambda</h2></a>
+<h3 id="01-explcit"><a class="header" href="#01-explcit">0.1 explcit</a></h3>
+<h3 id="02-noexcept"><a class="header" href="#02-noexcept">0.2 noexcept</a></h3>
+<h3 id="03-const"><a class="header" href="#03-const">0.3 const...</a></h3>
+<h3 id="04-const"><a class="header" href="#04-const">0.4 const</a></h3>
+<h3 id="05-static"><a class="header" href="#05-static">0.5 static</a></h3>
+<h3 id="06-typeplate"><a class="header" href="#06-typeplate">0.6 typeplate</a></h3>
+<h3 id="07-tpyename"><a class="header" href="#07-tpyename">0.7 tpyename</a></h3>
+<h3 id="08-class"><a class="header" href="#08-class">0.8 class</a></h3>
+<h3 id="09-decltype"><a class="header" href="#09-decltype">0.9 decltype</a></h3>
+<h3 id="010-auto"><a class="header" href="#010-auto">0.10 auto</a></h3>
+<h3 id="011-public"><a class="header" href="#011-public">0.11 public</a></h3>
+<h3 id="012-private"><a class="header" href="#012-private">0.12 private</a></h3>
+<h3 id="013-proteced"><a class="header" href="#013-proteced">0.13 proteced</a></h3>
+<h3 id="014-virtual"><a class="header" href="#014-virtual">0.14 virtual</a></h3>
+<h2 id="015"><a class="header" href="#015">0.15</a></h2>
+<h2 id="1-lambda"><a class="header" href="#1-lambda">1. lambda</a></h2>
 <ul>
 <li>格式
 <ul>
@@ -145,7 +168,7 @@
 </ul>
 </li>
 </ul>
-<a class="header" href="CPP/C++11.html#2-variadic-templates" id="2-variadic-templates"><h2>2. Variadic Templates</h2></a>
+<h2 id="2-variadic-templates"><a class="header" href="#2-variadic-templates">2. Variadic Templates</a></h2>
 <ul>
 <li>参数类型变化</li>
 <li>参数个数变化</li>
@@ -163,7 +186,7 @@ void func(const T&amp; firstArg, const Types&amp;... args) // ... 是类型的�
 {
   处理 firstArg;
   // sizeof...(args); 用于得到args参数的个数
-    func(args...);
+	func(args...);
 }
 //////////////////////////////////////////////////////////////////////////////
 template &lt;typename... Args&gt;
@@ -194,24 +217,33 @@ struct PRINT_TYPLE&lt;MAX, MAX, Args...&gt; {
 <p><img src="../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF2.png" alt="截屏2022-06-30 22.04.50" /></p>
 <p><img src="../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF3.png" alt="截屏2022-06-30 22.07.23" /></p>
 <p><img src="../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF4.png" alt="截屏2022-06-30 22.13.34" /></p>
-<a class="header" href="CPP/C++11.html#3-initializer_lists" id="3-initializer_lists"><h2>3. initializer_lists</h2></a>
-<a class="header" href="CPP/C++11.html#c11标准库" id="c11标准库"><h1>c++11标准库</h1></a>
+<h2 id="3-initializer_lists"><a class="header" href="#3-initializer_lists">3. initializer_lists</a></h2>
+<h1 id="c11标准库"><a class="header" href="#c11标准库">c++11标准库</a></h1>
+<h2 id="右值引用move"><a class="header" href="#右值引用move">右值引用｜Move</a></h2>
+<ul>
+<li>右值通常是临时对象，不能出现在等号左边</li>
+<li>拷贝指针（必须有指针）</li>
+<li>使用 std::move(left_value) 来将左值引用当作右值引用，来使用move语义</li>
+</ul>
+<pre><code class="language-c++">M c1(c);
+M c2(std::move(c1)); // 必须确保后续不在使用c1
+cl.swap(c2);
+
+// move ctor
+MyString（MyString	&amp;&amp; str） noexcept: initization list {}
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
-                            <a rel="prev" href="CPP/TCP_socket.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../CPP/TCP_socket.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
-                            <a rel="next" href="Programmer/README.html" class="mobile-nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../CPP/EMC++.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -219,46 +251,35 @@ struct PRINT_TYPLE&lt;MAX, MAX, Args...&gt; {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
-                    <a href="CPP/TCP_socket.html" class="nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../CPP/TCP_socket.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
-                    <a href="Programmer/README.html" class="nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../CPP/EMC++.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
 
-        <!-- Local fallback for Font Awesome -->
-        <script>
-            if (getComputedStyle(document.querySelector(".fa")).fontFamily !== "FontAwesome") {
-                var link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.type = 'text/css';
-                link.href = '_FontAwesome/css/font-awesome.css';
-                document.head.insertBefore(link, document.head.firstChild)
-            }
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
         </script>
 
-        
 
-        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
 
-        
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
-        
+        <!-- Custom JS scripts -->
 
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
-
-        <!-- Custom JS script -->
-        
 
     </body>
 </html>

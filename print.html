@@ -1,43 +1,45 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>梦北</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="学习笔记">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <base href="">
-
-        <link rel="stylesheet" href="book.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
-
+        <link rel="icon" href="favicon.svg">
         <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
 
+        <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
         <link rel="stylesheet" href="tomorrow-night.css">
         <link rel="stylesheet" href="ayu-highlight.css">
 
-        <!-- Custom theme -->
-        
-
-        
-
-        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
-        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
-        <script>
-            if (typeof Clipboard == 'undefined') {
-                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
-            }
-        </script>
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body class="light">
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script type="text/javascript">
             try {
@@ -57,54 +59,76 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script type="text/javascript">
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
-            if (theme === null || theme === undefined) { theme = 'light'; }
-            document.body.className = theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script type="text/javascript">
+            var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             }
-            document.querySelector('html').classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li><a href="CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li><a href="CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li><a href="CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li><a href="CPP/C++11.html"><strong aria-hidden="true">1.5.</strong> C++11</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">README</a></li><li class="chapter-item expanded "><a href="CPP/index.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li class="chapter-item expanded "><a href="CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li class="chapter-item expanded "><a href="CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li class="chapter-item expanded "><a href="CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li class="chapter-item expanded "><a href="CPP/C++11.html"><strong aria-hidden="true">1.5.</strong> C++11</a></li><li class="chapter-item expanded "><a href="CPP/EMC++.html"><strong aria-hidden="true">1.6.</strong> Effective Modern C++</a></li></ol></li><li class="chapter-item expanded "><a href="Programmer/index.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li class="chapter-item expanded "><a href="Media/index.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li class="chapter-item expanded "><a href="Media/ffmpeg_install.html"><strong aria-hidden="true">3.2.</strong> FFMPEG 安装 MACOS</a></li><li class="chapter-item expanded "><a href="Media/cmake.html"><strong aria-hidden="true">3.3.</strong> CMAKE 模板</a></li><li class="chapter-item expanded "><a href="Media/yuvplayer.html"><strong aria-hidden="true">3.4.</strong> YUVPLayer Demo(C)</a></li><li class="chapter-item expanded "><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.5.</strong> PCMPLayer Demo(C)</a></li></ol></li><li class="chapter-item expanded "><a href="Redis/index.html"><strong aria-hidden="true">4.</strong> Redis</a></li><li class="chapter-item expanded "><a href="NET/index.html"><strong aria-hidden="true">5.</strong> NET</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="submenu">
-                                <li><button class="theme" id="light">Light <span class="default">(default)</span></button></li>
-                                <li><button class="theme" id="rust">Rust</button></li>
-                                <li><button class="theme" id="coal">Coal</button></li>
-                                <li><button class="theme" id="navy">Navy</button></li>
-                                <li><button class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                        </div>
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
 
-                        <h1 class="menu-title">梦北</h1>
+                    <h1 class="menu-title">梦北</h1>
 
-                        <div class="right-buttons">
-                            <a href="print.html" title="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                        </div>
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
                     </div>
                 </div>
 
@@ -119,9 +143,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="print.html#readme" id="readme"><h1>README</h1></a>
-<a class="header" href="print.html#cpp学习笔记" id="cpp学习笔记"><h1>CPP学习笔记</h1></a>
-<a class="header" href="print.html#基于类对象" id="基于类对象"><h1>基于类（对象）</h1></a>
+                        <h1 id="readme"><a class="header" href="#readme">README</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cpp学习笔记"><a class="header" href="#cpp学习笔记">CPP学习笔记</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="基于类对象"><a class="header" href="#基于类对象">基于类（对象）</a></h1>
 <ul>
 <li>
 <p>类是<font color='red'><strong>数据</strong></font>和数据的处理函数的一种组织形式。</p>
@@ -163,7 +187,7 @@
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#面向对象" id="面向对象"><h1>面向对象</h1></a>
+<h1 id="面向对象"><a class="header" href="#面向对象">面向对象</a></h1>
 <ul>
 <li>复合 （内存 has a， Container / Component）
 <ul>
@@ -196,39 +220,39 @@
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#1-零散" id="1-零散"><h1>1 零散</h1></a>
-<a class="header" href="print.html#转换函数" id="转换函数"><h2>转换函数</h2></a>
-<a class="header" href="print.html#explict明白的明确的" id="explict明白的明确的"><h2>explict（明白的，明确的）</h2></a>
+<h1 id="1-零散"><a class="header" href="#1-零散">1 零散</a></h1>
+<h2 id="转换函数"><a class="header" href="#转换函数">转换函数</a></h2>
+<h2 id="explict明白的明确的"><a class="header" href="#explict明白的明确的">explict（明白的，明确的）</a></h2>
 <ul>
 <li>non-explict-one-argument ctor</li>
 </ul>
-<a class="header" href="print.html#pointer-likeclass智能指针迭代器" id="pointer-likeclass智能指针迭代器"><h2>Pointer-likeClass（智能指针，迭代器）</h2></a>
-<a class="header" href="print.html#function-likeclass仿函数" id="function-likeclass仿函数"><h2>Function-likeClass（仿函数）</h2></a>
-<a class="header" href="print.html#类模板" id="类模板"><h2>类模板</h2></a>
+<h2 id="pointer-likeclass智能指针迭代器"><a class="header" href="#pointer-likeclass智能指针迭代器">Pointer-likeClass（智能指针，迭代器）</a></h2>
+<h2 id="function-likeclass仿函数"><a class="header" href="#function-likeclass仿函数">Function-likeClass（仿函数）</a></h2>
+<h2 id="类模板"><a class="header" href="#类模板">类模板</a></h2>
 <ul>
 <li>使用时指定类型</li>
 </ul>
-<a class="header" href="print.html#函数模板" id="函数模板"><h2>函数模板</h2></a>
-<a class="header" href="print.html#成员模板" id="成员模板"><h2>成员模板</h2></a>
-<a class="header" href="print.html#模板特化全偏特化-范围个数缩小" id="模板特化全偏特化-范围个数缩小"><h2>模板特化（全/偏特化-范围｜个数缩小）</h2></a>
-<a class="header" href="print.html#模板模板参数" id="模板模板参数"><h2>模板模板参数</h2></a>
-<a class="header" href="print.html#数量不定的模板参数typename-typessizeofargs" id="数量不定的模板参数typename-typessizeofargs"><h2>数量不定的模板参数：typename... Types：sizeof...(args)</h2></a>
-<a class="header" href="print.html#auto编译时推理" id="auto编译时推理"><h2>auto（编译时推理）</h2></a>
+<h2 id="函数模板"><a class="header" href="#函数模板">函数模板</a></h2>
+<h2 id="成员模板"><a class="header" href="#成员模板">成员模板</a></h2>
+<h2 id="模板特化全偏特化-范围个数缩小"><a class="header" href="#模板特化全偏特化-范围个数缩小">模板特化（全/偏特化-范围｜个数缩小）</a></h2>
+<h2 id="模板模板参数"><a class="header" href="#模板模板参数">模板模板参数</a></h2>
+<h2 id="数量不定的模板参数typename-typessizeofargs"><a class="header" href="#数量不定的模板参数typename-typessizeofargs">数量不定的模板参数：typename... Types：sizeof...(args)</a></h2>
+<h2 id="auto编译时推理"><a class="header" href="#auto编译时推理">auto（编译时推理）</a></h2>
 <ul>
 <li>声明时需要定义</li>
 </ul>
-<a class="header" href="print.html#objectmodel" id="objectmodel"><h2>ObjectModel</h2></a>
+<h2 id="objectmodel"><a class="header" href="#objectmodel">ObjectModel</a></h2>
 <ul>
 <li>虚指针（vptr）</li>
 <li>虚表（vtbl）</li>
 </ul>
-<a class="header" href="print.html#stl" id="stl"><h1>STL</h1></a>
-<p><a href="../resource/Slide.pdf">参考资料</a></p>
-<p><a href="../resource/sample.cpp">源码</a></p>
-<p><img src="../assets/STL.png" alt="截屏2022-06-22 20.23.54" /></p>
-<a class="header" href="print.html#容器container" id="容器container"><h1>容器（Container）</h1></a>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="stl"><a class="header" href="#stl">STL</a></h1>
+<p><a href="CPP/../resource/Slide.pdf">参考资料</a></p>
+<p><a href="CPP/../resource/sample.cpp">源码</a></p>
+<p><img src="CPP/../assets/STL.png" alt="截屏2022-06-22 20.23.54" /></p>
+<h1 id="容器container"><a class="header" href="#容器container">容器（Container）</a></h1>
 <p>前闭后开</p>
-<a class="header" href="print.html#结构与分类" id="结构与分类"><h2>结构与分类</h2></a>
+<h2 id="结构与分类"><a class="header" href="#结构与分类">结构与分类</a></h2>
 <ul>
 <li>序列容器
 <ul>
@@ -257,18 +281,18 @@
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#list" id="list"><h2>List</h2></a>
+<h2 id="list"><a class="header" href="#list">List</a></h2>
 <ul>
 <li>双向链表</li>
 <li>迭代器是class，</li>
 </ul>
-<a class="header" href="print.html#vector" id="vector"><h2>Vector</h2></a>
+<h2 id="vector"><a class="header" href="#vector">Vector</a></h2>
 <ul>
 <li>2倍动态增长</li>
 <li>不能原地扩充</li>
 <li>迭代器是原始指针</li>
 </ul>
-<a class="header" href="print.html#deque" id="deque"><h2>Deque</h2></a>
+<h2 id="deque"><a class="header" href="#deque">Deque</a></h2>
 <ul>
 <li>分段Buffer</li>
 <li>双向扩充</li>
@@ -283,7 +307,7 @@
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#分配器allocators" id="分配器allocators"><h1>分配器（Allocators）</h1></a>
+<h1 id="分配器allocators"><a class="header" href="#分配器allocators">分配器（Allocators）</a></h1>
 <ul>
 <li>VC6 的分配器没有特殊设计，调用的是 malloc和free</li>
 <li>BC5 的分配器也没有特殊设计</li>
@@ -293,17 +317,17 @@
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#算法algorithms" id="算法algorithms"><h1>算法（Algorithms）</h1></a>
+<h1 id="算法algorithms"><a class="header" href="#算法algorithms">算法（Algorithms）</a></h1>
 <ul>
 <li>所有的算法，最终的行为无非就是比大小。</li>
 <li>算法问迭代器问题</li>
 </ul>
-<a class="header" href="print.html#1-算法是一个函数模板" id="1-算法是一个函数模板"><h2>1. 算法是一个函数模板</h2></a>
+<h2 id="1-算法是一个函数模板"><a class="header" href="#1-算法是一个函数模板">1. 算法是一个函数模板</a></h2>
 <pre><code>- 从语言层次来讲，算法是一个函数模板
 - 其余部件都是一个类模板
 </code></pre>
-<a class="header" href="print.html#2-处理迭代器" id="2-处理迭代器"><h2>2. 处理迭代器</h2></a>
-<a class="header" href="print.html#3-实例" id="3-实例"><h2>3. 实例</h2></a>
+<h2 id="2-处理迭代器"><a class="header" href="#2-处理迭代器">2. 处理迭代器</a></h2>
+<h2 id="3-实例"><a class="header" href="#3-实例">3. 实例</a></h2>
 <ul>
 <li>accumulate（累计）</li>
 <li>for_each</li>
@@ -326,9 +350,9 @@
 <li>sort</li>
 <li>binary_search</li>
 </ul>
-<a class="header" href="print.html#迭代器iterators" id="迭代器iterators"><h1>迭代器（Iterators）</h1></a>
-<p><img src="../assets/%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%B1%BB%E5%9E%8B.png" alt="截屏2022-06-22 12.52.02" /></p>
-<a class="header" href="print.html#1-五种相关类型" id="1-五种相关类型"><h2>1. 五种相关类型</h2></a>
+<h1 id="迭代器iterators"><a class="header" href="#迭代器iterators">迭代器（Iterators）</a></h1>
+<p><img src="CPP/../assets/%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%B1%BB%E5%9E%8B.png" alt="截屏2022-06-22 12.52.02" /></p>
+<h2 id="1-五种相关类型"><a class="header" href="#1-五种相关类型">1. 五种相关类型</a></h2>
 <ul>
 <li>iterator_category （分类）</li>
 <li>distance（两个iterator之间的距离的类型）</li>
@@ -336,11 +360,26 @@
 <li>reference</li>
 <li>pointer</li>
 </ul>
-<a class="header" href="print.html#2-traits中间层" id="2-traits中间层"><h2>2. traits（中间层）</h2></a>
+<h2 id="2-traits中间层"><a class="header" href="#2-traits中间层">2. traits（中间层）</a></h2>
 <ul>
 <li>用于封装原生指针，用以实现上述五种类型的数据。</li>
 </ul>
-<a class="header" href="print.html#适配器adapters" id="适配器adapters"><h1>适配器（Adapters）</h1></a>
+<h2 id="3-接口"><a class="header" href="#3-接口">3. 接口</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>名称</th><th>初始化</th><th>前</th><th>后</th><th>首元素</th><th>尾元素</th><th>随机</th><th>随机查询</th><th>大小</th><th>容积</th><th>反转</th><th>重设大小</th></tr></thead><tbody>
+<tr><td><a href="https://en.cppreference.com/w/cpp/header/array">array</a></td><td></td><td></td><td>[push|pop]_back</td><td>front</td><td>back</td><td>[]/insert/erase</td><td>[].data</td><td>size</td><td>capacity</td><td></td><td></td></tr>
+<tr><td>vector</td><td>vector<int>v1</td><td></td><td>[push|pop]_back</td><td></td><td></td><td></td><td></td><td></td><td></td><td>reserve</td><td></td></tr>
+<tr><td>stack</td><td></td><td>pop</td><td>push</td><td>top</td><td></td><td></td><td></td><td>size</td><td></td><td></td><td></td></tr>
+<tr><td><a href="https://zh.cppreference.com/w/cpp/container/deque">queue</a></td><td></td><td>push</td><td>pop</td><td>front</td><td>back</td><td></td><td></td><td>Size</td><td></td><td></td><td></td></tr>
+<tr><td>deque</td><td></td><td>[push|pop]_front</td><td>[push|pop]_back</td><td>front</td><td>back</td><td>insert/erase</td><td></td><td>size</td><td></td><td></td><td>resize</td></tr>
+<tr><td>Forward-list</td><td></td><td>[push|pop]_front</td><td></td><td>front</td><td>back</td><td>insert/erase</td><td></td><td></td><td></td><td></td><td>resize</td></tr>
+<tr><td>list</td><td></td><td>[push|pop]_front</td><td>[push|pop]_back</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>set/mutiset</td><td></td><td></td><td></td><td></td><td></td><td>insert/erase</td><td></td><td>Size</td><td></td><td></td><td></td></tr>
+<tr><td>map/multimap</td><td></td><td></td><td></td><td></td><td></td><td>insert/erase</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>string</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>tuple</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</tbody></table>
+</div>
+<h1 id="适配器adapters"><a class="header" href="#适配器adapters">适配器（Adapters）</a></h1>
 <ul>
 <li>容器的适配器
 <ul>
@@ -364,18 +403,18 @@
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#仿函数functors" id="仿函数functors"><h1>仿函数（Functors）</h1></a>
+<h1 id="仿函数functors"><a class="header" href="#仿函数functors">仿函数（Functors）</a></h1>
 <ul>
 <li>STL 的仿函数必须public继承binary_function或者unary_function之后才能被适配器适配</li>
 </ul>
-<a class="header" href="print.html#1-算术类-" id="1-算术类-"><h2>1. 算术类（+/-）</h2></a>
-<a class="header" href="print.html#2-逻辑运算类-" id="2-逻辑运算类-"><h2>2. 逻辑运算类（&amp;&amp; ||）</h2></a>
-<a class="header" href="print.html#3-相对关系类---" id="3-相对关系类---"><h2>3. 相对关系类( &lt; | &gt;=)</h2></a>
-<a class="header" href="print.html#4-binary_function两个操作数" id="4-binary_function两个操作数"><h2>4. binary_function:（两个操作数）</h2></a>
-<a class="header" href="print.html#5-unary_function一个操作数" id="5-unary_function一个操作数"><h2>5. unary_function（一个操作数）</h2></a>
-<a class="header" href="print.html#标准库其他" id="标准库其他"><h1>标准库其他</h1></a>
-<a class="header" href="print.html#thread" id="thread"><h1>Thread</h1></a>
-<a class="header" href="print.html#一主要函数" id="一主要函数"><h1>一、主要函数</h1></a>
+<h2 id="1-算术类-"><a class="header" href="#1-算术类-">1. 算术类（+/-）</a></h2>
+<h2 id="2-逻辑运算类-"><a class="header" href="#2-逻辑运算类-">2. 逻辑运算类（&amp;&amp; ||）</a></h2>
+<h2 id="3-相对关系类---"><a class="header" href="#3-相对关系类---">3. 相对关系类( &lt; | &gt;=)</a></h2>
+<h2 id="4-binary_function两个操作数"><a class="header" href="#4-binary_function两个操作数">4. binary_function:（两个操作数）</a></h2>
+<h2 id="5-unary_function一个操作数"><a class="header" href="#5-unary_function一个操作数">5. unary_function（一个操作数）</a></h2>
+<h1 id="标准库其他"><a class="header" href="#标准库其他">标准库其他</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="thread"><a class="header" href="#thread">Thread</a></h1>
+<h1 id="一主要函数"><a class="header" href="#一主要函数">一、主要函数</a></h1>
 <pre><code class="language-C"> #include &lt;pthread.h&gt;
 
 int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void *), void *arg)
@@ -389,22 +428,22 @@ int pthread_once(pthread_once_t *once_control, void (*init_routine)(void))
 pthread_t pthread_self(void)
 pthread_equal(tid1, tid2)
 </code></pre>
-<a class="header" href="print.html#二具体功能" id="二具体功能"><h1>二、具体功能</h1></a>
-<a class="header" href="print.html#21-线程的创建" id="21-线程的创建"><h2>2.1 线程的创建</h2></a>
-<a class="header" href="print.html#22-线程的中止" id="22-线程的中止"><h2>2.2 线程的中止</h2></a>
-<a class="header" href="print.html#221-异常终止" id="221-异常终止"><h3>2.2.1 异常终止</h3></a>
+<h1 id="二具体功能"><a class="header" href="#二具体功能">二、具体功能</a></h1>
+<h2 id="21-线程的创建"><a class="header" href="#21-线程的创建">2.1 线程的创建</a></h2>
+<h2 id="22-线程的中止"><a class="header" href="#22-线程的中止">2.2 线程的中止</a></h2>
+<h3 id="221-异常终止"><a class="header" href="#221-异常终止">2.2.1 异常终止</a></h3>
 <ul>
 <li>主线程退出，子线程被强行终止</li>
 <li>子线程中调用 exit()，则整个<strong>进程</strong>全部退出</li>
 <li>缺省行为是终止程序的信号，会终止整个<strong>进程</strong></li>
 </ul>
-<a class="header" href="print.html#222-正常终止" id="222-正常终止"><h3>2.2.2 正常终止</h3></a>
+<h3 id="222-正常终止"><a class="header" href="#222-正常终止">2.2.2 正常终止</a></h3>
 <ul>
 <li>线程使用 return 返回，return 0 无需转换，return (void*) 1; 返回值是线程的结束码。</li>
 <li>线程可以被同一进程的其他线程调用 pthread_cancel() 结束。</li>
 <li>在线程中调用 pthread_exit((void*)1) 退出</li>
 </ul>
-<a class="header" href="print.html#23-线程的参数传递" id="23-线程的参数传递"><h2>2.3 线程的参数传递</h2></a>
+<h2 id="23-线程的参数传递"><a class="header" href="#23-线程的参数传递">2.3 线程的参数传递</a></h2>
 <ul>
 <li>线程创建顺序和线程运行顺序并不保证一致。</li>
 <li>全局变量不能代替线程的参数传递</li>
@@ -417,7 +456,10 @@ pthread_equal(tid1, tid2)
 </li>
 <li>传递地址参数(需要给每个线程传递一个单独的地址，不能使用同一个地址：全局变量)
 <ul>
-<li>int* var1 = new int; <em>var = 1;</em>)arg;</li>
+<li>int* var1 = new int; *var = 1;</li>
+<li>pthread_create(&amp;pid, NULL, func, var1))</li>
+<li>printf(&quot;%xx&quot;, *(int*)arg)</li>
+<li>var1 需要在线程中释放内存。 delete  (int*)arg;</li>
 </ul>
 </li>
 <li>线程退出状态
@@ -428,7 +470,7 @@ pthread_equal(tid1, tid2)
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#24-线程资源的回收" id="24-线程资源的回收"><h2>2.4 线程资源的回收</h2></a>
+<h2 id="24-线程资源的回收"><a class="header" href="#24-线程资源的回收">2.4 线程资源的回收</a></h2>
 <ul>
 <li>线程分离
 <ul>
@@ -471,7 +513,7 @@ pthread_equal(tid1, tid2)
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#25-线程取消" id="25-线程取消"><h2>2.5 线程取消</h2></a>
+<h2 id="25-线程取消"><a class="header" href="#25-线程取消">2.5 线程取消</a></h2>
 <ul>
 <li>可以被join</li>
 <li>返回值 为 PTHREAD_CANCELED ，即 -1</li>
@@ -495,7 +537,7 @@ pthread_equal(tid1, tid2)
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#26-线程与信号" id="26-线程与信号"><h2>2.6 线程与信号</h2></a>
+<h2 id="26-线程与信号"><a class="header" href="#26-线程与信号">2.6 线程与信号</a></h2>
 <ul>
 <li>在多线程程序中，外部向进程发送信号不会中断系统调用</li>
 <li>在多线程程序中，信号的处理是所有线程共享的</li>
@@ -506,7 +548,7 @@ pthread_equal(tid1, tid2)
 </li>
 <li>如果某个线程因为信号被终止，则整个进程都会被终止</li>
 </ul>
-<a class="header" href="print.html#27-线程安全" id="27-线程安全"><h2>2.7 线程安全</h2></a>
+<h2 id="27-线程安全"><a class="header" href="#27-线程安全">2.7 线程安全</a></h2>
 <ul>
 <li>原子性，可见行，顺序性
 <ul>
@@ -528,26 +570,26 @@ pthread_equal(tid1, tid2)
 </li>
 <li>线程同步锁</li>
 </ul>
-<a class="header" href="print.html#28-线程同步" id="28-线程同步"><h2>2.8 线程同步</h2></a>
-<a class="header" href="print.html#281-互斥锁" id="281-互斥锁"><h3>2.8.1 互斥锁</h3></a>
+<h2 id="28-线程同步"><a class="header" href="#28-线程同步">2.8 线程同步</a></h2>
+<h3 id="281-互斥锁"><a class="header" href="#281-互斥锁">2.8.1 互斥锁</a></h3>
 <ul>
 <li>加锁解锁，其他等待</li>
 <li>mutex</li>
 </ul>
-<a class="header" href="print.html#282-自旋锁" id="282-自旋锁"><h3>2.8.2 自旋锁</h3></a>
+<h3 id="282-自旋锁"><a class="header" href="#282-自旋锁">2.8.2 自旋锁</a></h3>
 <ul>
 <li>加锁解锁，其他不等待</li>
 <li>spin</li>
 <li>共享标志</li>
 </ul>
-<a class="header" href="print.html#283-读写锁" id="283-读写锁"><h3>2.8.3 读写锁</h3></a>
+<h3 id="283-读写锁"><a class="header" href="#283-读写锁">2.8.3 读写锁</a></h3>
 <ul>
 <li>读模式加锁（可以多个持有读锁）</li>
 <li>写模式加锁（只有不加锁的时候才能申请写锁，只能有一个持有写锁）</li>
 <li>不加锁</li>
 <li>rw</li>
 </ul>
-<a class="header" href="print.html#284-条件变量专为生产消费者设计" id="284-条件变量专为生产消费者设计"><h3>2.8.4 条件变量（专为生产消费者设计）</h3></a>
+<h3 id="284-条件变量专为生产消费者设计"><a class="header" href="#284-条件变量专为生产消费者设计">2.8.4 条件变量（专为生产消费者设计）</a></h3>
 <ul>
 <li>
 <p>与互斥锁一起使用</p>
@@ -565,7 +607,7 @@ pthread_cond_broadcast(); // 唤醒全部等待中的线程
 </code></pre>
 </li>
 </ul>
-<a class="header" href="print.html#285-匿名信号量" id="285-匿名信号量"><h3>2.8.5 （匿名）信号量</h3></a>
+<h3 id="285-匿名信号量"><a class="header" href="#285-匿名信号量">2.8.5 （匿名）信号量</a></h3>
 <ul>
 <li>
 <p>一个整数计数器，数值表示空闲的临界资源的数量</p>
@@ -586,7 +628,7 @@ int sem_getvalue(); // 获取信号想的值
 </code></pre>
 </li>
 </ul>
-<a class="header" href="print.html#286-生产消费者模型" id="286-生产消费者模型"><h3>2.8.6 生产消费者模型</h3></a>
+<h3 id="286-生产消费者模型"><a class="header" href="#286-生产消费者模型">2.8.6 生产消费者模型</a></h3>
 <ul>
 <li>基本概念</li>
 <li>互斥锁 + 条件变量实现生产消费者模型
@@ -600,32 +642,32 @@ int sem_getvalue(); // 获取信号想的值
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#287-多线程程序" id="287-多线程程序"><h3>2.8.7 多线程程序</h3></a>
+<h3 id="287-多线程程序"><a class="header" href="#287-多线程程序">2.8.7 多线程程序</a></h3>
 <ul>
 <li>全局变量的线程安全</li>
 <li>是否有不可重入函数</li>
 </ul>
-<p><img src="../assets/%E5%AE%89%E5%85%A8%E5%87%BD%E6%95%B0.png" alt="安全函数" /></p>
-<a class="header" href="print.html#tcp_socket" id="tcp_socket"><h1>TCP_Socket</h1></a>
-<a class="header" href="print.html#c11语言" id="c11语言"><h1>C++11语言</h1></a>
-<a class="header" href="print.html#0-关键字" id="0-关键字"><h2>0. 关键字</h2></a>
-<p><img src="../assets/C11%E5%85%B3%E9%94%AE%E5%AD%97.png" alt="截屏2022-06-30 22.15.35" /></p>
-<a class="header" href="print.html#01-explcit" id="01-explcit"><h3>0.1 explcit</h3></a>
-<a class="header" href="print.html#02-noexcept" id="02-noexcept"><h3>0.2 noexcept</h3></a>
-<a class="header" href="print.html#03-const" id="03-const"><h3>0.3 const...</h3></a>
-<a class="header" href="print.html#04-const" id="04-const"><h3>0.4 const</h3></a>
-<a class="header" href="print.html#05-static" id="05-static"><h3>0.5 static</h3></a>
-<a class="header" href="print.html#06-typeplate" id="06-typeplate"><h3>0.6 typeplate</h3></a>
-<a class="header" href="print.html#07-tpyename" id="07-tpyename"><h3>0.7 tpyename</h3></a>
-<a class="header" href="print.html#08-class" id="08-class"><h3>0.8 class</h3></a>
-<a class="header" href="print.html#09-decltype" id="09-decltype"><h3>0.9 decltype</h3></a>
-<a class="header" href="print.html#010-auto" id="010-auto"><h3>0.10 auto</h3></a>
-<a class="header" href="print.html#011-public" id="011-public"><h3>0.11 public</h3></a>
-<a class="header" href="print.html#012-private" id="012-private"><h3>0.12 private</h3></a>
-<a class="header" href="print.html#013-proteced" id="013-proteced"><h3>0.13 proteced</h3></a>
-<a class="header" href="print.html#014-virtual" id="014-virtual"><h3>0.14 virtual</h3></a>
-<a class="header" href="print.html#015" id="015"><h2>0.15</h2></a>
-<a class="header" href="print.html#1-lambda" id="1-lambda"><h2>1. lambda</h2></a>
+<p><img src="CPP/../assets/%E5%AE%89%E5%85%A8%E5%87%BD%E6%95%B0.png" alt="安全函数" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="tcp_socket"><a class="header" href="#tcp_socket">TCP_Socket</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="c11语言"><a class="header" href="#c11语言">C++11语言</a></h1>
+<h2 id="0-关键字"><a class="header" href="#0-关键字">0. 关键字</a></h2>
+<p><img src="CPP/../assets/C11%E5%85%B3%E9%94%AE%E5%AD%97.png" alt="截屏2022-06-30 22.15.35" /></p>
+<h3 id="01-explcit"><a class="header" href="#01-explcit">0.1 explcit</a></h3>
+<h3 id="02-noexcept"><a class="header" href="#02-noexcept">0.2 noexcept</a></h3>
+<h3 id="03-const"><a class="header" href="#03-const">0.3 const...</a></h3>
+<h3 id="04-const"><a class="header" href="#04-const">0.4 const</a></h3>
+<h3 id="05-static"><a class="header" href="#05-static">0.5 static</a></h3>
+<h3 id="06-typeplate"><a class="header" href="#06-typeplate">0.6 typeplate</a></h3>
+<h3 id="07-tpyename"><a class="header" href="#07-tpyename">0.7 tpyename</a></h3>
+<h3 id="08-class"><a class="header" href="#08-class">0.8 class</a></h3>
+<h3 id="09-decltype"><a class="header" href="#09-decltype">0.9 decltype</a></h3>
+<h3 id="010-auto"><a class="header" href="#010-auto">0.10 auto</a></h3>
+<h3 id="011-public"><a class="header" href="#011-public">0.11 public</a></h3>
+<h3 id="012-private"><a class="header" href="#012-private">0.12 private</a></h3>
+<h3 id="013-proteced"><a class="header" href="#013-proteced">0.13 proteced</a></h3>
+<h3 id="014-virtual"><a class="header" href="#014-virtual">0.14 virtual</a></h3>
+<h2 id="015"><a class="header" href="#015">0.15</a></h2>
+<h2 id="1-lambda"><a class="header" href="#1-lambda">1. lambda</a></h2>
 <ul>
 <li>格式
 <ul>
@@ -633,7 +675,7 @@ int sem_getvalue(); // 获取信号想的值
 </ul>
 </li>
 </ul>
-<a class="header" href="print.html#2-variadic-templates" id="2-variadic-templates"><h2>2. Variadic Templates</h2></a>
+<h2 id="2-variadic-templates"><a class="header" href="#2-variadic-templates">2. Variadic Templates</a></h2>
 <ul>
 <li>参数类型变化</li>
 <li>参数个数变化</li>
@@ -651,7 +693,7 @@ void func(const T&amp; firstArg, const Types&amp;... args) // ... 是类型的�
 {
   处理 firstArg;
   // sizeof...(args); 用于得到args参数的个数
-    func(args...);
+	func(args...);
 }
 //////////////////////////////////////////////////////////////////////////////
 template &lt;typename... Args&gt;
@@ -678,22 +720,110 @@ struct PRINT_TYPLE&lt;MAX, MAX, Args...&gt; {
 /////////////////////////////////////////////////////////////////////////////
 // 递归的继承
 </code></pre>
-<p><img src="../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF.png" alt="截屏2022-06-30 21.56.25" /></p>
-<p><img src="../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF2.png" alt="截屏2022-06-30 22.04.50" /></p>
-<p><img src="../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF3.png" alt="截屏2022-06-30 22.07.23" /></p>
-<p><img src="../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF4.png" alt="截屏2022-06-30 22.13.34" /></p>
-<a class="header" href="print.html#3-initializer_lists" id="3-initializer_lists"><h2>3. initializer_lists</h2></a>
-<a class="header" href="print.html#c11标准库" id="c11标准库"><h1>c++11标准库</h1></a>
-<a class="header" href="print.html#程序员笔记" id="程序员笔记"><h1>程序员笔记</h1></a>
-<a class="header" href="print.html#pkg-config" id="pkg-config"><h1>PKG-CONFIG</h1></a>
-<a class="header" href="print.html#a-hrefhttpswwwfreedesktoporgwikisoftwarepkg-config地址a" id="a-hrefhttpswwwfreedesktoporgwikisoftwarepkg-config地址a"><h2><a href="https://www.freedesktop.org/wiki/Software/pkg-config/">地址</a></h2></a>
-<a class="header" href="print.html#一般用法" id="一般用法"><h2>一般用法</h2></a>
+<p><img src="CPP/../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF.png" alt="截屏2022-06-30 21.56.25" /></p>
+<p><img src="CPP/../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF2.png" alt="截屏2022-06-30 22.04.50" /></p>
+<p><img src="CPP/../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF3.png" alt="截屏2022-06-30 22.07.23" /></p>
+<p><img src="CPP/../assets/%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF4.png" alt="截屏2022-06-30 22.13.34" /></p>
+<h2 id="3-initializer_lists"><a class="header" href="#3-initializer_lists">3. initializer_lists</a></h2>
+<h1 id="c11标准库"><a class="header" href="#c11标准库">c++11标准库</a></h1>
+<h2 id="右值引用move"><a class="header" href="#右值引用move">右值引用｜Move</a></h2>
+<ul>
+<li>右值通常是临时对象，不能出现在等号左边</li>
+<li>拷贝指针（必须有指针）</li>
+<li>使用 std::move(left_value) 来将左值引用当作右值引用，来使用move语义</li>
+</ul>
+<pre><code class="language-c++">M c1(c);
+M c2(std::move(c1)); // 必须确保后续不在使用c1
+cl.swap(c2);
+
+// move ctor
+MyString（MyString	&amp;&amp; str） noexcept: initization list {}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="effective-moderc-c"><a class="header" href="#effective-moderc-c">Effective Moderc C++</a></h1>
+<h1 id="零"><a class="header" href="#零">零</a></h1>
+<h2 id="类型名称值址权限"><a class="header" href="#类型名称值址权限">类型，名称，值，址，权限</a></h2>
+<p>int a = 10;</p>
+<p>const char* val; </p>
+<p>char* const val;</p>
+<h1 id="一类型推导"><a class="header" href="#一类型推导">一、类型推导</a></h1>
+<h2 id="11-理解模版类型推导"><a class="header" href="#11-理解模版类型推导">1.1 理解模版类型推导</a></h2>
+<pre><code class="language-c++">template&lt;typename T&gt;
+void f(ParamType param);
+f(expr)
+</code></pre>
+<h3 id="111-paramtype-是指针或者引用但不是万能引用万能引用对左值和右值的处理方式不一样"><a class="header" href="#111-paramtype-是指针或者引用但不是万能引用万能引用对左值和右值的处理方式不一样">1.1.1 ParamType 是指针或者引用，但不是万能引用（万能引用对左值和右值的处理方式不一样）</a></h3>
+<ul>
+<li>忽略<em>expt</em>的引用类型</li>
+<li>对<em>expr</em>的类型和<em>ParamType</em> 进行模式匹配，确定<em>T</em>的类型</li>
+</ul>
+<pre><code class="language-c++">template&lt;typename T&gt;
+void f(T&amp; param); // param是个引用
+
+int X = 27;  // x的型别是int
+const int cx = x;  // cx 的型别是 const int
+const int&amp; rx = x; // rx 是 x 的型别为 const int 的引用
+
+f(x); // T 的型别是 int. param 的型别是 int&amp;
+f(cx); // T 的型别是 const int, param 的型别是 const int&amp; 
+f(rx); // T 的和别是 const int, param 的和别是 const int&amp;
+</code></pre>
+<h3 id="112-paramtype-是个万能引用"><a class="header" href="#112-paramtype-是个万能引用">1.1.2 ParamType 是个万能引用</a></h3>
+<ul>
+<li>如果 <em>expr</em> 是个左值，<em>T</em>和<em>ParamType</em>都会被推导为左值引用
+<ul>
+<li>首先，这是在模板型别推导中， T 被推导为引用型别的唯一情形。 </li>
+<li>其次，尽管在声明时使用的是右值引用语法，它的型别推导结果却是左值引用。</li>
+</ul>
+</li>
+<li>如果 <em>expr</em> 是个右值，则使用 1.1.1 的规则</li>
+</ul>
+<pre><code class="language-c++">template&lt;typename T&gt; 
+void f(T&amp;&amp; param); // param现在是个万能引用
+
+int X = 27;
+const int ex = x;
+const int&amp; rx = x;
+
+f(x);  // X 是个左值，所以 T 的型别是 int&amp;, param 的 型别也是 int&amp;
+f(cx); // cx 是个左值，所以 T 的型别是 const int&amp;, param 的型别也是 const int&amp;
+f(rx); // rx 是个左值，所以 T 的型别是 const int&amp;, param 的型别也是 const int&amp;
+f(27); //27 是个右值，所以 T 的型别是 int, 这么 一来, param的型别就成 int&amp;&amp;
+</code></pre>
+<h3 id="113-paramtype既不是指针或者引用也不是万能指针"><a class="header" href="#113-paramtype既不是指针或者引用也不是万能指针">1.1.3 ParamType既不是指针或者引用，也不是万能指针</a></h3>
+<ul>
+<li>若 expr具有引用型别，则忽略其引用部分。</li>
+<li>忽略 expr 的引用性之后，若 expr 是个 const 对象，也忽略之。若其是个 volatile 对象，同忽略之</li>
+</ul>
+<pre><code class="language-c++">template&lt;typename T&gt;
+void f(T param); // param现在是按值传递
+
+intX =27;
+const int cx = x; 
+const int&amp; rx = x;
+
+f(x); // T 和 param 的节别都是 int
+f(cx); //T 和 param 的型别还都是 int
+f(rx); //T 和 param 的型别仍都是 int
+/*
+请注意，即使 cx 和 rx 代表 const 值， param 仍然不具有 const 型别。这是合理的 。 
+param 是个完全独立千 cx 和 rx 存在的对象 cx 和 rx 的 一 个副本。
+从而 cx 和 rx 不可修改这一事实并不能说明 param是否可以修改。
+正是由于这一原因， expr 的常址 性以及挥发性 (volatileness, 若有)可以在推导 param 的型别时加以忽略:
+仅仅由千 expr 不可修改，并不能断定其副本也不可修改。
+*/
+</code></pre>
+<h2 id="11-auto"><a class="header" href="#11-auto">1.1 auto</a></h2>
+<h2 id="12-decltype"><a class="header" href="#12-decltype">1.2 decltype</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="程序员笔记"><a class="header" href="#程序员笔记">程序员笔记</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="pkg-config"><a class="header" href="#pkg-config">PKG-CONFIG</a></h1>
+<h2 id="地址"><a class="header" href="#地址"><a href="https://www.freedesktop.org/wiki/Software/pkg-config/">地址</a></a></h2>
+<h2 id="一般用法"><a class="header" href="#一般用法">一般用法</a></h2>
 <pre><code class="language-shell"> gcc -o test test.c `pkg-config --libs --cflags glib-2.0`
 </code></pre>
-<a class="header" href="print.html#环境变量" id="环境变量"><h2>环境变量</h2></a>
+<h2 id="环境变量"><a class="header" href="#环境变量">环境变量</a></h2>
 <pre><code class="language-shell">export PKG_CONGIG_PATH=$PKG_CONFIG_PATH
 </code></pre>
-<a class="header" href="print.html#常用参数" id="常用参数"><h2>常用参数</h2></a>
+<h2 id="常用参数"><a class="header" href="#常用参数">常用参数</a></h2>
 <pre><code>--cflags # -I/usr/include/***
 
 --libs # -L/usr/lib/***
@@ -701,13 +831,13 @@ struct PRINT_TYPLE&lt;MAX, MAX, Args...&gt; {
 --list-all # 查看所有模块信息
 
 </code></pre>
-<a class="header" href="print.html#流媒体笔记" id="流媒体笔记"><h1>流媒体笔记</h1></a>
-<a class="header" href="print.html#ffmpeg-命令行学习" id="ffmpeg-命令行学习"><h1>FFMPEG 命令行学习</h1></a>
-<a class="header" href="print.html#a-hrefhttpffmpegorgffmpeghtml命令分类a" id="a-hrefhttpffmpegorgffmpeghtml命令分类a"><h1><a href="http://ffmpeg.org/ffmpeg.html">命令分类</a></h1></a>
-<a class="header" href="print.html#0-基本格式" id="0-基本格式"><h2>0. 基本格式</h2></a>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="流媒体笔记"><a class="header" href="#流媒体笔记">流媒体笔记</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ffmpeg-命令行学习"><a class="header" href="#ffmpeg-命令行学习">FFMPEG 命令行学习</a></h1>
+<h1 id="命令分类"><a class="header" href="#命令分类"><a href="http://ffmpeg.org/ffmpeg.html">命令分类</a></a></h1>
+<h2 id="0-基本格式"><a class="header" href="#0-基本格式">0. 基本格式</a></h2>
 <pre><code class="language-shell">ffmpeg [global_options] {[input_file_options] -i input_url} ... {[output_file_options] output_url} ...
 </code></pre>
-<a class="header" href="print.html#input_url--i" id="input_url--i"><h2>Input_url (-i)</h2></a>
+<h2 id="input_url--i"><a class="header" href="#input_url--i">Input_url (-i)</a></h2>
 <ul>
 <li>regular files</li>
 <li>pipes</li>
@@ -716,7 +846,7 @@ struct PRINT_TYPLE&lt;MAX, MAX, Args...&gt; {
 <li>Based 0 numbers</li>
 <li>...</li>
 </ul>
-<a class="header" href="print.html#input-or-output-data-types" id="input-or-output-data-types"><h2>Input or output data types</h2></a>
+<h2 id="input-or-output-data-types"><a class="header" href="#input-or-output-data-types">Input or output data types</a></h2>
 <ul>
 <li>video</li>
 <li>audios</li>
@@ -724,8 +854,8 @@ struct PRINT_TYPLE&lt;MAX, MAX, Args...&gt; {
 <li>attachment</li>
 <li>data</li>
 </ul>
-<a class="header" href="print.html#stream" id="stream"><h2>Stream</h2></a>
-<a class="header" href="print.html#selection" id="selection"><h3>selection</h3></a>
+<h2 id="stream"><a class="header" href="#stream">Stream</a></h2>
+<h3 id="selection"><a class="header" href="#selection">selection</a></h3>
 <ul>
 <li>-map (attachment streams can only use map)</li>
 <li>-vn</li>
@@ -733,11 +863,11 @@ struct PRINT_TYPLE&lt;MAX, MAX, Args...&gt; {
 <li>-sn</li>
 <li>-dn</li>
 </ul>
-<a class="header" href="print.html#handling" id="handling"><h3>handling</h3></a>
+<h3 id="handling"><a class="header" href="#handling">handling</a></h3>
 <ul>
 <li>-codec</li>
 </ul>
-<a class="header" href="print.html#example" id="example"><h3>example</h3></a>
+<h3 id="example"><a class="header" href="#example">example</a></h3>
 <pre><code>input file 'A.avi'
       stream 0: video 640x360
       stream 1: audio 2 channels
@@ -782,7 +912,7 @@ fail
         -map '[outv2]' -map 1:a:0 out3.mkv
 success
 </code></pre>
-<a class="header" href="print.html#基本流程" id="基本流程"><h2>基本流程</h2></a>
+<h2 id="基本流程"><a class="header" href="#基本流程">基本流程</a></h2>
 <pre><code> _______              ______________
 |       |            |              |
 | input |  demuxer   | encoded data |   decoder
@@ -802,8 +932,8 @@ success
 
 
 </code></pre>
-<a class="header" href="print.html#filtering-vf-or--af" id="filtering-vf-or--af"><h2>Filtering（-vf or -af）</h2></a>
-<a class="header" href="print.html#simple-filtergraphs" id="simple-filtergraphs"><h3>simple filtergraphs</h3></a>
+<h2 id="filtering-vf-or--af"><a class="header" href="#filtering-vf-or--af">Filtering（-vf or -af）</a></h2>
+<h3 id="simple-filtergraphs"><a class="header" href="#simple-filtergraphs">simple filtergraphs</a></h3>
 <pre><code> _________                        ______________
 |         |                      |              |
 | decoded |                      | encoded data |
@@ -816,14 +946,14 @@ success
                 |__________|
 
 </code></pre>
-<a class="header" href="print.html#filter-for-video" id="filter-for-video"><h3>filter for video</h3></a>
+<h3 id="filter-for-video"><a class="header" href="#filter-for-video">filter for video</a></h3>
 <pre><code> _______        _____________        _______        ________
 |       |      |             |      |       |      |        |
 | input | ---&gt; | deinterlace | ---&gt; | scale | ---&gt; | output |
 |_______|      |_____________|      |_______|      |________|
 
 </code></pre>
-<a class="header" href="print.html#complex-filter-graphs" id="complex-filter-graphs"><h2>Complex filter graphs</h2></a>
+<h2 id="complex-filter-graphs"><a class="header" href="#complex-filter-graphs">Complex filter graphs</a></h2>
 <pre><code> _________
 |         |
 | input 0 |\                    __________
@@ -842,7 +972,7 @@ success
 |_________|
 
 </code></pre>
-<a class="header" href="print.html#stream-copy" id="stream-copy"><h2>Stream Copy</h2></a>
+<h2 id="stream-copy"><a class="header" href="#stream-copy">Stream Copy</a></h2>
 <pre><code> _______              ______________            ________
 |       |            |              |          |        |
 | input |  demuxer   | encoded data |  muxer   | output |
@@ -850,60 +980,60 @@ success
 |_______|            |______________|          |________|
 
 </code></pre>
-<a class="header" href="print.html#1-通用查询参数" id="1-通用查询参数"><h2>1. 通用查询参数</h2></a>
+<h2 id="1-通用查询参数"><a class="header" href="#1-通用查询参数">1. 通用查询参数</a></h2>
 <ul>
 <li>-formats</li>
 </ul>
-<p>​   Show available formats (including devices).</p>
+<p>​	Show available formats (including devices).</p>
 <ul>
 <li>-demuxers</li>
 </ul>
-<p>​   Show available demuxers.</p>
+<p>​	Show available demuxers.</p>
 <ul>
 <li>-muxers</li>
 </ul>
-<p>​   Show available muxers.</p>
+<p>​	Show available muxers.</p>
 <ul>
 <li>-devices</li>
 </ul>
-<p>​   Show available devices.</p>
+<p>​	Show available devices.</p>
 <ul>
 <li>-codecs</li>
 </ul>
-<p>​   Show all codecs known to libavcodec.</p>
+<p>​	Show all codecs known to libavcodec.</p>
 <ul>
 <li>-decoders</li>
 </ul>
-<p>​   Show available decoders.</p>
+<p>​	Show available decoders.</p>
 <ul>
 <li>-encoders</li>
 </ul>
-<p>​   Show all available encoders.</p>
+<p>​	Show all available encoders.</p>
 <ul>
 <li>-bsfs</li>
 </ul>
-<p>​   Show available bitstream filters.</p>
+<p>​	Show available bitstream filters.</p>
 <ul>
 <li>-protocols</li>
 </ul>
-<p>​   Show available protocols.</p>
+<p>​	Show available protocols.</p>
 <ul>
 <li>-filters</li>
 </ul>
-<p>​   Show available libavfilter filters.</p>
+<p>​	Show available libavfilter filters.</p>
 <ul>
 <li>-pix_fmts</li>
 </ul>
-<p>​   Show available pixel formats.</p>
+<p>​	Show available pixel formats.</p>
 <ul>
 <li>-sample_fmts</li>
 </ul>
-<p>​   Show available sample formats.</p>
+<p>​	Show available sample formats.</p>
 <ul>
 <li>-layouts</li>
 </ul>
-<p>​   Show channel names and standard channel layouts.</p>
-<a class="header" href="print.html#2-av参数" id="2-av参数"><h2>2. AV参数</h2></a>
+<p>​	Show channel names and standard channel layouts.</p>
+<h2 id="2-av参数"><a class="header" href="#2-av参数">2. AV参数</a></h2>
 <ul>
 <li>
 <p>-f fmt (<em>input/output</em>)</p>
@@ -945,7 +1075,7 @@ success
 <p>ffmpeg -f avfoundation -list_devices true -i &quot;&quot;</p>
 </li>
 </ul>
-<a class="header" href="print.html#3-video参数" id="3-video参数"><h2>3. Video参数</h2></a>
+<h2 id="3-video参数"><a class="header" href="#3-video参数">3. Video参数</a></h2>
 <ul>
 <li>
 <p>-r[:stream_specifier] fps (<em>input/output,per-stream</em>)</p>
@@ -985,7 +1115,7 @@ success
 <p>Set pixel format. Use <code>-pix_fmts</code> to show all the supported pixel formats. If the selected pixel format can not be selected, ffmpeg will print a warning and select the best pixel format supported by the encoder. If pix_fmt is prefixed by a <code>+</code>, ffmpeg will exit with an error if the requested pixel format can not be selected, and automatic conversions inside filtergraphs are disabled. If pix_fmt is a single <code>+</code>, ffmpeg selects the same pixel format as the input (or graph output) and automatic conversions are disabled.</p>
 </li>
 </ul>
-<a class="header" href="print.html#4-audio参数" id="4-audio参数"><h2>4. Audio参数</h2></a>
+<h2 id="4-audio参数"><a class="header" href="#4-audio参数">4. Audio参数</a></h2>
 <ul>
 <li>
 <p>-aq q (<em>output</em>)</p>
@@ -1020,8 +1150,21 @@ success
 <p>-f sl6le</p>
 </li>
 </ul>
-<a class="header" href="print.html#cmake-模板" id="cmake-模板"><h1>CMAKE 模板</h1></a>
-<a class="header" href="print.html#a-hrefhttpscmakeorgcmakehelpv319modulefindpkgconfightmlhighlightpkgcommandpkg_check_modulescmakepkga" id="a-hrefhttpscmakeorgcmakehelpv319modulefindpkgconfightmlhighlightpkgcommandpkg_check_modulescmakepkga"><h2><a href="https://cmake.org/cmake/help/v3.19/module/FindPkgConfig.html?highlight=pkg#command:pkg_check_modules">CMake+Pkg</a></h2></a>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ffmpeg-安装-macos"><a class="header" href="#ffmpeg-安装-macos">FFMPEG 安装 MACOS</a></h1>
+<pre><code class="language-shell">./configure --prefix=/usr/local/ffmpeg --enable-gpl --enable-nonfree --enable-libfdk-aac --enable-libx264 --enable-libx265 --enable-filter=delogo --enable-debug --disable-optimizations --enable-libspeex --enable-videotoolbox --enable-shared --enable-pthreads --enable-version3 --enable-hardcoded-tables --cc=clang --host-cflags= --host-ldflags= --disable-x86asm
+
+brew install fdk-aac&amp;&amp;brew install x264&amp;&amp;brew install x265&amp;&amp;brew install speex&amp;&amp;brew install pkg-config&amp;&amp;brew  install sdl2
+
+
+
+export PATH=$PATH:/usr/local/ffmpeg/bin
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig:/usr/lib/pkgconfig:/usr/local/Cellar/sdl2/2.0.8/lib/pkgconfig:/usr/local/ffmpeg/lib/pkgconfig
+
+codesign --remove-signature /path/to/*.dylib
+codesign -s &quot;Apple Development: Your Name (10-char-ID)&quot;  /path/to/*.dylib
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cmake-模板"><a class="header" href="#cmake-模板">CMAKE 模板</a></h1>
+<h2 id="cmakepkg"><a class="header" href="#cmakepkg"><a href="https://cmake.org/cmake/help/v3.19/module/FindPkgConfig.html?highlight=pkg#command:pkg_check_modules">CMake+Pkg</a></a></h2>
 <ul>
 <li>
 <p><code>&lt;XXX&gt;_FOUND</code></p>
@@ -1065,42 +1208,42 @@ project(player)
 
 set(CMAKE_CXX_STANDARD 11)
 list(APPEND SOURCE
-    src/main.c)
+	src/main.c)
 set(ENV{PKG_CONFIG_PATH} 
-    /usr/local/sdl2/lib/pkgconfig:/usr/local/ffmpeg/lib/pkgconfig
+	/usr/local/sdl2/lib/pkgconfig:/usr/local/ffmpeg/lib/pkgconfig
 )
 find_package(PkgConfig)
 pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET libavcodec libavformat libavutil)
 pkg_check_modules(SDL2 REQUIRED IMPORTED_TARGET sdl2)
 add_executable(${PROJECT_NAME} ${SOURCE})
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    PkgConfig::FFMPEG
-    PkgConfig::SDL2
-    )
+	PkgConfig::FFMPEG
+	PkgConfig::SDL2
+	)
 </code></pre>
 <pre><code class="language-cmake">cmake_minimum_required(VERSION 3.19)
 project(player)
 
 set(CMAKE_CXX_STANDARD 11)
 list(APPEND SOURCE
-    src/main.c)
+	src/main.c)
 set(ENV{PKG_CONFIG_PATH} 
-    /usr/local/sdl2/lib/pkgconfig:/usr/local/ffmpeg/lib/pkgconfig
+	/usr/local/sdl2/lib/pkgconfig:/usr/local/ffmpeg/lib/pkgconfig
 )
 find_package(PkgConfig)
 pkg_check_modules(FFMPEG REQUIRED IMPORTED_TARGET libavcodec libavformat libavutil)
 pkg_check_modules(SDL2 REQUIRED IMPORTED_TARGET sdl2)
 add_executable(player ${SOURCE})
 include_directories(
-    ${FFMPEG_INCLUDE_DIRS}
-    ${SDL2_INCLUDE_DIRS}
-    )
+	${FFMPEG_INCLUDE_DIRS}
+	${SDL2_INCLUDE_DIRS}
+	)
 target_link_libraries(player PRIVATE
-    ${FFMPEG_LDFLAGS}
-    ${SDL2_LDFLAGS}
-    )
+	${FFMPEG_LDFLAGS}
+	${SDL2_LDFLAGS}
+	)
 </code></pre>
-<a class="header" href="print.html#yuvplayer-demo" id="yuvplayer-demo"><h1>YUVPLayer Demo</h1></a>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="yuvplayer-demo"><a class="header" href="#yuvplayer-demo">YUVPLayer Demo</a></h1>
 <pre><code class="language-C">
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -1112,126 +1255,126 @@ target_link_libraries(player PRIVATE
 bool thread_exit = false;
 int refresh()
 {
-    thread_exit = false;
-    while (!thread_exit) {
-        SDL_Event event;
-        event.type = REFRESH_EVENT;
-        SDL_PushEvent(&amp;event);
-        SDL_Delay(40);
-    }
-    thread_exit = true;
+	thread_exit = false;
+	while (!thread_exit) {
+		SDL_Event event;
+		event.type = REFRESH_EVENT;
+		SDL_PushEvent(&amp;event);
+		SDL_Delay(40);
+	}
+	thread_exit = true;
 
-    SDL_Event event;
-    event.type = QUIT_EVENT;
-    SDL_PushEvent(&amp;event);
-    return 0;
+	SDL_Event event;
+	event.type = QUIT_EVENT;
+	SDL_PushEvent(&amp;event);
+	return 0;
 }
 int main(int argc, char* argv[])
 {
-    FILE* video_fd = NULL;
+	FILE* video_fd = NULL;
 
-    SDL_Event event = {0};
-    SDL_Rect rect = {0};
+	SDL_Event event = {0};
+	SDL_Rect rect = {0};
 
-    unsigned int pixformat = 0;
-    
-    SDL_Window* window = NULL;
-    SDL_Renderer* renderer = NULL;
-    SDL_Texture* texture = NULL;
-    SDL_Thread* timer_thread = NULL;
+	unsigned int pixformat = 0;
+	
+	SDL_Window* window = NULL;
+	SDL_Renderer* renderer = NULL;
+	SDL_Texture* texture = NULL;
+	SDL_Thread* timer_thread = NULL;
 
-    int win_w = 1920;
-    int win_h = 1080;
-    const int video_w = win_w;
-    const int video_h = win_h;
-    
-    unsigned char* video_pos = NULL;
-    unsigned char* video_end = NULL;
+	int win_w = 1920;
+	int win_h = 1080;
+	const int video_w = win_w;
+	const int video_h = win_h;
+	
+	unsigned char* video_pos = NULL;
+	unsigned char* video_end = NULL;
 
-    unsigned int remain_len = 0;
-    size_t video_buffer_len = 0;
-    size_t blank_space_len = 0;
-    unsigned char* video_buf = NULL;
+	unsigned int remain_len = 0;
+	size_t video_buffer_len = 0;
+	size_t blank_space_len = 0;
+	unsigned char* video_buf = NULL;
 
-    const char* path = &quot;1.yuv&quot;;
-    const unsigned int yuv_frame_len = video_w * video_h * 12 / 8;
-    unsigned int tmp_yuv_frame_len = yuv_frame_len;
+	const char* path = &quot;1.yuv&quot;;
+	const unsigned int yuv_frame_len = video_w * video_h * 12 / 8;
+	unsigned int tmp_yuv_frame_len = yuv_frame_len;
 
-    if (yuv_frame_len &amp; 0xF) {
-        tmp_yuv_frame_len = (yuv_frame_len &amp; 0xFFF0) + 0x10;
-    }
+	if (yuv_frame_len &amp; 0xF) {
+		tmp_yuv_frame_len = (yuv_frame_len &amp; 0xFFF0) + 0x10;
+	}
 
-    if (SDL_Init(SDL_INIT_VIDEO)) {
-        printf(&quot;SDL INIT Fail!\n&quot;);
-        return -1;
-    }
-    window = SDL_CreateWindow(
-            &quot;YUV Player&quot;,
-            SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED,
-            win_w, win_h,
-            SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
-    );
-    if (window == NULL) {
-        printf(&quot;Window create Fail!\n&quot;);
-        // TODO 资源释放
-        return -1;
-    } 
-    renderer = SDL_CreateRenderer(window, -1, 0);
-    // IYVU: Y + U + V (3 planes)
-    // YV12: Y + V + U (3 planes)
-    pixformat = SDL_PIXELFORMAT_IYUV;
-    texture = SDL_CreateTexture(
-                            renderer,
-                            pixformat,
-                            SDL_TEXTUREACCESS_STREAMING,
-                            video_w, video_h
-                            );
+	if (SDL_Init(SDL_INIT_VIDEO)) {
+		printf(&quot;SDL INIT Fail!\n&quot;);
+		return -1;
+	}
+	window = SDL_CreateWindow(
+			&quot;YUV Player&quot;,
+			SDL_WINDOWPOS_UNDEFINED,
+			SDL_WINDOWPOS_UNDEFINED,
+			win_w, win_h,
+			SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
+	);
+	if (window == NULL) {
+		printf(&quot;Window create Fail!\n&quot;);
+		// TODO 资源释放
+		return -1;
+	} 
+	renderer = SDL_CreateRenderer(window, -1, 0);
+	// IYVU: Y + U + V (3 planes)
+	// YV12: Y + V + U (3 planes)
+	pixformat = SDL_PIXELFORMAT_IYUV;
+	texture = SDL_CreateTexture(
+							renderer,
+							pixformat,
+							SDL_TEXTUREACCESS_STREAMING,
+							video_w, video_h
+							);
 
-    video_buf = (unsigned char*) malloc(tmp_yuv_frame_len);
-    if (video_buf == NULL) {
-        // TODO 资源释放
-        return -1;
-    }
-    video_fd = fopen(path, &quot;r&quot;);
-    video_buffer_len = fread(video_buf, 1, yuv_frame_len, video_fd);
-    if (video_buffer_len &lt;= 0) {
-        return -1;
-    }
-    video_pos = video_buf;
-    timer_thread = SDL_CreateThread(
-        refresh,
-        &quot;thread&quot;,
-        NULL
-    );
-    do {
-        SDL_WaitEvent(&amp;event);
-        if (event.type == REFRESH_EVENT) {
-            SDL_UpdateTexture(texture, NULL, video_pos, video_w);
-            rect.x = 0;
-            rect.y = 0;
-            rect.w = win_w;
-            rect.h = win_h;
-            SDL_RenderCopy(renderer, texture, NULL, &amp;rect);
-            SDL_RenderPresent(renderer);
+	video_buf = (unsigned char*) malloc(tmp_yuv_frame_len);
+	if (video_buf == NULL) {
+		// TODO 资源释放
+		return -1;
+	}
+	video_fd = fopen(path, &quot;r&quot;);
+	video_buffer_len = fread(video_buf, 1, yuv_frame_len, video_fd);
+	if (video_buffer_len &lt;= 0) {
+		return -1;
+	}
+	video_pos = video_buf;
+	timer_thread = SDL_CreateThread(
+		refresh,
+		&quot;thread&quot;,
+		NULL
+	);
+	do {
+		SDL_WaitEvent(&amp;event);
+		if (event.type == REFRESH_EVENT) {
+			SDL_UpdateTexture(texture, NULL, video_pos, video_w);
+			rect.x = 0;
+			rect.y = 0;
+			rect.w = win_w;
+			rect.h = win_h;
+			SDL_RenderCopy(renderer, texture, NULL, &amp;rect);
+			SDL_RenderPresent(renderer);
 
-            video_buffer_len = fread(video_buf, 1, yuv_frame_len, video_fd);
-            if (video_buffer_len &lt;= 0) {
-                thread_exit = true;
-                continue;
-            }
-        } else if (event.type == SDL_WINDOWEVENT) {
-            SDL_GetWindowSize(window, &amp;win_w, &amp;win_h);
-        } else if (event.type == SDL_QUIT) {
-            thread_exit = true;
-        } else if (event.type == QUIT_EVENT) {
-            break;
-        }
-    } while(1);
-    return 0;
+			video_buffer_len = fread(video_buf, 1, yuv_frame_len, video_fd);
+			if (video_buffer_len &lt;= 0) {
+				thread_exit = true;
+				continue;
+			}
+		} else if (event.type == SDL_WINDOWEVENT) {
+			SDL_GetWindowSize(window, &amp;win_w, &amp;win_h);
+		} else if (event.type == SDL_QUIT) {
+			thread_exit = true;
+		} else if (event.type == QUIT_EVENT) {
+			break;
+		}
+	} while(1);
+	return 0;
 }
 </code></pre>
-<a class="header" href="print.html#pcmplayer-democ" id="pcmplayer-democ"><h1>PCMPLayer Demo(C)</h1></a>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="pcmplayer-democ"><a class="header" href="#pcmplayer-democ">PCMPLayer Demo(C)</a></h1>
 <pre><code class="language-C">#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;stdbool.h&gt;
@@ -1243,71 +1386,71 @@ unsigned char* audio_pos = NULL;
 size_t buffer_len = 0;
 void read_audio_data(void* userdatai, Uint8* stream, int len)
 {
-    if (buffer_len == 0) {
-        return;
-    }
-    SDL_memset(stream, 0, len);
-    len = (len &lt; buffer_len) ? len : buffer_len;
-    SDL_MixAudio(stream, audio_pos, len, SDL_MIX_MAXVOLUME);
-    audio_pos += len;
-    buffer_len -= len;
+	if (buffer_len == 0) {
+		return;
+	}
+	SDL_memset(stream, 0, len);
+	len = (len &lt; buffer_len) ? len : buffer_len;
+	SDL_MixAudio(stream, audio_pos, len, SDL_MIX_MAXVOLUME);
+	audio_pos += len;
+	buffer_len -= len;
 }
 int main(int argc, char* argv[])
 {
-    if (SDL_Init(SDL_INIT_AUDIO) != 0) {
-        SDL_Log(&quot;init fail!\n&quot;);
-        return -1;
-    }
-    const char* path = &quot;1.pcm&quot;;
-    FILE* audio_fd = fopen(path, &quot;r&quot;);
-    if (audio_fd == NULL) {
-        SDL_Log(&quot;open fail!\n&quot;);
-        SDL_Quit();
-        return -1;
-    }
-    audio_buf = malloc(BLOCK_SIZE);
-    if (audio_buf == NULL) {
-        SDL_Log(&quot;malloc fail!\n&quot;);
-        fclose(audio_fd);
-        SDL_Quit();
-    }
-    SDL_AudioSpec spec;
-    spec.freq = 48000;
-    spec.channels = 2;
-    spec.format = AUDIO_S16SYS;
-    spec.callback = read_audio_data;
-    spec.userdata = NULL;
-    if (SDL_OpenAudio(&amp;spec, NULL) != 0) {
-        SDL_Log(&quot;open audio fail!\n&quot;);
-        fclose(audio_fd);
-        free(audio_buf);
-        SDL_Quit();
-        return -1;
-    }
-    SDL_PauseAudio(0);
-    do {
-        buffer_len = fread(audio_buf, 1, BLOCK_SIZE, audio_fd);
-        audio_pos = audio_buf;
-        while (audio_pos &lt; (audio_buf + buffer_len)) {
-            SDL_Delay(1);
-        }
-    } while(buffer_len != 0);
+	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
+		SDL_Log(&quot;init fail!\n&quot;);
+		return -1;
+	}
+	const char* path = &quot;1.pcm&quot;;
+	FILE* audio_fd = fopen(path, &quot;r&quot;);
+	if (audio_fd == NULL) {
+		SDL_Log(&quot;open fail!\n&quot;);
+		SDL_Quit();
+		return -1;
+	}
+	audio_buf = malloc(BLOCK_SIZE);
+	if (audio_buf == NULL) {
+		SDL_Log(&quot;malloc fail!\n&quot;);
+		fclose(audio_fd);
+		SDL_Quit();
+	}
+	SDL_AudioSpec spec;
+	spec.freq = 48000;
+	spec.channels = 2;
+	spec.format = AUDIO_S16SYS;
+	spec.callback = read_audio_data;
+	spec.userdata = NULL;
+	if (SDL_OpenAudio(&amp;spec, NULL) != 0) {
+		SDL_Log(&quot;open audio fail!\n&quot;);
+		fclose(audio_fd);
+		free(audio_buf);
+		SDL_Quit();
+		return -1;
+	}
+	SDL_PauseAudio(0);
+	do {
+		buffer_len = fread(audio_buf, 1, BLOCK_SIZE, audio_fd);
+		audio_pos = audio_buf;
+		while (audio_pos &lt; (audio_buf + buffer_len)) {
+			SDL_Delay(1);
+		}
+	} while(buffer_len != 0);
 
-    SDL_CloseAudio();
-    fclose(audio_fd);
-    free(audio_buf);
-    SDL_Quit();
-    return 0;
+	SDL_CloseAudio();
+	fclose(audio_fd);
+	free(audio_buf);
+	SDL_Quit();
+	return 0;
 }	
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="redis"><a class="header" href="#redis">Redis</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="net"><a class="header" href="#net">NET</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
 
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -1315,44 +1458,34 @@ int main(int argc, char* argv[])
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
 
-                
             </nav>
 
         </div>
 
 
-        <!-- Local fallback for Font Awesome -->
-        <script>
-            if (getComputedStyle(document.querySelector(".fa")).fontFamily !== "FontAwesome") {
-                var link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.type = 'text/css';
-                link.href = '_FontAwesome/css/font-awesome.css';
-                document.head.insertBefore(link, document.head.firstChild)
-            }
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
         </script>
 
-        
 
-        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
 
-        
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
 
-        
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                window.print();
-            })
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
         </script>
-        
-
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
-
-        <!-- Custom JS script -->
-        
 
     </body>
 </html>

@@ -1,43 +1,44 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="en" class="sidebar-visible no-js light">
     <head>
+        <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>YUVPLayer Demo(C) - 梦北</title>
+
+
+        <!-- Custom HTML head -->
+        
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="学习笔记">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <base href="../">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
-        <link rel="stylesheet" href="book.css">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
-        <link rel="shortcut icon" href="favicon.png">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
-
-        <!-- Custom theme -->
-        
-
-        
-
-        <!-- Fetch Clipboard.js from CDN but have a local fallback -->
-        <script src="https://cdn.jsdelivr.net/clipboard.js/1.6.1/clipboard.min.js"></script>
-        <script>
-            if (typeof Clipboard == 'undefined') {
-                document.write(unescape("%3Cscript src='clipboard.min.js'%3E%3C/script%3E"));
-            }
-        </script>
+        <!-- Custom theme stylesheets -->
 
     </head>
-    <body class="light">
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script type="text/javascript">
             try {
@@ -57,54 +58,76 @@
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script type="text/javascript">
             var theme;
-            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { } 
-            if (theme === null || theme === undefined) { theme = 'light'; }
-            document.body.className = theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script type="text/javascript">
+            var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             }
-            document.querySelector('html').classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <ol class="chapter"><li class="affix"><a href="README.html">README</a></li><li><a href="CPP/README.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li><a href="CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li><a href="CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li><a href="CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li><a href="CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li><a href="CPP/C++11.html"><strong aria-hidden="true">1.5.</strong> C++11</a></li></ol></li><li><a href="Programmer/README.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li><a href="Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li><a href="Media/README.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li><a href="Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li><a href="Media/cmake.html"><strong aria-hidden="true">3.2.</strong> CMAKE 模板</a></li><li><a href="Media/yuvplayer.html" class="active"><strong aria-hidden="true">3.3.</strong> YUVPLayer Demo(C)</a></li><li><a href="Media/pcmplayer.html"><strong aria-hidden="true">3.4.</strong> PCMPLayer Demo(C)</a></li></ol></li></ol>
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">README</a></li><li class="chapter-item expanded "><a href="../CPP/index.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li class="chapter-item expanded "><a href="../CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li class="chapter-item expanded "><a href="../CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li class="chapter-item expanded "><a href="../CPP/C++11.html"><strong aria-hidden="true">1.5.</strong> C++11</a></li><li class="chapter-item expanded "><a href="../CPP/EMC++.html"><strong aria-hidden="true">1.6.</strong> Effective Modern C++</a></li></ol></li><li class="chapter-item expanded "><a href="../Programmer/index.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li class="chapter-item expanded "><a href="../Media/index.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li class="chapter-item expanded "><a href="../Media/ffmpeg_install.html"><strong aria-hidden="true">3.2.</strong> FFMPEG 安装 MACOS</a></li><li class="chapter-item expanded "><a href="../Media/cmake.html"><strong aria-hidden="true">3.3.</strong> CMAKE 模板</a></li><li class="chapter-item expanded "><a href="../Media/yuvplayer.html" class="active"><strong aria-hidden="true">3.4.</strong> YUVPLayer Demo(C)</a></li><li class="chapter-item expanded "><a href="../Media/pcmplayer.html"><strong aria-hidden="true">3.5.</strong> PCMPLayer Demo(C)</a></li></ol></li><li class="chapter-item expanded "><a href="../Redis/index.html"><strong aria-hidden="true">4.</strong> Redis</a></li><li class="chapter-item expanded "><a href="../NET/index.html"><strong aria-hidden="true">5.</strong> NET</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar" class="menu-bar">
-                    <div id="menu-bar-sticky-container">
-                        <div class="left-buttons">
-                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-controls="sidebar">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                                <i class="fa fa-paint-brush"></i>
-                            </button>
-                            <ul id="theme-list" class="theme-popup" aria-label="submenu">
-                                <li><button class="theme" id="light">Light <span class="default">(default)</span></button></li>
-                                <li><button class="theme" id="rust">Rust</button></li>
-                                <li><button class="theme" id="coal">Coal</button></li>
-                                <li><button class="theme" id="navy">Navy</button></li>
-                                <li><button class="theme" id="ayu">Ayu</button></li>
-                            </ul>
-                        </div>
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
 
-                        <h1 class="menu-title">梦北</h1>
+                    <h1 class="menu-title">梦北</h1>
 
-                        <div class="right-buttons">
-                            <a href="print.html" title="Print this book">
-                                <i id="print-button" class="fa fa-print"></i>
-                            </a>
-                        </div>
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
                     </div>
                 </div>
 
@@ -119,7 +142,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <a class="header" href="Media/yuvplayer.html#yuvplayer-demo" id="yuvplayer-demo"><h1>YUVPLayer Demo</h1></a>
+                        <h1 id="yuvplayer-demo"><a class="header" href="#yuvplayer-demo">YUVPLayer Demo</a></h1>
 <pre><code class="language-C">
 #include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -131,123 +154,123 @@
 bool thread_exit = false;
 int refresh()
 {
-    thread_exit = false;
-    while (!thread_exit) {
-        SDL_Event event;
-        event.type = REFRESH_EVENT;
-        SDL_PushEvent(&amp;event);
-        SDL_Delay(40);
-    }
-    thread_exit = true;
+	thread_exit = false;
+	while (!thread_exit) {
+		SDL_Event event;
+		event.type = REFRESH_EVENT;
+		SDL_PushEvent(&amp;event);
+		SDL_Delay(40);
+	}
+	thread_exit = true;
 
-    SDL_Event event;
-    event.type = QUIT_EVENT;
-    SDL_PushEvent(&amp;event);
-    return 0;
+	SDL_Event event;
+	event.type = QUIT_EVENT;
+	SDL_PushEvent(&amp;event);
+	return 0;
 }
 int main(int argc, char* argv[])
 {
-    FILE* video_fd = NULL;
+	FILE* video_fd = NULL;
 
-    SDL_Event event = {0};
-    SDL_Rect rect = {0};
+	SDL_Event event = {0};
+	SDL_Rect rect = {0};
 
-    unsigned int pixformat = 0;
-    
-    SDL_Window* window = NULL;
-    SDL_Renderer* renderer = NULL;
-    SDL_Texture* texture = NULL;
-    SDL_Thread* timer_thread = NULL;
+	unsigned int pixformat = 0;
+	
+	SDL_Window* window = NULL;
+	SDL_Renderer* renderer = NULL;
+	SDL_Texture* texture = NULL;
+	SDL_Thread* timer_thread = NULL;
 
-    int win_w = 1920;
-    int win_h = 1080;
-    const int video_w = win_w;
-    const int video_h = win_h;
-    
-    unsigned char* video_pos = NULL;
-    unsigned char* video_end = NULL;
+	int win_w = 1920;
+	int win_h = 1080;
+	const int video_w = win_w;
+	const int video_h = win_h;
+	
+	unsigned char* video_pos = NULL;
+	unsigned char* video_end = NULL;
 
-    unsigned int remain_len = 0;
-    size_t video_buffer_len = 0;
-    size_t blank_space_len = 0;
-    unsigned char* video_buf = NULL;
+	unsigned int remain_len = 0;
+	size_t video_buffer_len = 0;
+	size_t blank_space_len = 0;
+	unsigned char* video_buf = NULL;
 
-    const char* path = &quot;1.yuv&quot;;
-    const unsigned int yuv_frame_len = video_w * video_h * 12 / 8;
-    unsigned int tmp_yuv_frame_len = yuv_frame_len;
+	const char* path = &quot;1.yuv&quot;;
+	const unsigned int yuv_frame_len = video_w * video_h * 12 / 8;
+	unsigned int tmp_yuv_frame_len = yuv_frame_len;
 
-    if (yuv_frame_len &amp; 0xF) {
-        tmp_yuv_frame_len = (yuv_frame_len &amp; 0xFFF0) + 0x10;
-    }
+	if (yuv_frame_len &amp; 0xF) {
+		tmp_yuv_frame_len = (yuv_frame_len &amp; 0xFFF0) + 0x10;
+	}
 
-    if (SDL_Init(SDL_INIT_VIDEO)) {
-        printf(&quot;SDL INIT Fail!\n&quot;);
-        return -1;
-    }
-    window = SDL_CreateWindow(
-            &quot;YUV Player&quot;,
-            SDL_WINDOWPOS_UNDEFINED,
-            SDL_WINDOWPOS_UNDEFINED,
-            win_w, win_h,
-            SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
-    );
-    if (window == NULL) {
-        printf(&quot;Window create Fail!\n&quot;);
-        // TODO 资源释放
-        return -1;
-    } 
-    renderer = SDL_CreateRenderer(window, -1, 0);
-    // IYVU: Y + U + V (3 planes)
-    // YV12: Y + V + U (3 planes)
-    pixformat = SDL_PIXELFORMAT_IYUV;
-    texture = SDL_CreateTexture(
-                            renderer,
-                            pixformat,
-                            SDL_TEXTUREACCESS_STREAMING,
-                            video_w, video_h
-                            );
+	if (SDL_Init(SDL_INIT_VIDEO)) {
+		printf(&quot;SDL INIT Fail!\n&quot;);
+		return -1;
+	}
+	window = SDL_CreateWindow(
+			&quot;YUV Player&quot;,
+			SDL_WINDOWPOS_UNDEFINED,
+			SDL_WINDOWPOS_UNDEFINED,
+			win_w, win_h,
+			SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE
+	);
+	if (window == NULL) {
+		printf(&quot;Window create Fail!\n&quot;);
+		// TODO 资源释放
+		return -1;
+	} 
+	renderer = SDL_CreateRenderer(window, -1, 0);
+	// IYVU: Y + U + V (3 planes)
+	// YV12: Y + V + U (3 planes)
+	pixformat = SDL_PIXELFORMAT_IYUV;
+	texture = SDL_CreateTexture(
+							renderer,
+							pixformat,
+							SDL_TEXTUREACCESS_STREAMING,
+							video_w, video_h
+							);
 
-    video_buf = (unsigned char*) malloc(tmp_yuv_frame_len);
-    if (video_buf == NULL) {
-        // TODO 资源释放
-        return -1;
-    }
-    video_fd = fopen(path, &quot;r&quot;);
-    video_buffer_len = fread(video_buf, 1, yuv_frame_len, video_fd);
-    if (video_buffer_len &lt;= 0) {
-        return -1;
-    }
-    video_pos = video_buf;
-    timer_thread = SDL_CreateThread(
-        refresh,
-        &quot;thread&quot;,
-        NULL
-    );
-    do {
-        SDL_WaitEvent(&amp;event);
-        if (event.type == REFRESH_EVENT) {
-            SDL_UpdateTexture(texture, NULL, video_pos, video_w);
-            rect.x = 0;
-            rect.y = 0;
-            rect.w = win_w;
-            rect.h = win_h;
-            SDL_RenderCopy(renderer, texture, NULL, &amp;rect);
-            SDL_RenderPresent(renderer);
+	video_buf = (unsigned char*) malloc(tmp_yuv_frame_len);
+	if (video_buf == NULL) {
+		// TODO 资源释放
+		return -1;
+	}
+	video_fd = fopen(path, &quot;r&quot;);
+	video_buffer_len = fread(video_buf, 1, yuv_frame_len, video_fd);
+	if (video_buffer_len &lt;= 0) {
+		return -1;
+	}
+	video_pos = video_buf;
+	timer_thread = SDL_CreateThread(
+		refresh,
+		&quot;thread&quot;,
+		NULL
+	);
+	do {
+		SDL_WaitEvent(&amp;event);
+		if (event.type == REFRESH_EVENT) {
+			SDL_UpdateTexture(texture, NULL, video_pos, video_w);
+			rect.x = 0;
+			rect.y = 0;
+			rect.w = win_w;
+			rect.h = win_h;
+			SDL_RenderCopy(renderer, texture, NULL, &amp;rect);
+			SDL_RenderPresent(renderer);
 
-            video_buffer_len = fread(video_buf, 1, yuv_frame_len, video_fd);
-            if (video_buffer_len &lt;= 0) {
-                thread_exit = true;
-                continue;
-            }
-        } else if (event.type == SDL_WINDOWEVENT) {
-            SDL_GetWindowSize(window, &amp;win_w, &amp;win_h);
-        } else if (event.type == SDL_QUIT) {
-            thread_exit = true;
-        } else if (event.type == QUIT_EVENT) {
-            break;
-        }
-    } while(1);
-    return 0;
+			video_buffer_len = fread(video_buf, 1, yuv_frame_len, video_fd);
+			if (video_buffer_len &lt;= 0) {
+				thread_exit = true;
+				continue;
+			}
+		} else if (event.type == SDL_WINDOWEVENT) {
+			SDL_GetWindowSize(window, &amp;win_w, &amp;win_h);
+		} else if (event.type == SDL_QUIT) {
+			thread_exit = true;
+		} else if (event.type == QUIT_EVENT) {
+			break;
+		}
+	} while(1);
+	return 0;
 }
 </code></pre>
 
@@ -255,17 +278,13 @@ int main(int argc, char* argv[])
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
-                            <a rel="prev" href="Media/cmake.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../Media/cmake.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
-                            <a rel="next" href="Media/pcmplayer.html" class="mobile-nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../Media/pcmplayer.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -273,46 +292,35 @@ int main(int argc, char* argv[])
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
-                    <a href="Media/cmake.html" class="nav-chapters previous" title="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../Media/cmake.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
-                    <a href="Media/pcmplayer.html" class="nav-chapters next" title="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../Media/pcmplayer.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
 
-        <!-- Local fallback for Font Awesome -->
-        <script>
-            if (getComputedStyle(document.querySelector(".fa")).fontFamily !== "FontAwesome") {
-                var link = document.createElement('link');
-                link.rel = 'stylesheet';
-                link.type = 'text/css';
-                link.href = '_FontAwesome/css/font-awesome.css';
-                document.head.insertBefore(link, document.head.firstChild)
-            }
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
         </script>
 
-        
 
-        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
 
-        
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
-        
+        <!-- Custom JS scripts -->
 
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
-
-        <!-- Custom JS script -->
-        
 
     </body>
 </html>
