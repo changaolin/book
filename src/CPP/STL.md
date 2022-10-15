@@ -96,6 +96,24 @@
 
 - 用于封装原生指针，用以实现上述五种类型的数据。
 
+## 3. 接口
+
+| 名称                                                       | 初始化        | 前                | 后               | 首元素 | 尾元素 | 随机            | 随机查询 | 大小 | 容积     | 反转    | 重设大小 |
+| ---------------------------------------------------------- | ------------- | ----------------- | ---------------- | ------ | ------ | --------------- | -------- | ---- | -------- | ------- | -------- |
+| [array](https://en.cppreference.com/w/cpp/header/array)    |               |                   | [push\|pop]_back | front  | back   | []/insert/erase | [].data  | size | capacity |         |          |
+| vector                                                     | vector<int>v1 |                   | [push\|pop]_back |        |        |                 |          |      |          | reserve |          |
+| stack                                                      |               | pop               | push             | top    |        |                 |          | size |          |         |          |
+| [queue](https://zh.cppreference.com/w/cpp/container/deque) |               | push              | pop              | front  | back   |                 |          | Size |          |         |          |
+| deque                                                      |               | [push\|pop]_front | [push\|pop]_back | front  | back   | insert/erase    |          | size |          |         | resize   |
+| Forward-list                                               |               | [push\|pop]_front |                  | front  | back   | insert/erase    |          |      |          |         | resize   |
+| list                                                       |               | [push\|pop]_front | [push\|pop]_back |        |        |                 |          |      |          |         |          |
+| set/mutiset                                                |               |                   |                  |        |        | insert/erase    |          | Size |          |         |          |
+| map/multimap                                               |               |                   |                  |        |        | insert/erase    |          |      |          |         |          |
+| string                                                     |               |                   |                  |        |        |                 |          |      |          |         |          |
+| tuple                                                      |               |                   |                  |        |        |                 |          |      |          |         |          |
+
+
+
 # 适配器（Adapters）
 
 - 容器的适配器
