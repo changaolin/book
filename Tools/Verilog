@@ -1,0 +1,260 @@
+# [Verilog on MAC](https://zhuanlan.zhihu.com/p/291571592)
+
+# 1. 安装
+
+## 1.1 安装 Verilog 和 gtkware
+
+```bash
+brew install icarus-verilog
+brew install verilator
+brew install xquartz # --cask
+brew install gtkwave # --cask
+```
+
+## 1.2 安装 graphviz
+
+```bash
+brew install graphviz # 可以打印png格式的电路结构图
+brew install xdot
+```
+
+
+
+## 1.3 安装yosys
+
+```shell
+git clone https://github.com/YosysHQ/yosys.git
+cd yosys
+brew tap Homebrew/bundle && brew bundle
+make
+sudo make install
+# 输入 yosys 进入工作模式
+```
+
+# 2. 验证安装
+
+## 2.1 编写counter.v
+
+```verilog
+module counter (clk, rst, en, count);
+   input clk, rst, en;
+   output reg [1:0] count;
+   always @(posedge clk)
+      if (rst)      //复位信号
+         count <= 2'd0;
+      else if (en)  //使能信号
+         count <= count + 2'd1;
+endmodule
+```
+
+## 2.2 test bench: counter_tb.v
+
+```verilog
+`timescale 1ns / 1ps
+module counter_tb;
+
+reg clk;
+reg reset;
+reg enable;
+wire [1:0] counter_out;
+
+counter c1(clk,reset,enable,counter_out);
+
+/*iverilog */
+initial
+begin            
+    $dumpfile("wave.vcd");        //生成的vcd文件名称
+    $dumpvars(0, counter_tb);     //tb模块名称
+end
+/*iverilog */
+
+initial
+begin
+  clk=0;
+  reset=1;
+  enable=1;
+  clk=1;
+  #10
+  reset=0;
+end
+always
+#5 clk=~clk;
+
+initial
+  #2000 $finish;
+
+endmodule
+```
+
+## 2.3 编写仿真执行脚本: simu_run.sh
+
+执行脚本查看波形图
+
+```shell
+echo "开始编译"
+iverilog -o wave ./counter.v counter_tb.v
+echo "编译完成"
+
+echo "生成波形文件"
+vvp -n wave -lxt2 
+cp wave.vcd wave.lxt
+
+echo "打开波形文件"
+gtkwave wave.vcd
+```
+
+## 2.4 编写综合文件: counter.ys [下载](https://pan.baidu.com/s/1ngzdwX9KkDVTJVOoGkx3dg)
+
+执行
+
+```bash
+yosys counter.ys
+```
+
+
+
+```verilog
+# read design
+read_verilog counter.v
+hierarchy -check -top counter
+
+# the high-level stuff
+proc; opt; memory; opt; fsm; opt
+
+# mapping to internal cell library
+techmap; opt
+
+# mapping flip-flops to mycells.lib
+dfflibmap -liberty mycells.lib
+
+# mapping logic to mycells.lib
+abc -liberty mycells.lib
+
+# cleanup
+clean
+
+write_verilog counter_gate.v
+
+# 其中的mycells.lib和mycells.v是自定义的库文件 需要从标题链接下载 提取码 5076
+```
+
+mycells.v
+
+```verilog
+module NOT(A, Y);
+input A;
+output Y = ~A;
+endmodule
+
+module NAND(A, B, Y);
+input A, B;
+output Y = ~(A & B);
+endmodule
+
+module NOR(A, B, Y);
+input A, B;
+output Y = ~(A | B);
+endmodule
+
+module DFF(C, D, Q);
+input C, D;
+output reg Q;
+always @(posedge C)
+	Q <= D;
+endmodule
+```
+
+mycells.lib
+
+```verilog
+library(demo) {
+  cell(BUF) {
+    area: 6;
+    pin(A) { direction: input; }
+    pin(Y) { direction: output;
+              function: "A"; }
+  }
+  cell(NOT) {
+    area: 3;
+    pin(A) { direction: input; }
+    pin(Y) { direction: output;
+              function: "A'"; }
+  }
+  cell(NAND) {
+    area: 4;
+    pin(A) { direction: input; }
+    pin(B) { direction: input; }
+    pin(Y) { direction: output;
+             function: "(A*B)'"; }
+  }
+  cell(NOR) {
+    area: 4;
+    pin(A) { direction: input; }
+    pin(B) { direction: input; }
+    pin(Y) { direction: output;
+             function: "(A+B)'"; }
+  }
+  cell(DFF) {
+    area: 18;
+    ff(IQ, IQN) { clocked_on: C;
+                  next_state: D; }
+    pin(C) { direction: input;
+                 clock: true; }
+    pin(D) { direction: input; }
+    pin(Q) { direction: output;
+              function: "IQ"; }
+  }
+}
+```
+
+
+
+## 2.5 打印电路图: counter_show_pdf.ys
+
+执行
+
+```bash
+yosys counter_show_pdf.ys # 该过程共输出4个dot文件和4个pdf文件，分别对应了counter网表的四种详细等级的输出
+# dot counter_03.dot -T png -o counter_03.png # 输出png
+```
+
+
+
+```verilog
+# read design
+read_verilog counter.v
+hierarchy -check -top counter
+
+# show0: print counter without high-level stuff
+show -notitle -stretch -format pdf -prefix counter_00
+
+# the high-level stuff
+proc; opt; memory; opt; fsm; opt
+
+# show1: print counter with high-level stuff
+show -notitle -stretch -format pdf -prefix counter_01
+
+# mapping to internal cell library
+techmap; opt
+splitnets -ports;;
+
+# show3: print counter mappped with internal cell library
+show -notitle -stretch -format pdf -prefix counter_02
+
+# mapping flip-flops to mycells.lib
+dfflibmap -liberty mycells.lib
+
+# mapping logic to mycells.lib
+abc -liberty mycells.lib
+
+# cleanup
+clean
+
+# show4: print counter with internal cell lib and mycell lib
+show -notitle -stretch -lib mycells.v -format pdf -prefix counter_03
+
+shell
+```
+
+
+
