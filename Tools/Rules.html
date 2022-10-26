@@ -1,0 +1,457 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Verilog语法规则 - 梦北</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">README</a></li><li class="chapter-item expanded "><a href="../CPP/index.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li class="chapter-item expanded "><a href="../CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li class="chapter-item expanded "><a href="../CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li class="chapter-item expanded "><a href="../CPP/C++11.html"><strong aria-hidden="true">1.5.</strong> C++11</a></li><li class="chapter-item expanded "><a href="../CPP/EMC++.html"><strong aria-hidden="true">1.6.</strong> Effective Modern C++</a></li></ol></li><li class="chapter-item expanded "><a href="../Programmer/index.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li class="chapter-item expanded "><a href="../Media/index.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li class="chapter-item expanded "><a href="../Media/ffmpeg_install.html"><strong aria-hidden="true">3.2.</strong> FFMPEG 安装 MACOS</a></li><li class="chapter-item expanded "><a href="../Media/cmake.html"><strong aria-hidden="true">3.3.</strong> CMAKE 模板</a></li><li class="chapter-item expanded "><a href="../Media/yuvplayer.html"><strong aria-hidden="true">3.4.</strong> YUVPLayer Demo(C)</a></li><li class="chapter-item expanded "><a href="../Media/pcmplayer.html"><strong aria-hidden="true">3.5.</strong> PCMPLayer Demo(C)</a></li></ol></li><li class="chapter-item expanded "><a href="../Redis/index.html"><strong aria-hidden="true">4.</strong> Redis</a></li><li class="chapter-item expanded "><a href="../NET/index.html"><strong aria-hidden="true">5.</strong> NET</a></li><li class="chapter-item expanded "><a href="../Vim/index.html"><strong aria-hidden="true">6.</strong> VIM</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vim/ccls.html"><strong aria-hidden="true">6.1.</strong> CCLS</a></li></ol></li><li class="chapter-item expanded "><a href="../Romanic/index.html"><strong aria-hidden="true">7.</strong> 四大浪漫</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Romanic/zoo.html"><strong aria-hidden="true">7.1.</strong> 计算机组成原理</a></li></ol></li><li class="chapter-item expanded "><a href="../Tools/index.html"><strong aria-hidden="true">8.</strong> 工具</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Tools/Verilog.html"><strong aria-hidden="true">8.1.</strong> Verilog on MAC</a></li><li class="chapter-item expanded "><a href="../Tools/Rules.html" class="active"><strong aria-hidden="true">8.2.</strong> Verilog语法规则</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">梦北</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="verilog语法规则"><a class="header" href="#verilog语法规则"><a href="https://www.runoob.com/w3cnote/verilog-timing-control.html">Verilog语法规则</a></a></h1>
+<h1 id="1-关键字"><a class="header" href="#1-关键字">1. 关键字</a></h1>
+<ul>
+<li>
+<p>wire (wire 型变量只能被赋值一次)</p>
+</li>
+<li>
+<p>assign (任何已经声明 wire 变量的连续赋值语句都是以 assign 开头)</p>
+</li>
+<li>
+<p>//</p>
+</li>
+<li>
+<p>/**/</p>
+</li>
+<li>
+<p>reg[31:0]</p>
+</li>
+<li>
+<p>input</p>
+</li>
+<li>
+<p>output</p>
+</li>
+<li>
+<p>module</p>
+</li>
+<li>
+<p>endmodule</p>
+</li>
+<li>
+<p>always</p>
+</li>
+<li>
+<p>postedge</p>
+</li>
+<li>
+<p>beigin</p>
+</li>
+<li>
+<p>end</p>
+</li>
+<li>
+<p>$time</p>
+</li>
+<li>
+<p>$finish</p>
+</li>
+<li>
+<p>or （or 也可以用逗号 <strong>,</strong> 来代替）</p>
+<ul>
+<li>更为简洁的写法是 <strong>@*</strong> 或 <strong>@(*)</strong>，表示对语句块中的所有输入变量的变化都是敏感的</li>
+</ul>
+</li>
+<li>
+<p>event (事件)</p>
+<pre><code class="language-verilog">event     start_receiving ;
+always @( posedge clk_samp) begin
+        -&gt; start_receiving ;       //采样时钟上升沿作为时间触发时刻
+end
+ 
+always @(start_receiving) begin
+    data_buf = {data_if[0], data_if[1]} ; //触发时刻，对多维数据整合
+end
+</code></pre>
+</li>
+<li>
+<p>fork （并行， begin）</p>
+</li>
+<li>
+<p>join （并行, end）</p>
+</li>
+<li>
+<p>disable</p>
+</li>
+<li>
+<p>case</p>
+</li>
+<li>
+<p>casez(casez 用问号 &quot;?&quot; 来表示无关值。)</p>
+</li>
+<li>
+<p>casex(casex 用 &quot;x&quot; 来表示无关值)</p>
+<pre><code class="language-verilog">module mux4to1(
+    input [3:0]     sel ,
+    input [1:0]     p0 ,
+    input [1:0]     p1 ,
+    input [1:0]     p2 ,
+    input [1:0]     p3 ,
+    output [1:0]    sout);
+ 
+    reg [1:0]     sout_t ;
+    always @(*)
+        casez(sel)
+            4'b???1:     sout_t = p0 ;
+            4'b??1?:     sout_t = p1 ;
+            4'b?1??:     sout_t = p2 ;
+            4'b1???:     sout_t = p3 ;  
+        default:         sout_t = 2'b0 ;
+    endcase
+    assign      sout = sout_t ;
+ 
+endmodule
+</code></pre>
+</li>
+<li>
+<p>default</p>
+</li>
+<li>
+<p>while</p>
+</li>
+<li>
+<p>for</p>
+</li>
+<li>
+<p>repeat</p>
+</li>
+<li>
+<p>forever</p>
+</li>
+<li>
+<p>deassign</p>
+</li>
+<li>
+<p>force</p>
+</li>
+<li>
+<p>release</p>
+</li>
+</ul>
+<h1 id="2-数值"><a class="header" href="#2-数值">2. 数值</a></h1>
+<ul>
+<li>0</li>
+<li>1</li>
+<li>X 或者 x (未知)</li>
+<li>Z 或者 z (高组态)</li>
+<li>b|B|d|D|h|H|o|O</li>
+<li>4'b1011</li>
+<li>b1011 自动匹配位宽</li>
+<li>字符串
+<ul>
+<li>reg [0: 14*8 -1] str;</li>
+<li>str = &quot;www.runoob.com&quot;;</li>
+</ul>
+</li>
+</ul>
+<h1 id="3-数据类型"><a class="header" href="#3-数据类型">3. 数据类型</a></h1>
+<ul>
+<li>wire</li>
+<li>reg</li>
+<li>integer （整数）</li>
+<li>real （实数）</li>
+<li>time</li>
+<li>数组
+<ul>
+<li>integer     flag [7:0] ; <em>//8个整数组成的数组</em>
+reg [3:0]    counter [3:0] ; <em>//由4个4bit计数器组成的数组</em>
+wire [7:0]    addr_bus [3:0] ; <em>//由4个8bit wire型变量组成的数组</em>
+wire       data_bit[7:0][5:0] ; <em>//声明1bit wire型变量的二维数组</em>
+reg [31:0]    data_4d[11:0][3:0][3:0][255:0] ; <em>//声明4维的32bit数据变量数组</em></li>
+</ul>
+</li>
+<li>parameter（只能赋值一次）
+<ul>
+<li>parameter    data_width = 10'd32 ;</li>
+</ul>
+</li>
+<li>RAM 或者 ROM
+<ul>
+<li>用寄存器数组表示</li>
+<li>reg [7:0]     mem[0:1023] ;   <em>//1Kbyte存储器，位宽8bit</em></li>
+</ul>
+</li>
+</ul>
+<h1 id="4-表达式"><a class="header" href="#4-表达式">4. 表达式</a></h1>
+<h2 id="41-操作符"><a class="header" href="#41-操作符">4.1 操作符</a></h2>
+<ul>
+<li>
+<p>算术、关系、等价、逻辑、按位、归约、移位、拼接、条件操作符</p>
+</li>
+<li>
+<p>归约</p>
+<ul>
+<li>归约操作符只有一个操作数，它对这个向量操作数逐位进行操作，最终产生一个 1bit 结果。</li>
+</ul>
+</li>
+<li>
+<p>拼接操作符(拼接符操作数必须指定位宽，常数的话也需要指定位宽)</p>
+<p>{,}</p>
+<pre><code class="language-verilog">A = 4'b1010 ;
+B = 1'b1 ;
+Y1 = {B, A[3:2], A[0], 4'h3 };  //结果为Y1='b1100_0011
+Y2 = {4{B}, 3'd4};  //结果为 Y2=7'b111_1100
+Y3 = {32{1'b0}};  //结果为 Y3=32h0，常用作寄存器初始化时匹配位宽的赋初值
+</code></pre>
+</li>
+<li>
+<p>条件操作符(可以多路)</p>
+<pre><code class="language-verilog">assign   hsel = (addr[9:8] == 2'b00) ? hsel_p1 : 
+                (addr[9:8] == 2'b01) ? hsel_p2 :
+                (addr[9:8] == 2'b10) ? hsel_p3 :
+                (addr[9:8] == 2'b11) ? hsel_p4 ;
+</code></pre>
+</li>
+</ul>
+<h1 id="5-编译指令"><a class="header" href="#5-编译指令">5. <a href="https://www.runoob.com/w3cnote/verilog-compile-instruction.html">编译指令</a></a></h1>
+<p>以反引号 <strong>`</strong> 开始的某些标识符是 Verilog 系统编译指令。</p>
+<h2 id="51-define-undef"><a class="header" href="#51-define-undef">5.1 `define, `undef</a></h2>
+<p>在编译阶段，<strong>`define</strong> 用于文本替换，类似于 C 语言中的 <strong>#define</strong>。</p>
+<p>一旦 <strong>`define</strong> 指令被编译，其在整个编译过程中都会有效。例如，在一个文件中定义</p>
+<pre><code class="language-verilog">`ifdef, `ifndef, `elsif, `else, `endif
+</code></pre>
+<h2 id="52-include"><a class="header" href="#52-include">5.2 `include</a></h2>
+<p>使用 <strong>`include</strong> 可以在编译时将一个 Verilog 文件内嵌到另一个 Verilog 文件中，作用类似于 C 语言中的 #include 结构。该指令通常用于将全局或公用的头文件包含在设计文件里。</p>
+<p>文件路径既可以使用相对路径，也可以使用绝对路径。</p>
+<pre><code class="language-verilog">`include         &quot;../../param.v&quot;
+`include         &quot;header.v&quot;
+</code></pre>
+<h2 id="53-timescale"><a class="header" href="#53-timescale">5.3 `timescale</a></h2>
+<p>在 Verilog 模型中，时延有具体的单位时间表述，并用 <strong>`timescale</strong> 编译指令将时间单位与实际时间相关联。</p>
+<p>在编译过程中，<strong><code>timescale 指令会影响后面所有模块中的时延值，直至遇到另一个 **</code>timescale</strong> 指令或 <strong>`resetall</strong> 指令。</p>
+<p>该指令用于定义时延、仿真的单位和精度，格式为：</p>
+<pre><code class="language-verilog">`timescale      time_unit / time_precision
+# time_unit 表示时间单位，time_precision 表示时间精度，它们均是由数字以及单位 s（秒），ms（毫秒），us（微妙），ns（纳秒），ps（皮秒）和 fs（飞秒）组成。时间精度可以和时间单位一样，但是时间精度大小不能超过时间单位大小
+
+`timescale 1ns/100ps    //时间单位为1ns，精度为100ps，合法
+</code></pre>
+<h2 id="53-default_nettype"><a class="header" href="#53-default_nettype">5.3 `default_nettype</a></h2>
+<p>该指令用于为隐式的线网变量指定为线网类型，即将没有被声明的连线定义为线网类型。</p>
+<pre><code class="language-verilog">`default_nettype wand 
+`default_nettype none
+</code></pre>
+<h1 id="6-时延"><a class="header" href="#6-时延">6. 时延</a></h1>
+<h1 id="7-过程结构"><a class="header" href="#7-过程结构">7. 过程结构</a></h1>
+<p>这些语句在模块间并行执行，与其在模块的前后顺序没有关系。</p>
+<h2 id="71-initil"><a class="header" href="#71-initil">7.1 initil</a></h2>
+<h2 id="72-always"><a class="header" href="#72-always">7.2 always</a></h2>
+<h1 id="8-过程赋值"><a class="header" href="#8-过程赋值">8. 过程赋值</a></h1>
+<p>在设计电路时，always 时序逻辑块中多用非阻塞赋值，always 组合逻辑块中多用阻塞赋值；在仿真电路时，initial 块中一般多用阻塞赋值</p>
+<h2 id="81-阻塞赋值-"><a class="header" href="#81-阻塞赋值-">8.1 阻塞赋值 (=)</a></h2>
+<h2 id="82-非阻塞赋值-"><a class="header" href="#82-非阻塞赋值-">8.2 非阻塞赋值 (&lt;=)</a></h2>
+<h2 id="83-并行"><a class="header" href="#83-并行">8.3 并行</a></h2>
+<h1 id="9-时序控制"><a class="header" href="#9-时序控制">9. 时序控制</a></h1>
+<ul>
+<li>事件控制用符号 <strong>@</strong> 表示。</li>
+<li>posedge 指信号发生边沿正向跳变</li>
+<li>negedge 指信号发生负向边沿跳变</li>
+<li>未指明跳变方向时，则 2 种情况的边沿变化都会触发相关事件</li>
+</ul>
+<pre><code class="language-verilog">//信号clk只要发生变化，就执行q&lt;=d，双边沿D触发器模型
+always @(clk) q &lt;= d ;                
+//在信号clk上升沿时刻，执行q&lt;=d，正边沿D触发器模型
+always @(posedge clk) q &lt;= d ;  
+//在信号clk下降沿时刻，执行q&lt;=d，负边沿D触发器模型
+always @(negedge clk) q &lt;= d ; 
+//立刻计算d的值，并在clk上升沿时刻赋值给q，不推荐这种写法
+q = @(posedge clk) d ;  
+</code></pre>
+<pre><code class="language-verilog">// Verilog 中还支持使用电平作为敏感信号来控制时序，即后面语句的执行需要等待某个条件为真。Verilog 中使用关键字 wait 来表示这种电平敏感情况
+initial begin
+    wait (start_enable) ;      //等待 start 信号
+    forever begin
+        //start信号使能后，在clk_samp上升沿，对数据进行整合
+        @(posedge clk_samp)  ;
+        data_buf = {data_if[0], data_if[1]} ;      
+    end
+end
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Tools/Verilog.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Tools/Verilog.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
