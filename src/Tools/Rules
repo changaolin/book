@@ -1,0 +1,268 @@
+# [Verilog语法规则](https://www.runoob.com/w3cnote/verilog-timing-control.html)
+
+# 1. 关键字
+
+- wire (wire 型变量只能被赋值一次)
+
+- assign (任何已经声明 wire 变量的连续赋值语句都是以 assign 开头)
+
+- //
+
+- /**/
+
+- reg[31:0]
+
+- input
+
+- output
+
+- module
+
+- endmodule
+
+- always
+
+- postedge
+
+- beigin
+
+- end
+
+- $time
+
+- $finish
+
+- or （or 也可以用逗号 **,** 来代替）
+
+  - 更为简洁的写法是 **@\*** 或 **@(\*)**，表示对语句块中的所有输入变量的变化都是敏感的
+
+- event (事件)
+
+  ```verilog
+  event     start_receiving ;
+  always @( posedge clk_samp) begin
+          -> start_receiving ;       //采样时钟上升沿作为时间触发时刻
+  end
+   
+  always @(start_receiving) begin
+      data_buf = {data_if[0], data_if[1]} ; //触发时刻，对多维数据整合
+  end
+  ```
+
+- fork （并行， begin）
+
+- join （并行, end）
+
+- disable
+
+- case
+
+- casez(casez 用问号 "?" 来表示无关值。)
+
+- casex(casex 用 "x" 来表示无关值)
+
+  ```verilog
+  module mux4to1(
+      input [3:0]     sel ,
+      input [1:0]     p0 ,
+      input [1:0]     p1 ,
+      input [1:0]     p2 ,
+      input [1:0]     p3 ,
+      output [1:0]    sout);
+   
+      reg [1:0]     sout_t ;
+      always @(*)
+          casez(sel)
+              4'b???1:     sout_t = p0 ;
+              4'b??1?:     sout_t = p1 ;
+              4'b?1??:     sout_t = p2 ;
+              4'b1???:     sout_t = p3 ;  
+          default:         sout_t = 2'b0 ;
+      endcase
+      assign      sout = sout_t ;
+   
+  endmodule
+  ```
+
+  
+
+- default
+
+- while
+
+- for
+
+- repeat
+
+- forever
+
+- deassign
+
+- force
+
+- release
+
+# 2. 数值
+
+- 0
+- 1
+- X 或者 x (未知)
+- Z 或者 z (高组态)
+- b|B|d|D|h|H|o|O
+- 4'b1011
+- b1011 自动匹配位宽
+- 字符串
+  - reg [0: 14*8 -1] str;
+  - str = "www.runoob.com";
+
+# 3. 数据类型
+
+- wire
+- reg
+- integer （整数）
+- real （实数）
+- time
+- 数组
+  - integer     flag [7:0] ; *//8个整数组成的数组*
+    reg [3:0]    counter [3:0] ; *//由4个4bit计数器组成的数组*
+    wire [7:0]    addr_bus [3:0] ; *//由4个8bit wire型变量组成的数组*
+    wire       data_bit\[7:0][5:0] ; *//声明1bit wire型变量的二维数组*
+    reg [31:0]    data_4d\[11:0][3:0]\[3:0]\[255:0] ; *//声明4维的32bit数据变量数组*
+- parameter（只能赋值一次）
+  - parameter    data_width = 10'd32 ;
+- RAM 或者 ROM
+  - 用寄存器数组表示
+  - reg [7:0]     mem[0:1023] ;   *//1Kbyte存储器，位宽8bit*
+
+# 4. 表达式
+
+## 4.1 操作符
+
+- 算术、关系、等价、逻辑、按位、归约、移位、拼接、条件操作符
+
+- 归约
+
+  - 归约操作符只有一个操作数，它对这个向量操作数逐位进行操作，最终产生一个 1bit 结果。
+
+- 拼接操作符(拼接符操作数必须指定位宽，常数的话也需要指定位宽)
+
+  {,}
+
+  ```verilog
+  A = 4'b1010 ;
+  B = 1'b1 ;
+  Y1 = {B, A[3:2], A[0], 4'h3 };  //结果为Y1='b1100_0011
+  Y2 = {4{B}, 3'd4};  //结果为 Y2=7'b111_1100
+  Y3 = {32{1'b0}};  //结果为 Y3=32h0，常用作寄存器初始化时匹配位宽的赋初值
+  ```
+
+  
+
+- 条件操作符(可以多路)
+
+  ```verilog
+  assign   hsel = (addr[9:8] == 2'b00) ? hsel_p1 : 
+                  (addr[9:8] == 2'b01) ? hsel_p2 :
+                  (addr[9:8] == 2'b10) ? hsel_p3 :
+                  (addr[9:8] == 2'b11) ? hsel_p4 ;
+  ```
+
+# 5. [编译指令](https://www.runoob.com/w3cnote/verilog-compile-instruction.html)
+
+以反引号 **`** 开始的某些标识符是 Verilog 系统编译指令。
+
+## 5.1 \`define, `undef
+
+在编译阶段，**`define** 用于文本替换，类似于 C 语言中的 **#define**。
+
+一旦 **`define** 指令被编译，其在整个编译过程中都会有效。例如，在一个文件中定义
+
+```verilog
+`ifdef, `ifndef, `elsif, `else, `endif
+```
+
+## 5.2 \`include
+
+使用 **`include** 可以在编译时将一个 Verilog 文件内嵌到另一个 Verilog 文件中，作用类似于 C 语言中的 #include 结构。该指令通常用于将全局或公用的头文件包含在设计文件里。
+
+文件路径既可以使用相对路径，也可以使用绝对路径。
+
+```verilog
+`include         "../../param.v"
+`include         "header.v"
+```
+
+## 5.3 `timescale
+
+在 Verilog 模型中，时延有具体的单位时间表述，并用 **`timescale** 编译指令将时间单位与实际时间相关联。
+
+在编译过程中，**`timescale 指令会影响后面所有模块中的时延值，直至遇到另一个 **`timescale** 指令或 **`resetall** 指令。
+
+该指令用于定义时延、仿真的单位和精度，格式为：
+
+```verilog
+`timescale      time_unit / time_precision
+# time_unit 表示时间单位，time_precision 表示时间精度，它们均是由数字以及单位 s（秒），ms（毫秒），us（微妙），ns（纳秒），ps（皮秒）和 fs（飞秒）组成。时间精度可以和时间单位一样，但是时间精度大小不能超过时间单位大小
+
+`timescale 1ns/100ps    //时间单位为1ns，精度为100ps，合法
+```
+
+## 5.3 `default_nettype
+
+该指令用于为隐式的线网变量指定为线网类型，即将没有被声明的连线定义为线网类型。
+
+```verilog
+`default_nettype wand 
+`default_nettype none
+```
+
+# 6. 时延
+
+# 7. 过程结构
+
+这些语句在模块间并行执行，与其在模块的前后顺序没有关系。
+
+## 7.1 initil
+
+## 7.2 always
+
+# 8. 过程赋值
+
+在设计电路时，always 时序逻辑块中多用非阻塞赋值，always 组合逻辑块中多用阻塞赋值；在仿真电路时，initial 块中一般多用阻塞赋值
+
+## 8.1 阻塞赋值 (=)
+
+## 8.2 非阻塞赋值 (<=)
+
+## 8.3 并行
+
+# 9. 时序控制
+
+- 事件控制用符号 **@** 表示。
+- posedge 指信号发生边沿正向跳变
+- negedge 指信号发生负向边沿跳变
+- 未指明跳变方向时，则 2 种情况的边沿变化都会触发相关事件
+
+```verilog
+//信号clk只要发生变化，就执行q<=d，双边沿D触发器模型
+always @(clk) q <= d ;                
+//在信号clk上升沿时刻，执行q<=d，正边沿D触发器模型
+always @(posedge clk) q <= d ;  
+//在信号clk下降沿时刻，执行q<=d，负边沿D触发器模型
+always @(negedge clk) q <= d ; 
+//立刻计算d的值，并在clk上升沿时刻赋值给q，不推荐这种写法
+q = @(posedge clk) d ;  
+```
+
+```verilog
+// Verilog 中还支持使用电平作为敏感信号来控制时序，即后面语句的执行需要等待某个条件为真。Verilog 中使用关键字 wait 来表示这种电平敏感情况
+initial begin
+    wait (start_enable) ;      //等待 start 信号
+    forever begin
+        //start信号使能后，在clk_samp上升沿，对数据进行整合
+        @(posedge clk_samp)  ;
+        data_buf = {data_if[0], data_if[1]} ;      
+    end
+end
+```
+

@@ -24,3 +24,4 @@
 	- [计算机组成原理](Romanic/zoo.md)
 - [工具](Tools/README.md)
 	- [Verilog on MAC](Tools/Verilog)
+	- [Verilog语法规则](Tools/Rules)
