@@ -22,6 +22,7 @@
 	- [CCLS](Vim/ccls.md)
 - [四大浪漫](Romanic/README.md)
 	- [计算机组成原理](Romanic/zoo.md)
+	- [操作系统实战笔记](Romanic/os.md)
 - [工具](Tools/README.md)
 	- [Verilog on MAC](Tools/Verilog)
 	- [Verilog语法规则](Tools/Rules)
