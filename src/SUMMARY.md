@@ -26,3 +26,5 @@
 - [工具](Tools/README.md)
 	- [Verilog on MAC](Tools/Verilog)
 	- [Verilog语法规则](Tools/Rules)
+- [Web](WEB/README.md)
+	- [WebAssembly](WEB/WebAssembly.md)
