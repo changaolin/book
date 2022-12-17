@@ -1,0 +1,19 @@
+# gparted
+
+# 1. 安装
+
+```shell
+apt install gparted
+```
+
+# 2. 系统盘扩容
+
+## 2.1 提示系统盘只读
+
+```shell
+sudo -i
+mount -o remount -rw /
+mount -o remount -rw /var/snap/firefox/common/host-hunspell # 挂载点 ,可以在info中查看
+# 刷新后可以扩容
+```
+
