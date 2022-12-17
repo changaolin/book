@@ -92,6 +92,7 @@ ament_package()
 sudo apt install python3-colcon-common-extensions
 # ros2_ws 目录
 coclon build
+source install/setup.sh
 coclon run ros2_qt_demo ros2_qt_demo
 # 也可以使用qtcreator打开,方法同3
 ```
