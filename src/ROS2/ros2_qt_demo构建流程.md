@@ -97,3 +97,8 @@ coclon run ros2_qt_demo ros2_qt_demo
 # 也可以使用qtcreator打开,方法同3
 ```
 
+# 5. 新建文件
+
+## 5.1 通过qtcreator创建文件后需要将对应的.h,.cpp,.ui 文件放入到具体的include,src,resource 文件夹中
+
+## 5.2 新增之后需要到build目录手动执行cmake .. ，之后qtcreator中才会刷新文件目录
