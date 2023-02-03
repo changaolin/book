@@ -32,3 +32,5 @@
 	- [gparted](Tools/gparted)
 - [ROS2](ROS2/README.md)
 	- [ros2_qt_demo](ROS2/ros2_qt_demo构建流程.md)
+- [HASS](HASS/README.md)
+    - [HASS安装](HASS/安装流程)
