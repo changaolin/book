@@ -69,9 +69,6 @@ PostgreSQL数据库的设计架构是高度复杂且灵活的，它支持广泛�
 
 # 详细介绍下 Write-Ahead Logging (WAL)是如何工作的
 
-
-ChatGPT
-
 Write-Ahead Logging（WAL）是一种用于确保数据库在发生故障时能够恢复到最后一致状态的技术。这是通过先写日志，后更新实际数据来实现的，因此得名“预写日志”。WAL是许多数据库系统，包括PostgreSQL，用于实现事务持久性和崩溃恢复的关键组成部分。以下是WAL工作原理的详细介绍：
 
 ### 1. 日志记录
@@ -961,9 +958,6 @@ GIN（Generalized Inverted Index）索引是PostgreSQL中一种特殊类型的�
 
 # SP-GiST（Space-Partitioned Generalized Search Tree）索引 是如何工作的
 
-
-ChatGPT
-
 SP-GiST（Space-Partitioned Generalized Search Tree）索引是PostgreSQL中支持的一种高级索引类型，它提供了对空间分区数据结构的支持，例如四叉树、k-d树和径向树等。与B-Tree和GIN等索引相比，SP-GiST允许更灵活的分区策略，特别适用于非均匀分布的数据和多维数据，能有效加速点查询、范围查询和最近邻查询等操作。下面是SP-GiST索引的工作原理和特点：
 
 ### 工作原理
@@ -1075,9 +1069,6 @@ GiST（Generalized Search Tree）索引是PostgreSQL中一种提供高度灵活�
 
 
 # WAL 如何保证在不锁库的情况下支持并发控制和数据写入
-
-
-ChatGPT
 
 Write-Ahead Logging（WAL）是数据库管理系统中用于确保数据完整性和恢复能力的关键技术。WAL通过记录所有修改数据库状态的操作到日志中，在这些操作实际对数据库文件进行修改之前，确保这些操作被持久化。这种机制支持并发控制和数据写入的主要方式如下：
 
