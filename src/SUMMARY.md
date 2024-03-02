@@ -35,4 +35,4 @@
 - [HASS](HASS/README.md)
     - [HASS安装](HASS/安装流程)
 
-- [PostgreSQL](PostgreSQL/README)
+- [PostgreSQL](PostgreSQL/README.md)
