@@ -205,7 +205,6 @@
 </ul>
 <p>通过以上机制，MVCC支持高度的并发操作，同时保持事务的隔离性和数据库的一致性。MVCC使得读操作无需等待写操作完成，大大提高了数据库系统的性能和可用性。</p>
 <h1 id="详细介绍下-write-ahead-logging-wal是如何工作的"><a class="header" href="#详细介绍下-write-ahead-logging-wal是如何工作的">详细介绍下 Write-Ahead Logging (WAL)是如何工作的</a></h1>
-<p>ChatGPT</p>
 <p>Write-Ahead Logging（WAL）是一种用于确保数据库在发生故障时能够恢复到最后一致状态的技术。这是通过先写日志，后更新实际数据来实现的，因此得名“预写日志”。WAL是许多数据库系统，包括PostgreSQL，用于实现事务持久性和崩溃恢复的关键组成部分。以下是WAL工作原理的详细介绍：</p>
 <h3 id="1-日志记录"><a class="header" href="#1-日志记录">1. 日志记录</a></h3>
 <ul>
@@ -983,7 +982,6 @@ VACUUM FULL; -- FULL VACUUM
 </ul>
 <p>总的来说，GIN索引是一种强大的索引类型，适用于特定的查询优化场景，尤其是在需要快速搜索包含多个值的复杂数据类型时。然而，考虑到其维护成本，应根据实际的数据访问模式谨慎使用。</p>
 <h1 id="sp-gistspace-partitioned-generalized-search-tree索引-是如何工作的"><a class="header" href="#sp-gistspace-partitioned-generalized-search-tree索引-是如何工作的">SP-GiST（Space-Partitioned Generalized Search Tree）索引 是如何工作的</a></h1>
-<p>ChatGPT</p>
 <p>SP-GiST（Space-Partitioned Generalized Search Tree）索引是PostgreSQL中支持的一种高级索引类型，它提供了对空间分区数据结构的支持，例如四叉树、k-d树和径向树等。与B-Tree和GIN等索引相比，SP-GiST允许更灵活的分区策略，特别适用于非均匀分布的数据和多维数据，能有效加速点查询、范围查询和最近邻查询等操作。下面是SP-GiST索引的工作原理和特点：</p>
 <h3 id="工作原理-1"><a class="header" href="#工作原理-1">工作原理</a></h3>
 <p>SP-GiST索引通过将数据空间划分成非重叠的区域（分区）来组织数据，每个区域内的数据项根据某种分区逻辑被组织起来。这种分区逻辑取决于实际应用的需求和数据的特性。SP-GiST索引的关键特性包括：</p>
@@ -1075,7 +1073,6 @@ VACUUM FULL; -- FULL VACUUM
 </ul>
 <p>总之，GiST索引通过其通用和灵活的框架，为PostgreSQL提供了支持广泛数据类型和复杂查询的能力，是一个强大的索引工具，适用于多种高级数据管理需求。</p>
 <h1 id="wal-如何保证在不锁库的情况下支持并发控制和数据写入"><a class="header" href="#wal-如何保证在不锁库的情况下支持并发控制和数据写入">WAL 如何保证在不锁库的情况下支持并发控制和数据写入</a></h1>
-<p>ChatGPT</p>
 <p>Write-Ahead Logging（WAL）是数据库管理系统中用于确保数据完整性和恢复能力的关键技术。WAL通过记录所有修改数据库状态的操作到日志中，在这些操作实际对数据库文件进行修改之前，确保这些操作被持久化。这种机制支持并发控制和数据写入的主要方式如下：</p>
 <h3 id="并发控制"><a class="header" href="#并发控制">并发控制</a></h3>
 <p>WAL本身主要关注数据的持久性和恢复，而并发控制则是通过多版本并发控制（MVCC）等技术实现的。不过，WAL与并发控制机制紧密协作，共同支持高效且安全的并发操作：</p>
