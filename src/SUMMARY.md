@@ -36,3 +36,7 @@
     - [HASS安装](HASS/安装流程)
 
 - [PostgreSQL](PostgreSQL/README.md)
+
+- [Docker](Docker/index.md)
+
+- [Rust](Rust/index.md)
