@@ -177,3 +177,23 @@
 |connection.rs|async fn write_value(&mut self, frame: &Frame) -> io::Result<()> {}||
 |connection.rs|async fn write_decimal(&mut self, val: u64) -> io::Result<()> {}||
 
+## [RESP](https://redis.com.cn/topics/protocol.html)
+
+RESP 协议在Redis1.2被引入，直到Redis2.0才成为和Redis服务器通信的标准。
+
+RESP 是一个支持多种数据类型的序列化协议：简单字符串（Simple Strings）,错误（ Errors）,整型（ Integers）, 大容量字符串（Bulk Strings）和数组（Arrays）。
+
+RESP在Redis中作为一个请求-响应协议以如下方式使用：
+
+- 客户端以大容量字符串RESP数组的方式发送命令给服务器端。
+- 服务器端根据命令的具体实现返回某一种RESP数据类型
+
+在 RESP 中，数据的类型依赖于首字节：
+
+- **单行字符串（Simple Strings）：** 响应的首字节是 "+"
+- **错误（Errors）： 响应的首字节是** "-"
+- **整型（Integers）： 响应的首字节是** ":"
+- **多行字符串（Bulk Strings）： 响应的首字节是**"\$"
+- **数组（Arrays）：** 响应的首字节是 "`*`"
+
+RESP可以使用大容量字符串或者数组类型的特殊变量表示空值。RESP协议的不同部分总是以 "\r\n" (CRLF) 结束。
