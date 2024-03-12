@@ -41,3 +41,4 @@
     - [Postgresql](Docker/postgresql.md)
 
 - [Rust](Rust/index.md)
+    - [MiniRedis](Rust/mini_redis.md)
