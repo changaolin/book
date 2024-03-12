@@ -3544,6 +3544,24 @@ rustup default stable # 安装 工具链
 <tr><td>connection.rs</td><td>async fn write_decimal(&amp;mut self, val: u64) -&gt; io::Result&lt;()&gt; {}</td><td></td></tr>
 </tbody></table>
 </div>
+<h2 id="resp"><a class="header" href="#resp"><a href="https://redis.com.cn/topics/protocol.html">RESP</a></a></h2>
+<p>RESP 协议在Redis1.2被引入，直到Redis2.0才成为和Redis服务器通信的标准。</p>
+<p>RESP 是一个支持多种数据类型的序列化协议：简单字符串（Simple Strings）,错误（ Errors）,整型（ Integers）, 大容量字符串（Bulk Strings）和数组（Arrays）。</p>
+<p>RESP在Redis中作为一个请求-响应协议以如下方式使用：</p>
+<ul>
+<li>客户端以大容量字符串RESP数组的方式发送命令给服务器端。</li>
+<li>服务器端根据命令的具体实现返回某一种RESP数据类型</li>
+</ul>
+<p>在 RESP 中，数据的类型依赖于首字节：</p>
+<ul>
+<li><strong>单行字符串（Simple Strings）：</strong> 响应的首字节是 &quot;+&quot;</li>
+<li><strong>错误（Errors）： 响应的首字节是</strong> &quot;-&quot;</li>
+<li><strong>整型（Integers）： 响应的首字节是</strong> &quot;:&quot;</li>
+<li><strong>多行字符串（Bulk Strings）： 响应的首字节是</strong>&quot;$&quot;</li>
+<li><strong>数组（Arrays）：</strong> 响应的首字节是 &quot;<code>*</code>&quot;</li>
+</ul>
+<p>RESP可以使用大容量字符串或者数组类型的特殊变量表示空值。RESP协议的不同部分总是以 &quot;\r\n&quot; (CRLF) 结束。</p>
+
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
