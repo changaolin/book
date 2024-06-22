@@ -2275,7 +2275,414 @@ mount -o remount -rw /
 mount -o remount -rw /var/snap/firefox/common/host-hunspell # 挂载点 ,可以在info中查看
 # 刷新后可以扩容
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="ros2"><a class="header" href="#ros2">ROS2</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="ros2"><a class="header" href="#ros2"><a href="https://docs.ros.org/en/foxy/Installation/Alternatives/Ubuntu-Development-Setup.html#system-requirements">ROS2</a></a></h1>
+<pre><code class="language-shell">sudo apt-key del F42ED6FBAB17C654
+sudo apt update
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo &quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release &amp;&amp; echo $UBUNTU_CODENAME) main&quot; | sudo tee /etc/apt/sources.list.d/ros2.list &gt; /dev/null
+</code></pre>
+<pre><code class="language-shell">locale  # check for UTF-8
+
+sudo apt update &amp;&amp; sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+locale  # verify settings
+
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+
+sudo apt update &amp;&amp; sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+
+echo &quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release &amp;&amp; echo $UBUNTU_CODENAME) main&quot; | sudo tee /etc/apt/sources.list.d/ros2.list &gt; /dev/null
+
+# sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
+sudo apt updatesudo apt update &amp;&amp; sudo apt install curl gnupg lsb-release
+ &amp;&amp; sudo apt install -y \
+  libbullet-dev \
+  python3-pip \
+  python3-pytest-cov \
+  ros-dev-tools
+
+# install some pip packages needed for testing
+python3 -m pip install -U \
+  argcomplete \
+  flake8-blind-except \
+  flake8-builtins \
+  flake8-class-newline \
+  flake8-comprehensions \
+  flake8-deprecated \
+  flake8-docstrings \
+  flake8-import-order \
+  flake8-quotes \
+  pytest-repeat \
+  pytest-rerunfailures \
+  pytest
+# install Fast-RTPS dependencies
+sudo apt install --no-install-recommends -y \
+  libasio-dev \
+  libtinyxml2-dev
+# install Cyclone DDS dependencies
+sudo apt install --no-install-recommends -y \
+  libcunit1-dev
+  
+  
+mkdir -p ~/ros2_foxy/src
+cd ~/ros2_foxy
+vcs import --input https://raw.githubusercontent.com/ros2/ros2/foxy/ros2.repos src
+
+sudo apt upgrade
+
+sudo rosdep init
+rosdep update
+rosdep install --from-paths src --ignore-src -y --skip-keys &quot;fastcdr rti-connext-dds-5.3.1 urdfdom_headers&quot;
+
+cd ~/ros2_foxy/
+colcon build --symlink-install
+</code></pre>
+<h1 id="jazzy"><a class="header" href="#jazzy"><a href="https://docs.ros.org/en/jazzy/Installation/Alternatives/Ubuntu-Development-Setup.html">JAZZY</a></a></h1>
+<ul>
+<li>https://chatgpt.com/share/1e4a3bf2-2e1c-4abc-b17f-541822f020f4</li>
+</ul>
+<pre><code class="language-shell">locale  # check for UTF-8
+
+sudo apt update &amp;&amp; sudo apt install locales
+sudo locale-gen en_US en_US.UTF-8
+sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+locale  # verify settings
+sudo apt install software-properties-common
+sudo add-apt-repository universe
+sudo apt update &amp;&amp; sudo apt install curl -y
+sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+echo &quot;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release &amp;&amp; echo $UBUNTU_CODENAME) main&quot; | sudo tee /etc/apt/sources.list.d/ros2.list &gt; /dev/null
+
+sudo apt update &amp;&amp; sudo apt install -y \
+  python3-flake8-blind-except \
+  python3-flake8-class-newline \
+  python3-flake8-deprecated \
+  python3-mypy \
+  python3-pip \
+  python3-pytest \
+  python3-pytest-cov \
+  python3-pytest-mock \
+  python3-pytest-repeat \
+  python3-pytest-rerunfailures \
+  python3-pytest-runner \
+  python3-pytest-timeout \
+  ros-dev-tools
+  
+  
+  
+mkdir -p ~/ros2_jazzy/src
+cd ~/ros2_jazzy
+vcs import --input https://raw.githubusercontent.com/ros2/ros2/jazzy/ros2.repos src
+
+sudo apt upgrade
+
+sudo rosdep init
+rosdep update
+rosdep install --from-paths src --ignore-src -y --skip-keys &quot;fastcdr rti-connext-dds-6.0.1 urdfdom_headers&quot;
+# In this case append --os=ubuntu:noble to the above command.
+# 失败的包添加到skip-keys中
+
+
+source /opt/ros/jazzy/setup.bash
+sudo apt install python3-colcon-common-extensions
+
+mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws
+git clone https://github.com/ros2/examples src/examples -b jazzy
+colcon build --symlink-install
+# cmake 失败 使用 sudo apt install ros-jazzy-xxxx-xxxx
+
+source install/setup.bash
+ros2 run examples_rclcpp_minimal_subscriber subscriber_member_function
+ros2 run examples_rclcpp_minimal_publisher publisher_member_function
+
+
+# 新建自己的package
+</code></pre>
+<hr />
+<p>这个错误表明在构建过程中，CMake无法找到<code>ament_cmake</code>包的配置文件。这可能是由于<code>ament_cmake</code>没有正确安装或者没有正确设置环境变量。以下是一些解决这个问题的步骤：</p>
+<h3 id="1-确保安装了ament_cmake"><a class="header" href="#1-确保安装了ament_cmake">1. 确保安装了<code>ament_cmake</code></a></h3>
+<p>首先，确保<code>ament_cmake</code>已经正确安装。可以通过以下命令来安装<code>ament_cmake</code>：</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install ros-&lt;ros2-distro&gt;-ament-cmake
+</code></pre>
+<p>请将<code>&lt;ros2-distro&gt;</code>替换为你的ROS 2发行版名称，例如<code>foxy</code>、<code>galactic</code>、<code>humble</code>等。</p>
+<h3 id="2-设置环境变量"><a class="header" href="#2-设置环境变量">2. 设置环境变量</a></h3>
+<p>确保你已经设置了环境变量，这样CMake可以找到安装的包。</p>
+<ol>
+<li>
+<p><strong>加载工作空间环境：</strong> 在终端中，进入你的工作空间目录，并运行以下命令：</p>
+<pre><code class="language-bash">source /opt/ros/&lt;ros2-distro&gt;/setup.bash
+source ~/ros2_ws/install/setup.bash
+</code></pre>
+</li>
+<li>
+<p><strong>添加到<code>CMAKE_PREFIX_PATH</code>：</strong> 如果上述方法不能解决问题，你可以手动将<code>ament_cmake</code>的路径添加到<code>CMAKE_PREFIX_PATH</code>。</p>
+<pre><code class="language-bash">export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/opt/ros/&lt;ros2-distro&gt;
+</code></pre>
+</li>
+</ol>
+<h3 id="3-验证安装和路径"><a class="header" href="#3-验证安装和路径">3. 验证安装和路径</a></h3>
+<p>确保<code>ament_cmake</code>确实存在于你的ROS 2安装路径中。检查以下目录是否包含<code>ament_cmake</code>：</p>
+<pre><code class="language-bash">ls /opt/ros/&lt;ros2-distro&gt;/share/ament_cmake
+</code></pre>
+<p>如果上述目录不存在或者没有<code>ament_cmake</code>，那么可能需要重新安装或检查你的ROS 2安装。</p>
+<h3 id="4-清理和重新构建工作空间"><a class="header" href="#4-清理和重新构建工作空间">4. 清理和重新构建工作空间</a></h3>
+<p>有时候问题可能是由于工作空间的缓存或构建文件不一致引起的。你可以尝试清理和重新构建工作空间：</p>
+<pre><code class="language-bash">cd ~/ros2_ws
+rm -rf build/ install/ log/
+colcon build
+</code></pre>
+<h3 id="5-检查cmakeliststxt和packagexml"><a class="header" href="#5-检查cmakeliststxt和packagexml">5. 检查<code>CMakeLists.txt</code>和<code>package.xml</code></a></h3>
+<p>确保你的包的<code>CMakeLists.txt</code>和<code>package.xml</code>文件中正确引用了<code>ament_cmake</code>。以下是一些基本的示例：</p>
+<p><strong>CMakeLists.txt</strong>:</p>
+<pre><code class="language-bash">cmake_minimum_required(VERSION 3.5)
+project(your_package_name)
+
+find_package(ament_cmake REQUIRED)
+
+# 其他配置...
+
+ament_package()
+</code></pre>
+<p><strong>package.xml</strong>:</p>
+<pre><code>xml
+复制代码
+&lt;package format=&quot;2&quot;&gt;
+  &lt;name&gt;your_package_name&lt;/name&gt;
+  &lt;version&gt;0.0.0&lt;/version&gt;
+  &lt;description&gt;Example package&lt;/description&gt;
+  &lt;maintainer email=&quot;your_email@example.com&quot;&gt;Your Name&lt;/maintainer&gt;
+  &lt;license&gt;Apache-2.0&lt;/license&gt;
+
+  &lt;buildtool_depend&gt;ament_cmake&lt;/buildtool_depend&gt;
+
+  &lt;!-- 其他依赖... --&gt;
+&lt;/package&gt;
+</code></pre>
+<h3 id="6-检查依赖项"><a class="header" href="#6-检查依赖项">6. 检查依赖项</a></h3>
+<p>确保所有依赖项都已经安装并且环境已经设置正确。例如，某些包可能需要额外的依赖项或特定版本的<code>ament</code>工具。</p>
+<p>通过以上步骤，你应该能够解决CMake无法找到<code>ament_cmake</code>包配置文件的问题。如果问题依然存在，可以提供更多的错误日志或上下文信息，以便进一步诊断。</p>
+<h2 id="ros2-jazzy-如何新建自己的package"><a class="header" href="#ros2-jazzy-如何新建自己的package">ros2 jazzy 如何新建自己的package</a></h2>
+<p>在ROS 2中，创建新包的过程相对简单，可以通过<code>ros2 pkg create</code>命令来完成。下面是详细的步骤：</p>
+<h3 id="1-准备工作"><a class="header" href="#1-准备工作">1. 准备工作</a></h3>
+<p>确保你的环境已经正确设置。首先，源入你的ROS 2安装环境：</p>
+<pre><code class="language-bash">source /opt/ros/foxy/setup.bash
+</code></pre>
+<p>请将<code>foxy</code>替换为你正在使用的ROS 2发行版名称，例如<code>dashing</code>、<code>eloquent</code>、<code>foxy</code>、<code>galactic</code>等。</p>
+<h3 id="2-创建一个工作空间"><a class="header" href="#2-创建一个工作空间">2. 创建一个工作空间</a></h3>
+<p>创建一个新的工作空间目录，并在其中创建<code>src</code>目录：</p>
+<pre><code class="language-bash">mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+</code></pre>
+<h3 id="3-创建一个新包"><a class="header" href="#3-创建一个新包">3. 创建一个新包</a></h3>
+<p>使用<code>ros2 pkg create</code>命令来创建一个新的包。例如，我们创建一个名为<code>my_package</code>的包：</p>
+<pre><code class="language-bash">ros2 pkg create --build-type ament_cmake my_package
+</code></pre>
+<p>这将创建一个基本的包结构，包括CMakeLists.txt和package.xml文件。你可以通过以下选项定制包：</p>
+<ul>
+<li><code>--build-type ament_cmake</code>：指定使用<code>ament_cmake</code>作为构建工具。</li>
+<li><code>--dependencies rclcpp std_msgs</code>：指定包的依赖项，例如<code>rclcpp</code>和<code>std_msgs</code>。</li>
+<li><code>--node-name my_node</code>：如果你想创建一个包含节点的包，可以指定节点名称。</li>
+</ul>
+<p>例如：</p>
+<pre><code class="language-shell">ros2 pkg create --build-type ament_cmake my_package --dependencies rclcpp std_msgs --node-name my_node
+</code></pre>
+<h3 id="4-查看包内容"><a class="header" href="#4-查看包内容">4. 查看包内容</a></h3>
+<p>创建完成后，你会在<code>~/ros2_ws/src/my_package</code>目录中看到以下文件和目录：</p>
+<pre><code>plaintext
+复制代码
+my_package/
+├── CMakeLists.txt
+├── package.xml
+├── include/
+│   └── my_package
+├── src/
+└── test/
+</code></pre>
+<h3 id="5-编写节点代码"><a class="header" href="#5-编写节点代码">5. 编写节点代码</a></h3>
+<p>编辑<code>src</code>目录下的文件，编写你的节点代码。例如，创建一个简单的C++节点：</p>
+<p><strong>src/my_node.cpp</strong>:</p>
+<pre><code class="language-cpp">#include &quot;rclcpp/rclcpp.hpp&quot;
+#include &quot;std_msgs/msg/string.hpp&quot;
+
+class MyNode : public rclcpp::Node
+{
+public:
+  MyNode() : Node(&quot;my_node&quot;)
+  {
+    publisher_ = this-&gt;create_publisher&lt;std_msgs::msg::String&gt;(&quot;topic&quot;, 10);
+    timer_ = this-&gt;create_wall_timer(
+      500ms, std::bind(&amp;MyNode::timer_callback, this));
+  }
+
+private:
+  void timer_callback()
+  {
+    auto message = std_msgs::msg::String();
+    message.data = &quot;Hello, world!&quot;;
+    RCLCPP_INFO(this-&gt;get_logger(), &quot;Publishing: '%s'&quot;, message.data.c_str());
+    publisher_-&gt;publish(message);
+  }
+  rclcpp::Publisher&lt;std_msgs::msg::String&gt;::SharedPtr publisher_;
+  rclcpp::TimerBase::SharedPtr timer_;
+};
+
+int main(int argc, char * argv[])
+{
+  rclcpp::init(argc, argv);
+  rclcpp::spin(std::make_shared&lt;MyNode&gt;());
+  rclcpp::shutdown();
+  return 0;
+}
+</code></pre>
+<h3 id="6-修改cmakeliststxt"><a class="header" href="#6-修改cmakeliststxt">6. 修改CMakeLists.txt</a></h3>
+<p>编辑<code>CMakeLists.txt</code>，添加编译指令：</p>
+<pre><code class="language-cmake">cmake_minimum_required(VERSION 3.5)
+project(my_package)
+
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+
+add_executable(my_node src/my_node.cpp)
+ament_target_dependencies(my_node rclcpp std_msgs)
+
+install(TARGETS
+  my_node
+  DESTINATION lib/${PROJECT_NAME})
+
+ament_package()
+</code></pre>
+<h3 id="7-编译包"><a class="header" href="#7-编译包">7. 编译包</a></h3>
+<p>回到工作空间根目录，编译你的包：</p>
+<pre><code class="language-bash">cd ~/ros2_ws
+colcon build
+</code></pre>
+<h3 id="8-运行节点"><a class="header" href="#8-运行节点">8. 运行节点</a></h3>
+<p>编译完成后，源入工作空间环境并运行节点：</p>
+<pre><code class="language-bash">source ~/ros2_ws/install/setup.bash
+ros2 run my_package my_node
+</code></pre>
+<h3 id="总结"><a class="header" href="#总结">总结</a></h3>
+<p>通过以上步骤，你可以在ROS 2中成功创建并运行一个新的包。这个过程包括创建工作空间、使用<code>ros2 pkg create</code>命令创建包、编写节点代码、修改CMakeLists.txt文件，以及编译和运行节点。通过这些步骤，你可以开始在ROS 2中开发自己的功能。</p>
+<h2 id="使用python呢"><a class="header" href="#使用python呢">使用Python呢？</a></h2>
+<p>在ROS 2中使用Python创建一个新包的步骤与使用C++类似。以下是详细的步骤：</p>
+<h3 id="1-准备工作-1"><a class="header" href="#1-准备工作-1">1. 准备工作</a></h3>
+<p>确保你的环境已经正确设置。首先，源入你的ROS 2安装环境：</p>
+<pre><code class="language-bash">source /opt/ros/&lt;ros2-distro&gt;/setup.bash
+</code></pre>
+<p>请将<code>&lt;ros2-distro&gt;</code>替换为你正在使用的ROS 2发行版名称，例如<code>foxy</code>、<code>galactic</code>、<code>humble</code>等。</p>
+<h3 id="2-创建一个工作空间-1"><a class="header" href="#2-创建一个工作空间-1">2. 创建一个工作空间</a></h3>
+<p>创建一个新的工作空间目录，并在其中创建<code>src</code>目录：</p>
+<pre><code class="language-bash">mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
+</code></pre>
+<h3 id="3-创建一个新包-1"><a class="header" href="#3-创建一个新包-1">3. 创建一个新包</a></h3>
+<p>使用<code>ros2 pkg create</code>命令来创建一个新的Python包。例如，我们创建一个名为<code>my_python_package</code>的包：</p>
+<pre><code class="language-bash">ros2 pkg create --build-type ament_python my_python_package
+</code></pre>
+<h3 id="4-查看包内容-1"><a class="header" href="#4-查看包内容-1">4. 查看包内容</a></h3>
+<p>创建完成后，你会在<code>~/ros2_ws/src/my_python_package</code>目录中看到以下文件和目录：</p>
+<pre><code class="language-plaintext">my_python_package/
+├── package.xml
+├── setup.cfg
+├── setup.py
+├── resource/
+│   └── my_python_package
+└── my_python_package/
+    ├── __init__.py
+    └── my_node.py
+</code></pre>
+<h3 id="5-编写节点代码-1"><a class="header" href="#5-编写节点代码-1">5. 编写节点代码</a></h3>
+<p>编辑<code>my_python_package</code>目录下的文件，编写你的节点代码。例如，创建一个简单的Python节点：</p>
+<p><strong>my_python_package/my_node.py</strong>:</p>
+<pre><code class="language-python">import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+
+
+class MyNode(Node):
+
+    def __init__(self):
+        super().__init__('my_node')
+        self.publisher_ = self.create_publisher(String, 'topic', 10)
+        timer_period = 0.5  # seconds
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.i = 0
+
+    def timer_callback(self):
+        msg = String()
+        msg.data = f'Hello, world: {self.i}'
+        self.publisher_.publish(msg)
+        self.get_logger().info(f'Publishing: &quot;{msg.data}&quot;')
+        self.i += 1
+
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = MyNode()
+
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+<h3 id="6-修改setuppy"><a class="header" href="#6-修改setuppy">6. 修改setup.py</a></h3>
+<p>编辑<code>setup.py</code>，添加节点脚本的入口点：</p>
+<pre><code class="language-python">from setuptools import setup
+
+package_name = 'my_python_package'
+
+setup(
+    name=package_name,
+    version='0.0.0',
+    packages=[package_name],
+    data_files=[
+        ('share/ament_index/resource_index/packages',
+            ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='Your Name',
+    maintainer_email='your_email@example.com',
+    description='Example Python package for ROS 2',
+    license='Apache License 2.0',
+    tests_require=['pytest'],
+    entry_points={
+        'console_scripts': [
+            'my_node = my_python_package.my_node:main',
+        ],
+    },
+)
+</code></pre>
+<h3 id="7-编译包-1"><a class="header" href="#7-编译包-1">7. 编译包</a></h3>
+<p>回到工作空间根目录，编译你的包：</p>
+<pre><code class="language-bash">cd ~/ros2_ws
+colcon build
+</code></pre>
+<h3 id="8-运行节点-1"><a class="header" href="#8-运行节点-1">8. 运行节点</a></h3>
+<p>编译完成后，源入工作空间环境并运行节点：</p>
+<pre><code class="language-bash">source ~/ros2_ws/install/setup.bash
+ros2 run my_python_package my_node
+</code></pre>
+<h3 id="总结-1"><a class="header" href="#总结-1">总结</a></h3>
+<p>通过以上步骤，你可以在ROS 2中成功创建并运行一个新的Python包。这个过程包括创建工作空间、使用<code>ros2 pkg create</code>命令创建包、编写节点代码、修改<code>setup.py</code>文件，以及编译和运行节点。通过这些步骤，你可以开始在ROS 2中开发自己的Python功能。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="ros2_qt_demo"><a class="header" href="#ros2_qt_demo">ros2_qt_demo</a></h1>
 <h1 id="1-生成qt5和ros2同名项目"><a class="header" href="#1-生成qt5和ros2同名项目">1. 生成qt5和ros2同名项目</a></h1>
 <pre><code class="language-shell"># qtcreator 创建 名称为 ros2_qt_demo
