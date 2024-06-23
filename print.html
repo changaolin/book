@@ -2862,10 +2862,16 @@ mkdir build
 cd build
 cmake ..
 make
-sudo make install
+sudo make instcall
 sudo ldconfig /usr/local/lib/
 
 # MicroXRCEAgent udp4 -p 8888  请注意，每个连接端口只允许一个代理(Agent)。
+</code></pre>
+<h1 id="gz_x500"><a class="header" href="#gz_x500">GZ_X500</a></h1>
+<pre><code class="language-shell"> cd PX4-Autopilot/
+ # make clean
+ # make distclean
+ make px4_sitl gz_x500
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hass"><a class="header" href="#hass">HASS</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hass安装"><a class="header" href="#hass安装"><a href="https://www.home-assistant.io/installation/raspberrypi">HASS安装</a></a></h1>
@@ -2894,21 +2900,28 @@ services:
 <h1 id="python安装"><a class="header" href="#python安装">Python安装</a></h1>
 <pre><code class="language-shell">sudo apt-get upgrade -y
 sudo apt-get install -y python3 python3-dev python3-venv python3-pip bluez libffi-dev libssl-dev libjpeg-dev zlib1g-dev autoconf build-essential libopenjp2-7 libturbojpeg0-dev tzdata ffmpeg liblapack3 liblapack-dev libatlas-base-dev  libtiff6
-python3 -m pip install wheel
-pip3 install homeassistant
+  # https://www.yaolong.net/article/pip-externally-managed-environment/
+  sudo apt install pipx  # 解决 python-xyz 问题
+  pipx ensurepath
+  pipx install ***
+OR
+	sudo apt install python3-venv
+	mkdir -p $HOME/.env &amp;&amp; python3 -m venv $HOME/.env/project_name
+	source $HOME/.env/project_name/bin/activate
+OR
+  # ~/.config/pip/pip.conf
+  [global]
+  break-system-packages = true
+ 
+sudo apt install -y libavfilter-dev libavdevice-dev pkg-config cmake libjpeg-dev zlib1g-dev
+pip3 install --upgrade wheel homeassistant
+OR
+	pip install wheel homeassistant --no-cache-dir
+
+
 </code></pre>
 <h1 id="安装-homeassistant"><a class="header" href="#安装-homeassistant">安装 homeassistant</a></h1>
 <p>https://pypi.org/project/homeassistant/</p>
-<h1 id="安装rust"><a class="header" href="#安装rust">安装Rust</a></h1>
-<pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-sudo apt install pkg-config cmake libjpeg-dev zlib1g-dev
-pip3 install --upgrade homeassistant
-sudo apt-get install -y libavfilter-dev libavdevice-dev
-
-# ~/.config/pip/pip.conf
-[global]
-break-system-packages = true
-</code></pre>
 <h1 id="home-assistant-安装-hacs"><a class="header" href="#home-assistant-安装-hacs"><a href="https://juejin.cn/post/7134636720892739598">Home Assistant 安装 HACS</a></a></h1>
 <h2 id="下载地址"><a class="header" href="#下载地址"><a href="https://github.com/hacs/integration/releases/">下载地址</a></a></h2>
 <pre><code> # wget -q -O - https://install.hacs.xyz | bash -
