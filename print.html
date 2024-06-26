@@ -2873,6 +2873,42 @@ sudo ldconfig /usr/local/lib/
  # make distclean
  make px4_sitl gz_x500
 </code></pre>
+<p>在构建 PX4 时，如果遇到 &quot;OpenGL 3.3 is not supported&quot; 的错误，这通常是因为你的系统不支持 OpenGL 3.3 或者相关的驱动程序没有正确安装。这里有几种方法可以尝试解决这个问题：</p>
+<h3 id="1-更新显卡驱动程序"><a class="header" href="#1-更新显卡驱动程序">1. 更新显卡驱动程序</a></h3>
+<p>确保你的显卡驱动程序是最新的。对于 NVIDIA 和 AMD 显卡，你可以使用它们各自的官方工具来更新驱动程序。</p>
+<h4 id="对于-nvidia-显卡"><a class="header" href="#对于-nvidia-显卡">对于 NVIDIA 显卡：</a></h4>
+<pre><code>bash
+复制代码
+sudo apt update
+sudo apt install nvidia-driver-XXX
+</code></pre>
+<p>（将 <code>XXX</code> 替换为你显卡的最新驱动版本）</p>
+<h4 id="对于-amd-显卡"><a class="header" href="#对于-amd-显卡">对于 AMD 显卡：</a></h4>
+<p>你可以从 AMD 的官方网站下载并安装最新的驱动程序。</p>
+<h3 id="2-安装必要的软件包"><a class="header" href="#2-安装必要的软件包">2. 安装必要的软件包</a></h3>
+<p>确保你已经安装了所有必要的 OpenGL 库和开发工具。可以尝试安装以下软件包：</p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install libgl1-mesa-dev
+sudo apt install libglu1-mesa-dev
+</code></pre>
+<h3 id="3-使用虚拟机或远程桌面"><a class="header" href="#3-使用虚拟机或远程桌面">3. 使用虚拟机或远程桌面</a></h3>
+<p>如果你在虚拟机或远程桌面环境中运行，可能会遇到 OpenGL 支持的问题。你可以尝试在本地物理机上构建，或者检查虚拟机软件的 3D 加速设置。</p>
+<h3 id="4-安装-gazebo-和相关依赖项"><a class="header" href="#4-安装-gazebo-和相关依赖项">4. 安装 Gazebo 和相关依赖项</a></h3>
+<p>确保你已经安装了 Gazebo 和所有必要的依赖项。可以参考 PX4 官方文档来安装这些依赖项：</p>
+<pre><code class="language-bash">sudo apt install gazebo9 libgazebo9-dev
+</code></pre>
+<h3 id="5-检查硬件支持"><a class="header" href="#5-检查硬件支持">5. 检查硬件支持</a></h3>
+<p>确保你的硬件支持 OpenGL 3.3。你可以使用以下命令来检查你的系统支持的 OpenGL 版本：</p>
+<pre><code class="language-bash">glxinfo | grep &quot;OpenGL version&quot;
+</code></pre>
+<h3 id="6-使用软件渲染"><a class="header" href="#6-使用软件渲染">6. 使用软件渲染</a></h3>
+<p>如果你的硬件不支持 OpenGL 3.3，你可以尝试使用 Mesa 3D 的软件渲染：</p>
+<pre><code class="language-bash">sudo apt install mesa-utils
+export LIBGL_ALWAYS_SOFTWARE=1
+
+# sudo apt install nvidia-utils-535
+</code></pre>
+<p>执行以上命令后，再次尝试构建 PX4。如果问题仍然存在，可以进一步检查 PX4 和 Gazebo 的文档或相关社区论坛，以获取更多帮助。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hass"><a class="header" href="#hass">HASS</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hass安装"><a class="header" href="#hass安装"><a href="https://www.home-assistant.io/installation/raspberrypi">HASS安装</a></a></h1>
 <h1 id="安装dockerdocker版本hacs没有集成商店"><a class="header" href="#安装dockerdocker版本hacs没有集成商店">安装docker(Docker版本HACS没有集成商店)</a></h1>
@@ -2918,14 +2954,18 @@ pip3 install --upgrade wheel homeassistant
 OR
 	pip install wheel homeassistant --no-cache-dir
 
-
+# 出现 HTTPSConnectionPool(host='www.piwheels.org', port=443): Read timed out.
+	export PIP_DEFAULT_TIMEOUT=1200
+OR
+	pip install --default-timeout=1200 xxx
 </code></pre>
 <h1 id="安装-homeassistant"><a class="header" href="#安装-homeassistant">安装 homeassistant</a></h1>
 <p>https://pypi.org/project/homeassistant/</p>
 <h1 id="home-assistant-安装-hacs"><a class="header" href="#home-assistant-安装-hacs"><a href="https://juejin.cn/post/7134636720892739598">Home Assistant 安装 HACS</a></a></h1>
 <h2 id="下载地址"><a class="header" href="#下载地址"><a href="https://github.com/hacs/integration/releases/">下载地址</a></a></h2>
 <pre><code> # wget -q -O - https://install.hacs.xyz | bash -
-
+# pip install securesystemslib==0.31.0
+# https://www.reddit.com/r/homeassistant/comments/1cimhub/tried_to_enable_hacs_on_fresh_installation_got/
 在Home Assistant根目录创建custom_components与www文件
 官方下载的将hacs文件移入custom_components文件夹
 下载整合包的将custom_components与www移入Home Assistant根目录
@@ -3257,6 +3297,12 @@ exit 0
 sudo crontab -l
 10 1 * * * /sbin/reboot
 </code></pre>
+<h1 id="查看网速"><a class="header" href="#查看网速">查看网速</a></h1>
+<pre><code class="language-bash">apt install nload
+sudo nload -m # wlan0 -m
+</code></pre>
+<h1 id="问题处理"><a class="header" href="#问题处理">问题处理</a></h1>
+<h2 id="如果出现-home-app-中米家设备无响应的问题请检查家里的wifi设置是不是245g合并了建议只打开24g"><a class="header" href="#如果出现-home-app-中米家设备无响应的问题请检查家里的wifi设置是不是245g合并了建议只打开24g">如果出现 Home APP 中米家设备无响应的问题，请检查家里的wifi设置，是不是2.4/5G合并了，建议只打开2.4G</a></h2>
 <div style="break-before: page; page-break-before: always;"></div><p>PostgreSQL数据库的设计架构是高度复杂且灵活的，它支持广泛的数据类型和高级功能，包括事务完整性、并发控制、故障恢复和高度的可扩展性。PostgreSQL的设计架构可以分为几个关键组件：</p>
 <h3 id="1-server-process-architecture"><a class="header" href="#1-server-process-architecture">1. Server Process Architecture</a></h3>
 <ul>

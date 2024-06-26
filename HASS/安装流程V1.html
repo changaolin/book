@@ -186,14 +186,18 @@ pip3 install --upgrade wheel homeassistant
 OR
 	pip install wheel homeassistant --no-cache-dir
 
-
+# 出现 HTTPSConnectionPool(host='www.piwheels.org', port=443): Read timed out.
+	export PIP_DEFAULT_TIMEOUT=1200
+OR
+	pip install --default-timeout=1200 xxx
 </code></pre>
 <h1 id="安装-homeassistant"><a class="header" href="#安装-homeassistant">安装 homeassistant</a></h1>
 <p>https://pypi.org/project/homeassistant/</p>
 <h1 id="home-assistant-安装-hacs"><a class="header" href="#home-assistant-安装-hacs"><a href="https://juejin.cn/post/7134636720892739598">Home Assistant 安装 HACS</a></a></h1>
 <h2 id="下载地址"><a class="header" href="#下载地址"><a href="https://github.com/hacs/integration/releases/">下载地址</a></a></h2>
 <pre><code> # wget -q -O - https://install.hacs.xyz | bash -
-
+# pip install securesystemslib==0.31.0
+# https://www.reddit.com/r/homeassistant/comments/1cimhub/tried_to_enable_hacs_on_fresh_installation_got/
 在Home Assistant根目录创建custom_components与www文件
 官方下载的将hacs文件移入custom_components文件夹
 下载整合包的将custom_components与www移入Home Assistant根目录
@@ -525,6 +529,12 @@ exit 0
 sudo crontab -l
 10 1 * * * /sbin/reboot
 </code></pre>
+<h1 id="查看网速"><a class="header" href="#查看网速">查看网速</a></h1>
+<pre><code class="language-bash">apt install nload
+sudo nload -m # wlan0 -m
+</code></pre>
+<h1 id="问题处理"><a class="header" href="#问题处理">问题处理</a></h1>
+<h2 id="如果出现-home-app-中米家设备无响应的问题请检查家里的wifi设置是不是245g合并了建议只打开24g"><a class="header" href="#如果出现-home-app-中米家设备无响应的问题请检查家里的wifi设置是不是245g合并了建议只打开24g">如果出现 Home APP 中米家设备无响应的问题，请检查家里的wifi设置，是不是2.4/5G合并了，建议只打开2.4G</a></h2>
 
                     </main>
 
