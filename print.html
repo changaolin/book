@@ -2999,7 +2999,81 @@ reboot
 <h3 id="10-普通用户使用摄像头"><a class="header" href="#10-普通用户使用摄像头">10. 普通用户使用摄像头</a></h3>
 <pre><code class="language-bash">sudo usermod -aG video $USER # 将用户加入video组
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="esp-rs"><a class="header" href="#esp-rs"><a href="https://github.com/esp-rs">ESP-RS</a></a></h1>
+<div style="break-before: page; page-break-before: always;"></div><p><a href="https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/index.html">ESP32-IDF</a></p>
+<pre><code class="language-shell">sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+
+
+mkdir -p ~/esp
+cd ~/esp
+git clone --recursive https://github.com/espressif/esp-idf.git
+
+cd ~/esp/esp-idf
+./install.sh all
+# or 国内
+cd ~/esp/esp-idf
+export IDF_GITHUB_ASSETS=&quot;dl.espressif.cn/github_assets&quot;
+./install.sh
+
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
+
+
+cd ~/esp
+cp -r $IDF_PATH/examples/get-started/hello_world .
+# Linux 操作系统： 以 /dev/tty 开头 -- /ttyUSB0
+# macOS 操作系统： 以 /dev/cu. 开头
+
+idf.py build
+
+# 权限问题 https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/get-started/establish-serial-connection.html#linux-dialout-group
+sudo usermod -a -G dialout $USER
+
+idf.py -p PORT flash
+# PORT = /dev/ttyUSB0
+idf.py -p PORT monitor
+
+# OR
+
+idf.py -p PORT flash monitor
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><p><a href="https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/index.html">ESP32-IDF</a></p>
+<pre><code class="language-shell">sudo apt-get install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+
+
+mkdir -p ~/esp
+cd ~/esp
+git clone --recursive https://github.com/espressif/esp-idf.git
+
+cd ~/esp/esp-idf
+./install.sh all
+# or 国内
+cd ~/esp/esp-idf
+export IDF_GITHUB_ASSETS=&quot;dl.espressif.cn/github_assets&quot;
+./install.sh
+
+alias get_idf='. $HOME/esp/esp-idf/export.sh'
+
+
+cd ~/esp
+cp -r $IDF_PATH/examples/get-started/hello_world .
+# Linux 操作系统： 以 /dev/tty 开头 -- /ttyUSB0
+# macOS 操作系统： 以 /dev/cu. 开头
+
+idf.py build
+
+# 权限问题 https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32c3/get-started/establish-serial-connection.html#linux-dialout-group
+sudo usermod -a -G dialout $USER
+
+idf.py -p PORT flash
+# PORT = /dev/ttyUSB0
+idf.py -p PORT monitor
+
+# OR
+
+idf.py -p PORT flash monitor
+
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="esp-rs"><a class="header" href="#esp-rs"><a href="https://github.com/esp-rs">ESP-RS</a></a></h1>
 <h2 id="book"><a class="header" href="#book"><a href="https://narukara.github.io/rust-on-esp-book-zh-cn/">book</a></a></h2>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hass"><a class="header" href="#hass">HASS</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="hass安装"><a class="header" href="#hass安装"><a href="https://www.home-assistant.io/installation/raspberrypi">HASS安装</a></a></h1>
