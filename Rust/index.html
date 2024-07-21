@@ -148,6 +148,43 @@
 # 卸载 rustup self uninstall
 rustup default stable # 安装 工具链
 </code></pre>
+<h1 id="国内源"><a class="header" href="#国内源"><a href="https://sammyne.github.io/rustup-cn/#%E8%83%8C%E6%99%AF">国内源</a></a></h1>
+<pre><code class="language-shell"># 可以把以下两行添加到 ~/.bashrc 等文件，使之成为全局环境变量，这样后续所有 rustup 或 cargo 命令均会使用此环境变量
+export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# 适用于未把 RUSTUP_UPDATE_ROOT 和 RUSTUP_DIST_SERVER 添加到 ~/.bashrc 的场景
+# rust 安装后，会创建文件 $HOME/.cargo/env，支持通过此文件配置其包管理工具 cargo。为了以后都从国内镜像源下载包，可以将上面的环境变量加入到 $HOME/.cargo/env 文件
+echo &quot;RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup&quot;  &gt;&gt; ~./ .cargo/env
+
+# 使用国内镜像加速更新 crate 拉取
+# ~/.cargo/config
+
+[source.crates-io]
+registry = &quot;https://github.com/rust-lang/crates.io-index&quot;
+
+# 替换成你偏好的镜像源
+# replace-with = 'sjtu'
+replace-with = 'ustc'
+
+# 清华大学
+[source.tuna]
+registry = &quot;https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git&quot;
+
+# 中国科学技术大学
+[source.ustc]
+registry = &quot;git://mirrors.ustc.edu.cn/crates.io-index&quot;
+
+# 上海交通大学
+[source.sjtu]
+registry = &quot;https://mirrors.sjtug.sjtu.edu.cn/git/crates.io-index&quot;
+
+# rustcc社区
+[source.rustcc]
+registry = &quot;git://crates.rustcc.cn/crates.io-index&quot;
+</code></pre>
 
                     </main>
 
