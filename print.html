@@ -4876,6 +4876,320 @@ foundryup: installed - chisel 0.2.0 (805d7ce 2024-12-04T00:23:11.640018000Z)
 foundryup: done!
 </code></pre>
 <h1 id="demo"><a class="header" href="#demo"><a href="https://leapwhale.com/zh/tag/foundry">Demo</a></a></h1>
+<h1 id="使用"><a class="header" href="#使用">使用</a></h1>
+<h2 id="初始化----三种"><a class="header" href="#初始化----三种">初始化 -- 三种</a></h2>
+<pre><code class="language-shell"># 创建新项目
+forge init hello_foundry
+
+# 使用项目模板
+git clone https://github.com/PaulRBerg/foundry-template
+cd foundry-template
+forge install
+bun install
+
+# 从链上clone
+forge clone 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 WETH9
+</code></pre>
+<h2 id="soldeer---------xyz"><a class="header" href="#soldeer---------xyz"><a href="https://github.com/mario-eth/soldeer">soldeer</a>    --   <a href="https://soldeer.xyz">xyz</a></a></h2>
+<pre><code class="language-shell">forge soldeer init
+forge soldeer install @openzeppelin-contracts~5.0.2
+forge soldeer uninstall
+forge soldeer push
+</code></pre>
+<h2 id="依赖相关"><a class="header" href="#依赖相关">依赖相关</a></h2>
+<pre><code class="language-shell"># 安装依赖
+forge install transmissions11/solmate
+
+# 重映射 依赖
+forge remappings
+
+# 管理重映射
+forge remappings &gt; remappings.txt
+-- OR -- 
+remappings.txt &lt; EOF
+@solmate-utils/=lib/solmate/src/utils/
+&lt;EOF
+# import {LibString} from &quot;@solmate-utils/LibString.sol&quot;;
+
+# 兼容 Haddhat
+ --hh
+</code></pre>
+<h2 id="forge-test"><a class="header" href="#forge-test"><a href="https://learnblockchain.cn/docs/foundry/i18n/zh/tutorials/best-practices.html">forge test</a></a></h2>
+<pre><code class="language-shell">forge test
+forge test --match-contract ComplicatedContractTest --match-test test_Deposit
+forge test --match-path test/ContractB.t.sol
+forge test * -v[vvv] --warch --run-all
+forge test --rerun  # 回放失败的用例
+forge test --gas-report
+forge test --match-test testBurn --gas-report
+</code></pre>
+<pre><code class="language-solidity">// 测试函数必须具有external或public可见性。 声明为internal或 private 不会被 Forge 选中，即使它们以 test 为前缀。
+
+pragma solidity 0.8.10;
+
+import {Test} from &quot;forge-std/Test.sol&quot;;
+
+contract ContractBTest is Test {
+    uint256 testNumber;
+
+    function setUp() public {
+        testNumber = 42;
+    }
+
+    function test_NumberIs42() public {
+        assertEq(testNumber, 42);
+    }
+		// expect
+    function test_CannotSubtract43() public {
+        vm.expectRevert(stdError.arithmeticError);
+        testNumber -= 43;
+    }
+}
+
+
+// 多test用例关联
+// testC 被配置为使用由 testA 和 setB(uint256) 函数修改的状态
+contract ContractTest is Test {
+    uint256 a;
+    uint256 b;
+
+    function beforeTestSetup(
+        bytes4 testSelector
+    ) public pure returns (bytes[] memory beforeTestCalldata) {
+        if (testSelector == this.testC.selector) {
+            beforeTestCalldata = new bytes[](2);
+            beforeTestCalldata[0] = abi.encodePacked(this.testA.selector);
+            beforeTestCalldata[1] = abi.encodeWithSignature(&quot;setB(uint256)&quot;, 1);
+        }
+    }
+
+    function testA() public {
+        require(a == 0);
+        a += 1;
+    }
+
+    function setB(uint256 value) public {
+        b = value;
+    }
+
+    function testC() public {
+        assertEq(a, 1);
+        assertEq(b, 1);
+    }
+}
+
+// 共享
+abstract contract HelperContract {
+    address constant IMPORTANT_ADDRESS = 0x543d...;
+    SomeContract someContract;
+    constructor() {...}
+}
+
+contract MyContractTest is Test, HelperContract {
+    function setUp() public {
+        someContract = new SomeContract(0, IMPORTANT_ADDRESS);
+        ...
+    }
+}
+
+contract MyOtherContractTest is Test, HelperContract {
+    function setUp() public {
+        someContract = new SomeContract(1000, IMPORTANT_ADDRESS);
+        ...
+    }
+}
+</code></pre>
+<h2 id="forge-debug"><a class="header" href="#forge-debug">forge debug</a></h2>
+<pre><code class="language-shell">forge test --debug $FUNC  # forge test --debug &quot;testSomething()&quot;
+# forge debug
+forge debug --debug src/SomeContract.sol --sig &quot;myFunc(uint256,string)&quot; 123 &quot;你好&quot; --target-contract
+
+General
+q: 退出 debugger
+h: 显示帮助
+
+Navigating calls
+0-9 + k：向后移动数次（或者用鼠标向上滚动）
+0-9 + j：向前走几步（或者用鼠标向下滚动）
+g: 移动到事务的开头
+G：移至事务末尾
+c：移至上一个调用类型指令（即 CALL、STATICCALL、[DELEGATECALL][op- delegatecall] 和 CALLCODE）。
+C: 移动到下一个调用类型指令
+a: 移动到上一个 JUMP 或 JUMPI 指令
+s: 移动到下一个 JUMPDEST 指令
+' + a-z: 移动到由 vm.breakpoint 作弊码设置的 &lt;char&gt; 断点
+
+Navigating memory
+Ctrl + j：向下滚动内存视图
+Ctrl + k：向上滚动内存视图
+m: 将内存显示为 UTF8
+
+Navigating the stack
+J：向下滚动堆栈视图
+K：向上滚动堆栈视图
+t: 在堆栈上显示标签以查看当前操作将消耗哪些项
+</code></pre>
+<p>![截屏2024-12-07 21.49.53](/Users/cal/Library/Application Support/typora-user-images/截屏2024-12-07 21.49.53.png)</p>
+<h2 id="作弊码cheatcodes"><a class="header" href="#作弊码cheatcodes"><a href="https://learnblockchain.cn/docs/foundry/i18n/zh/forge/cheatcodes.html#%E4%BD%9C%E5%BC%8A%E7%A0%81cheatcodes">作弊码（Cheatcodes）</a></a></h2>
+<h2 id="标准库----六部分"><a class="header" href="#标准库----六部分">标准库 -- 六部分</a></h2>
+<pre><code class="language-solidity">import {Vm} from &quot;forge-std/Vm.sol&quot;;
+import {console} from &quot;forge-std/console.sol&quot;;
+import {console2} from &quot;forge-std/console2.sol&quot;; // 不兼容hardhat
+import {Test} from &quot;forge-std/Test.sol&quot;;
+// 六部分
+// Std Logs
+// Std Assertions
+// Std Cheats
+// Std Errors
+// Std Storage
+// Std Math
+</code></pre>
+<h2 id="forge-create-部署"><a class="header" href="#forge-create-部署">forge create 部署</a></h2>
+<pre><code class="language-shell">forge create 
+	--rpc-url &lt;your_rpc_url&gt; 
+	--private-key &lt;your_private_key&gt;
+	--constructor-args &quot;name&quot; &quot;symbol&quot; 18 1000000000000000000000 # 标志将参数传递给构造函数
+	--verify
+	src/MyContract.sol:MyContract
+
+# 验证合约
+forge verify-contract
+	--watch
+	--chain-id 11155111
+  --num-of-optimizations 1000000
+  --watch
+  --constructor-args $(cast abi-encode &quot;constructor(string,string,uint256,uint256)&quot; &quot;ForgeUSD&quot; &quot;FUSD&quot; 18 1000000000000000000000)
+  --etherscan-api-key &lt;your_etherscan_api_key&gt;
+  --compiler-version v0.8.10+commit.fc410830
+  &lt;the_contract_address&gt;
+  src/MyToken.sol:MyToken 
+
+# 查询验证结果
+forge verify-check --chain-id 11155111 &lt;GUID&gt; &lt;your_etherscan_api_key&gt;
+</code></pre>
+<pre><code class="language-solidity">// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.0;
+
+import {ERC20} from &quot;solmate/tokens/ERC20.sol&quot;;
+
+contract MyToken is ERC20 {
+    constructor(
+        string memory name,
+        string memory symbol,
+        uint8 decimals, // 18
+        uint256 initialSupply // 1000000000000000000000
+    ) ERC20(name, symbol, decimals) {
+        _mint(msg.sender, initialSupply);
+    }
+}
+
+</code></pre>
+<h2 id="forge-snapshot----gas"><a class="header" href="#forge-snapshot----gas">forge snapshot -- Gas</a></h2>
+<pre><code class="language-shell">foundry.toml &lt; EOF
+gas_reports = [&quot;MyContract&quot;, &quot;MyContractFactory&quot;]
+--OR--
+gas_reports = [&quot;*&quot;]
+--AND--
+gas_reports_ignore = [&quot;Example&quot;]
+&lt;EOF
+
+forge test --gas-report
+forge snapshot
+cat .gas-snapshot
+
+forge snapshot --snap &lt;FILE_NAME&gt; --asc --desc --min &lt;VALUE&gt; --max &lt;VALUE&gt;
+
+forge snapshot --diff .gas-snapshot2
+forge snapshot --check .gas-snapshot2
+</code></pre>
+<h2 id="cast"><a class="header" href="#cast">Cast</a></h2>
+<p>Cast 是 Foundry 用于执行以太坊 RPC 调用的命令行工具。 你可以进行智能合约调用、发送交易或检索任何类型的链数据——所有这些都来自你的命令行！</p>
+<pre><code class="language-shell">cast &lt;subcommand&gt;
+
+# 检索 DAI 代币的总供应量
+cast call 0x6b175474e89094c44da98b954eedeac495271d0f &quot;totalSupply()(uint256)&quot; --rpc-url https://eth-mainnet.alchemyapi.io/v2/Lc7oIGYeL_QvInzI0Wiu_pOZZDEKBrdf
+
+# 解码 calldata
+cast 4byte-decode 0x1F1F897F676d00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e7
+
+# 在两个 Anvil 帐户之间发送消息
+cast send --private-key &lt;Your Private Key&gt; 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc $(cast from-utf8 &quot;hello world&quot;) --rpc-url http://127.0.0.1:8545/
+
+</code></pre>
+<h2 id="anvil"><a class="header" href="#anvil">Anvil</a></h2>
+<p>Anvil 是 Foundry 附带的本地测试网节点。</p>
+<pre><code class="language-shell">anvil
+anvil -h
+
+#  Number of dev accounts to generate and configure. [default: 10]
+anvil -a, --accounts &lt;ACCOUNTS&gt;
+
+# The EVM hardfork to use. [default: latest]
+anvil --hardfork &lt;HARDFORK&gt;
+
+# Port number to listen on. [default: 8545]
+anvil  -p, --port &lt;PORT&gt;
+</code></pre>
+<h2 id="chisel"><a class="header" href="#chisel">Chisel</a></h2>
+<p>Chisel 是随 Foundry 提供的高级 Solidity REPL。它可用于在本地或分叉网络上快速测试 Solidity 片段。</p>
+<h2 id="cicd"><a class="header" href="#cicd">CICD</a></h2>
+<pre><code class="language-shell">GitHub Actions  &lt; EOF
+
+on: [push]
+name: test
+jobs:
+  check:
+    name: Foundry project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Run tests
+        run: forge test -vvv
+
+ &lt; EOF
+ 
+ 
+Travis CI &lt; EOF
+
+language: rust
+cache:
+  cargo: true
+  directories:
+    - $HOME/.foundry
+
+install:
+  - curl -L https://foundry.paradigm.xyz | bash
+  - export PATH=$PATH:$HOME/.foundry/bin
+  - foundryup -b master
+
+script:
+  - forge test -vvv
+
+&lt; EOF
+
+
+#  https://docs.gitlab.com/runner/executors/docker.html#how-pull-policies-work
+GitLab CI &lt; EOF
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+jobs:
+  image: ghcr.io/foundry-rs/foundry
+  script:
+    - forge install
+    - forge test -vvv
+
+&lt; EOF
+</code></pre>
 
                     </main>
 
