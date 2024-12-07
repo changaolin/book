@@ -5129,6 +5129,52 @@ anvil --hardfork &lt;HARDFORK&gt;
 
 # Port number to listen on. [default: 8545]
 anvil  -p, --port &lt;PORT&gt;
+
+# 分叉主网
+anvil --fork-url https://mainnet.infura.io/v3/$INFURA_KEY
+</code></pre>
+<h2 id="cast--anivl----test"><a class="header" href="#cast--anivl----test">Cast &amp;&amp; Anivl -- Test</a></h2>
+<pre><code class="language-shell">anvil --fork-url https://mainnet.infura.io/v3/$INFURA_KEY
+export ALICE=0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266
+export DAI=0x6b175474e89094c44da98b954eedeac495271d0f
+export LUCKY_USER=0xfc2eE3bD619B7cfb2dE2C797b96DeeCbD7F68e46
+
+$ cast call $DAI \
+  &quot;balanceOf(address)(uint256)&quot; \
+  $ALICE
+0
+
+
+$ cast call $DAI \
+  &quot;balanceOf(address)(uint256)&quot; \
+  $UNLUCKY_USER
+21840114973524208109322438
+
+
+# This calls Anvil and lets us impersonate our lucky user
+$ cast rpc anvil_impersonateAccount $UNLUCKY_USER
+$ cast send $DAI \
+--unlocked \
+--from $UNLUCKY_USER \
+  &quot;transfer(address,uint256)(bool)&quot; \
+  $ALICE \
+  300000000000000000000000 \
+  --unlocked
+blockHash               0xbf31c45f6935a0714bb4f709b5e3850ab0cc2f8bffe895fefb653d154e0aa062
+blockNumber             15052891
+...
+
+# 检查交易是否有效
+$ cast call $DAI \
+  &quot;balanceOf(address)(uint256)&quot; \
+  $ALICE
+300000000000000000000000
+
+$ cast call $DAI \
+  &quot;balanceOf(address)(uint256)&quot; \
+  $UNLUCKY_USER
+21540114973524208109322438
+
 </code></pre>
 <h2 id="chisel"><a class="header" href="#chisel">Chisel</a></h2>
 <p>Chisel 是随 Foundry 提供的高级 Solidity REPL。它可用于在本地或分叉网络上快速测试 Solidity 片段。</p>
@@ -5189,6 +5235,54 @@ jobs:
     - forge test -vvv
 
 &lt; EOF
+</code></pre>
+<h2 id="script"><a class="header" href="#script">Script</a></h2>
+<pre><code class="language-shell">.env &lt; EOF
+SEPOLIA_RPC_URL=
+PRIVATE_KEY=
+ETHERSCAN_API_KEY=
+&lt; EOF
+
+foundry.toml &lt; EOF
+
+[rpc_endpoints]
+sepolia = &quot;${SEPOLIA_RPC_URL}&quot;
+
+[etherscan]
+sepolia = { key = &quot;${ETHERSCAN_API_KEY}&quot; }
+
+&lt; EOF
+
+source .env
+forge script --chain sepolia script/NFT.s.sol:MyScript --rpc-url $SEPOLIA_RPC_URL --broadcast --verify -vvvv
+
+
+anvil
+forge script script/NFT.s.sol:MyScript --fork-url http://localhost:8545 --broadcast
+-- OR --
+
+MNEMONIC= &gt;&gt; .env
+source .env
+
+anvil -m $MNEMONIC
+forge script script/NFT.s.sol:MyScript --fork-url http://localhost:8545 --broadcast
+</code></pre>
+<pre><code class="language-solidity">// SPDX-License-Identifier: UNLICENSED
+pragma solidity ^0.8.13;
+
+import {Script} from &quot;forge-std/Script.sol&quot;;
+import {NFT} from &quot;../src/NFT.sol&quot;;
+
+contract MyScript is Script {
+    function run() external {
+        uint256 deployerPrivateKey = vm.envUint(&quot;PRIVATE_KEY&quot;);
+        vm.startBroadcast(deployerPrivateKey);
+
+        NFT nft = new NFT(&quot;NFT_tutorial&quot;, &quot;TUT&quot;, &quot;baseUri&quot;);
+
+        vm.stopBroadcast();
+    }
+}
 </code></pre>
 
                     </main>
