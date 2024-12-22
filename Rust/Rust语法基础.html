@@ -1,0 +1,472 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rust语法基础 - 梦北</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="学习笔记">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">README</a></li><li class="chapter-item expanded "><a href="../CPP/index.html"><strong aria-hidden="true">1.</strong> CPP学习笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../CPP/Object.html"><strong aria-hidden="true">1.1.</strong> 类</a></li><li class="chapter-item expanded "><a href="../CPP/STL.html"><strong aria-hidden="true">1.2.</strong> STL</a></li><li class="chapter-item expanded "><a href="../CPP/Thread.html"><strong aria-hidden="true">1.3.</strong> Thread</a></li><li class="chapter-item expanded "><a href="../CPP/TCP_socket.html"><strong aria-hidden="true">1.4.</strong> TCP_Socket</a></li><li class="chapter-item expanded "><a href="../CPP/C++11.html"><strong aria-hidden="true">1.5.</strong> C++11</a></li><li class="chapter-item expanded "><a href="../CPP/EMC++.html"><strong aria-hidden="true">1.6.</strong> Effective Modern C++</a></li></ol></li><li class="chapter-item expanded "><a href="../Programmer/index.html"><strong aria-hidden="true">2.</strong> 程序员笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Programmer/pkg_config.html"><strong aria-hidden="true">2.1.</strong> PKG-CONFIG</a></li></ol></li><li class="chapter-item expanded "><a href="../Media/index.html"><strong aria-hidden="true">3.</strong> 流媒体笔记</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Media/ffmpeg_cmd.html"><strong aria-hidden="true">3.1.</strong> FFMPEG 命令行学习笔记</a></li><li class="chapter-item expanded "><a href="../Media/ffmpeg_install.html"><strong aria-hidden="true">3.2.</strong> FFMPEG 安装 MACOS</a></li><li class="chapter-item expanded "><a href="../Media/cmake.html"><strong aria-hidden="true">3.3.</strong> CMAKE 模板</a></li><li class="chapter-item expanded "><a href="../Media/yuvplayer.html"><strong aria-hidden="true">3.4.</strong> YUVPLayer Demo(C)</a></li><li class="chapter-item expanded "><a href="../Media/pcmplayer.html"><strong aria-hidden="true">3.5.</strong> PCMPLayer Demo(C)</a></li></ol></li><li class="chapter-item expanded "><a href="../Redis/index.html"><strong aria-hidden="true">4.</strong> Redis</a></li><li class="chapter-item expanded "><a href="../NET/index.html"><strong aria-hidden="true">5.</strong> NET</a></li><li class="chapter-item expanded "><a href="../Vim/index.html"><strong aria-hidden="true">6.</strong> VIM</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Vim/ccls.html"><strong aria-hidden="true">6.1.</strong> CCLS</a></li></ol></li><li class="chapter-item expanded "><a href="../Romanic/index.html"><strong aria-hidden="true">7.</strong> 四大浪漫</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Romanic/zoo.html"><strong aria-hidden="true">7.1.</strong> 计算机组成原理</a></li><li class="chapter-item expanded "><a href="../Romanic/os.html"><strong aria-hidden="true">7.2.</strong> 操作系统实战笔记</a></li></ol></li><li class="chapter-item expanded "><a href="../Tools/index.html"><strong aria-hidden="true">8.</strong> 工具</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Tools/Verilog.html"><strong aria-hidden="true">8.1.</strong> Verilog on MAC</a></li><li class="chapter-item expanded "><a href="../Tools/Rules.html"><strong aria-hidden="true">8.2.</strong> Verilog语法规则</a></li></ol></li><li class="chapter-item expanded "><a href="../WEB/index.html"><strong aria-hidden="true">9.</strong> Web</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../WEB/WebAssembly.html"><strong aria-hidden="true">9.1.</strong> WebAssembly</a></li><li class="chapter-item expanded "><a href="../WEB/NVM.html"><strong aria-hidden="true">9.2.</strong> NVM</a></li></ol></li><li class="chapter-item expanded "><a href="../Tools/index.html"><strong aria-hidden="true">10.</strong> Tools</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Tools/gparted.html"><strong aria-hidden="true">10.1.</strong> gparted</a></li><li class="chapter-item expanded "><a href="../Tools/VSCodeServer.html"><strong aria-hidden="true">10.2.</strong> VsCodeServer</a></li></ol></li><li class="chapter-item expanded "><a href="../ROS2/index.html"><strong aria-hidden="true">11.</strong> ROS2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../ROS2/ros2_qt_demo构建流程.html"><strong aria-hidden="true">11.1.</strong> ros2_qt_demo</a></li><li class="chapter-item expanded "><a href="../ROS2/Desktop.html"><strong aria-hidden="true">11.2.</strong> ros2_destop_jazzy</a></li><li class="chapter-item expanded "><a href="../ROS2/PX4.html"><strong aria-hidden="true">11.3.</strong> px4</a></li><li class="chapter-item expanded "><a href="../ROS2/人脸识别2.html"><strong aria-hidden="true">11.4.</strong> ros2人脸识别</a></li><li class="chapter-item expanded "><a href="../ROS2/Raspi-camera-ubuntu.html"><strong aria-hidden="true">11.5.</strong> 树莓派+Ubuntu+Camera</a></li></ol></li><li class="chapter-item expanded "><a href="../esp32/ESP32-IDF.html"><strong aria-hidden="true">12.</strong> ESP32</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../esp32/ESP32-IDF.html"><strong aria-hidden="true">12.1.</strong> ESP-IDF</a></li><li class="chapter-item expanded "><a href="../esp32/ESP-RS.html"><strong aria-hidden="true">12.2.</strong> ESP-RS</a></li><li class="chapter-item expanded "><a href="../esp32/ESP8266.html"><strong aria-hidden="true">12.3.</strong> ESP8266</a></li></ol></li><li class="chapter-item expanded "><a href="../HASS/index.html"><strong aria-hidden="true">13.</strong> HASS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../HASS/安装流程V1.html"><strong aria-hidden="true">13.1.</strong> HASS安装</a></li></ol></li><li class="chapter-item expanded "><a href="../PostgreSQL/index.html"><strong aria-hidden="true">14.</strong> PostgreSQL</a></li><li class="chapter-item expanded "><a href="../Docker/index.html"><strong aria-hidden="true">15.</strong> Docker</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Docker/postgresql.html"><strong aria-hidden="true">15.1.</strong> Postgresql</a></li></ol></li><li class="chapter-item expanded "><a href="../Rust/index.html"><strong aria-hidden="true">16.</strong> Rust</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Rust/mini_redis.html"><strong aria-hidden="true">16.1.</strong> MiniRedis</a></li><li class="chapter-item expanded "><a href="../Rust/Tauri.html"><strong aria-hidden="true">16.2.</strong> Tauri</a></li><li class="chapter-item expanded "><a href="../Rust/Rust语法基础.html" class="active"><strong aria-hidden="true">16.3.</strong> Rust语法基础</a></li><li class="chapter-item expanded "><a href="../Rust/Rust常用三方库.html"><strong aria-hidden="true">16.4.</strong> Rust常用三方库</a></li></ol></li><li class="chapter-item expanded "><a href="../Chain/index.html"><strong aria-hidden="true">17.</strong> Chain</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../Chain/Foundry.html"><strong aria-hidden="true">17.1.</strong> Foundry</a></li><li class="chapter-item expanded "><a href="../Chain/SolidityBase.html"><strong aria-hidden="true">17.2.</strong> Solidity基础</a></li><li class="chapter-item expanded "><a href="../Chain/DistributedSystem.html"><strong aria-hidden="true">17.3.</strong> DistributedSystem.md</a></li><li class="chapter-item expanded "><a href="../Chain/Solana.html"><strong aria-hidden="true">17.4.</strong> Solana</a></li></ol></li><li class="chapter-item expanded "><a href="../LLM/index.html"><strong aria-hidden="true">18.</strong> LLM</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../LLM/Trandformer.html"><strong aria-hidden="true">18.1.</strong> Transformer</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">梦北</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="rust-语法基础"><a class="header" href="#rust-语法基础">Rust 语法基础</a></h1>
+<h2 id="数据类型"><a class="header" href="#数据类型">数据类型</a></h2>
+<h3 id="数字类型"><a class="header" href="#数字类型">数字类型</a></h3>
+<ul>
+<li>整型
+<ul>
+<li>u64</li>
+<li>u32</li>
+<li>i32</li>
+</ul>
+</li>
+<li>浮点型
+<ul>
+<li>f32</li>
+<li>f64</li>
+</ul>
+</li>
+</ul>
+<h3 id="bool类型"><a class="header" href="#bool类型">bool类型</a></h3>
+<ul>
+<li>Bool</li>
+</ul>
+<h3 id="字符相关类型"><a class="header" href="#字符相关类型">字符相关类型</a></h3>
+<ul>
+<li>Char</li>
+<li>Str</li>
+<li>字面量</li>
+</ul>
+<h3 id="聚合类型"><a class="header" href="#聚合类型">聚合类型</a></h3>
+<h4 id="点形"><a class="header" href="#点形">点形</a></h4>
+<h4 id="线形"><a class="header" href="#线形">线形</a></h4>
+<ul>
+<li>向量</li>
+<li>Vec</li>
+<li>元组</li>
+<li>切片</li>
+<li>String</li>
+</ul>
+<h4 id="树形"><a class="header" href="#树形">树形</a></h4>
+<h4 id="网形"><a class="header" href="#网形">网形</a></h4>
+<ul>
+<li>Map</li>
+</ul>
+<h3 id="组合类型"><a class="header" href="#组合类型">组合类型</a></h3>
+<ul>
+<li>
+<p>Enum</p>
+<ul>
+<li>
+<p>Option</p>
+</li>
+<li>
+<p>Result</p>
+</li>
+<li>
+<p>模式匹配</p>
+<ul>
+<li>
+<p>match</p>
+</li>
+<li>
+<p>ref</p>
+</li>
+<li>
+<p>mut ref</p>
+</li>
+<li>
+<p>@</p>
+<ul>
+<li>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 使用 @ 左边的变量名，匹配其右边的模式 -- 别名
+val @ 0 ..= 99
+ref circle @ Shape::Circle { .. }  
+<span class="boring">}</span></code></pre></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>&amp;</p>
+</li>
+<li>
+<p>｜</p>
+</li>
+<li>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>x if x * x &lt; r2 // 守卫表达式
+<span class="boring">}</span></code></pre></pre>
+</li>
+<li>
+<p>_ : 通配符</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Struct</p>
+<ul>
+<li>
+<p>具名</p>
+</li>
+<li>
+<p>元组结构体</p>
+</li>
+<li>
+<p>单元型</p>
+</li>
+<li>
+<p><code>#[repr(C)]</code> : 兼容C的内存布局</p>
+</li>
+<li>
+<p>带常量的泛型结构体</p>
+<ul>
+<li>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// N - 1 次多项式
+struct Polynomial&lt;const N: usize&gt; {
+    ///  多项式的系数
+    ///  对于多项式 a + bx + cx&lt;sup&gt;2&lt;/sup&gt; + ... + zx&lt;sup&gt;n-1&lt;/sup&gt;，其第`i`个元素是 x&lt;sup&gt;i&lt;/sup&gt;的系数
+    coefficients: [f64; N]
+}
+
+impl&lt;const N: usize&gt; Polynomial&lt;N&gt; {
+    fn new(coefficients: [f64; N]) -&gt; Polynomial&lt;N&gt; {
+        Polynomial { coefficients }
+    }
+
+    ///  计算`x`处的多项式的值
+    fn eval(&amp;self, x: f64) -&gt; f64 {
+        //  秦九韶算法在数值计算上稳定、高效且简单：
+        // c&lt;sub&gt;0&lt;/sub&gt; + x(c&lt;sub&gt;1&lt;/sub&gt; + x(c&lt;sub&gt;2&lt;/sub&gt; + x(c&lt;sub&gt;3&lt;/sub&gt; + ... x(c[n-1] + x c[n]))))
+        let mut sum = 0.0;
+        for i in (0..N).rev() {
+            sum = self.coefficients[i] + x * sum;
+        }
+
+        sum
+    }
+}
+
+use std::f64::consts::FRAC_PI_2;   // π/2
+
+//  用近似法对`sin`函数求值：sin x ≅ x - 1/6 x³ + 1/120 x&lt;sup&gt;5&lt;/sup&gt;
+//  误差几乎为 0，相当精确！
+let sine_poly = Polynomial::new([0.0, 1.0, 0.0, -1.0/6.0, 0.0,
+                                 1.0/120.0]);
+assert_eq!(sine_poly.eval(0.0), 0.0);
+assert!((sine_poly.eval(FRAC_PI_2) - 1.).abs() &lt; 0.005);
+<span class="boring">}</span></code></pre></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="依赖类型"><a class="header" href="#依赖类型">依赖类型</a></h3>
+<ul>
+<li>
+<p>胖指针</p>
+<ul>
+<li>Raw Pointer</li>
+<li>对该指针操作需要的必要的参数：长度，容量等</li>
+</ul>
+</li>
+<li>
+<p>智能指针</p>
+<ul>
+<li>Raw Pointer</li>
+<li>生命周期管理</li>
+</ul>
+</li>
+<li>
+<p>借用(生命周期)</p>
+<ul>
+<li>写所有权</li>
+<li>读所有权</li>
+<li>释放所有权</li>
+</ul>
+</li>
+</ul>
+<h3 id="函数类型"><a class="header" href="#函数类型">函数类型</a></h3>
+<ul>
+<li>表达式
+<ul>
+<li>表达式有值，而语句没有
+<ul>
+<li>所以 Rust中<code>if</code>和<code>macth</code>可以生成值，而C中他们是语句，不能生成值。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>trait -- 特型</li>
+<li>trait object</li>
+<li>闭包</li>
+<li>高级函数
+<ul>
+<li>map</li>
+<li>filter</li>
+</ul>
+</li>
+<li>...</li>
+</ul>
+<h2 id="语法结构"><a class="header" href="#语法结构">语法结构</a></h2>
+<h3 id="注释"><a class="header" href="#注释">注释</a></h3>
+<blockquote>
+<p>///</p>
+<p>//!</p>
+<p>#![doc = include_str!(&quot;../README.md&quot;)]</p>
+<p>\ ```no_run</p>
+</blockquote>
+<h3 id="组织结构"><a class="header" href="#组织结构">组织结构</a></h3>
+<ul>
+<li>
+<p>mod</p>
+</li>
+<li>
+<p>crate</p>
+<ul>
+<li>use</li>
+</ul>
+</li>
+<li>
+<p>mut</p>
+</li>
+<li>
+<p>let</p>
+</li>
+<li>
+<p>生命周期</p>
+</li>
+<li>
+<p>unsafe</p>
+</li>
+<li>
+<p>宏 -- 位置待定</p>
+</li>
+<li>
+<p>pub</p>
+</li>
+<li>
+<p>crate</p>
+</li>
+</ul>
+<h3 id="顺序结构"><a class="header" href="#顺序结构">顺序结构</a></h3>
+<ul>
+<li>fn</li>
+<li>impl</li>
+</ul>
+<h3 id="条件结构"><a class="header" href="#条件结构">条件结构</a></h3>
+<ul>
+<li>if</li>
+<li>if let</li>
+<li>match</li>
+</ul>
+<h3 id="跳转结构"><a class="header" href="#跳转结构">跳转结构</a></h3>
+<ul>
+<li>while</li>
+<li>for</li>
+<li>loop
+<ul>
+<li><code>!</code></li>
+</ul>
+</li>
+<li>break</li>
+<li>continue</li>
+<li>return</li>
+</ul>
+<h2 id="迭代器"><a class="header" href="#迭代器">迭代器</a></h2>
+<ul>
+<li>iter()</li>
+<li>iter_mut()</li>
+<li>into_iter()</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../Rust/Tauri.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../Rust/Rust常用三方库.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../Rust/Tauri.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../Rust/Rust常用三方库.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </body>
+</html>
