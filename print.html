@@ -6353,35 +6353,190 @@ contract.on('Withdrawn', (user, amount) =&gt; {
 <li>A reliable algorithm for electing a proposer must use either randomness or real time—for example, by using timeouts. However, safety is ensured regardless of the success or failure of the election.</li>
 </ul>
 <h2 id="三paxos-算法实现"><a class="header" href="#三paxos-算法实现">三、Paxos 算法实现</a></h2>
-<div style="break-before: page; page-break-before: always;"></div><div style="break-before: page; page-break-before: always;"></div><h1 id="struct"><a class="header" href="#struct">Struct</a></h1>
-<ul>
-<li>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="error"><a class="header" href="#error">Error</a></h1>
+<h1 id="问题1"><a class="header" href="#问题1">问题1</a></h1>
+<h2 id="问题描述"><a class="header" href="#问题描述">问题描述</a></h2>
+<p>cargo_build_sbf] Failed to install platform-tools: HTTP status client error (404 Not Found) for url (https://github.com/anza-xyz/platform-tools/releases/download/v1.42/platform-tools-osx-x86_64.tar.bz2)</p>
+<h2 id="解决办法"><a class="header" href="#解决办法">解决办法：</a></h2>
+<p>https://github.com/anza-xyz/platform-tools?tab=readme-ov-file#building</p>
+<pre><code class="language-bash">git clone https://github.com/anza-xyz/platform-tools.git
+./build.sh
+</code></pre>
+<h2 id="降低版本"><a class="header" href="#降低版本">降低版本</a></h2>
+<p>https://github.com/solana-labs/solana/releases?q=1.18&amp;expanded=true</p>
+<h2 id="参考链接"><a class="header" href="#参考链接">参考链接</a></h2>
+<p>https://github.com/anza-xyz/agave/issues/3566</p>
+<p>https://github.com/anza-xyz/platform-tools/issues/83</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="模型训练"><a class="header" href="#模型训练">模型训练</a></h1>
 <h2 id="transformer"><a class="header" href="#transformer">Transformer</a></h2>
+<h2 id="encoder-only"><a class="header" href="#encoder-only">Encoder Only</a></h2>
+<h2 id="decoder-only"><a class="header" href="#decoder-only">Decoder Only</a></h2>
+<h2 id="rlhf"><a class="header" href="#rlhf">RLHF</a></h2>
+<h2 id="评估"><a class="header" href="#评估">评估</a></h2>
 <ul>
-<li>Tokenizer</li>
-<li>PE</li>
-<li>Attention Layer</li>
-<li>Norm</li>
-<li>FFN</li>
-<li>Encoding Layer</li>
-<li>Decoding Layer</li>
-<li>Mask</li>
+<li>C-EVAL</li>
 </ul>
-</li>
-</ul>
-<h1 id="action-2"><a class="header" href="#action-2">Action</a></h1>
+<h2 id="分布式训练"><a class="header" href="#分布式训练">分布式训练</a></h2>
+<h1 id="rag"><a class="header" href="#rag">RAG</a></h1>
+<p>![截屏2025-04-19 15.47.23](/Users/cal/Library/Application Support/typora-user-images/截屏2025-04-19 15.47.23.png)</p>
+<h1 id="模型推理"><a class="header" href="#模型推理">模型推理</a></h1>
+<h2 id="微调"><a class="header" href="#微调">微调</a></h2>
 <ul>
 <li>
-<h2 id="train"><a class="header" href="#train">Train</a></h2>
+<p>LoRA/QLoRA</p>
+<p>$W` = W + A * B $</p>
 </li>
 <li>
-<h2 id="opti"><a class="header" href="#opti">Opti</a></h2>
+<p>P Tuning  v1/v2</p>
 </li>
 <li>
-<h2 id="并行"><a class="header" href="#并行">并行</a></h2>
+<p>Fine Tuning</p>
+</li>
+<li>
+<p>Prefix Tuning</p>
+</li>
+<li>
+<p>Prompt Tuning</p>
+</li>
+<li>
+<p>Freeze</p>
+</li>
+<li>
+<p>open-retrievals 微调框架</p>
 </li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="transformer-1"><a class="header" href="#transformer-1">Transformer</a></h1>
+<h2 id="裁剪"><a class="header" href="#裁剪">裁剪</a></h2>
+<h2 id="量化"><a class="header" href="#量化">量化</a></h2>
+<h2 id="蒸馏"><a class="header" href="#蒸馏">蒸馏</a></h2>
+<h2 id="上下文扩容"><a class="header" href="#上下文扩容">上下文扩容</a></h2>
+<ul>
+<li>FlashAttention</li>
+</ul>
+<h2 id="加速"><a class="header" href="#加速">加速</a></h2>
+<ul>
+<li>DeepSpeed</li>
+</ul>
+<h1 id="agent使用"><a class="header" href="#agent使用">Agent使用</a></h1>
+<h2 id="rag-1"><a class="header" href="#rag-1">RAG</a></h2>
+<h2 id="agents"><a class="header" href="#agents">Agents</a></h2>
+<h1 id="领域"><a class="header" href="#领域">领域</a></h1>
+<h2 id="金融"><a class="header" href="#金融">金融</a></h2>
+<h2 id="医疗"><a class="header" href="#医疗">医疗</a></h2>
+<h2 id="客服"><a class="header" href="#客服">客服</a></h2>
+<h1 id="分词"><a class="header" href="#分词">分词</a></h1>
+<ul>
+<li>词表扩充</li>
+</ul>
+<h1 id="text-splitter"><a class="header" href="#text-splitter">Text Splitter</a></h1>
+<h1 id="embedding"><a class="header" href="#embedding">Embedding</a></h1>
+<ul>
+<li>text2vec</li>
+<li>openai-text-embedding</li>
+<li>m3e</li>
+<li>bge</li>
+<li>bce</li>
+<li>MTEB榜单</li>
+</ul>
+<h1 id="vector-store"><a class="header" href="#vector-store">Vector Store</a></h1>
+<ul>
+<li>
+<p>Faiss</p>
+</li>
+<li>
+<p>向量化</p>
+</li>
+<li>
+<p>存储</p>
+</li>
+<li>
+<p>search</p>
+</li>
+<li>
+<p>召回</p>
+<ul>
+<li>多路召回
+<ul>
+<li>文本召回：分词，预处理，倒排索引
+<ul>
+<li>词袋模型</li>
+<li>IDF 逆文档频率</li>
+<li>TF-IDF</li>
+</ul>
+</li>
+<li>向量召回</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>排序</p>
+</li>
+</ul>
+<h1 id="normalization"><a class="header" href="#normalization">Normalization</a></h1>
+<ul>
+<li>Layer Norm</li>
+<li>RMS Norm</li>
+</ul>
+<h1 id="激活函数"><a class="header" href="#激活函数">激活函数</a></h1>
+<ul>
+<li>
+<p>ReLU</p>
+</li>
+<li>
+<p>SwiGLU</p>
+</li>
+</ul>
+<h1 id="position-embedding"><a class="header" href="#position-embedding">Position Embedding</a></h1>
+<ul>
+<li>sin/cos</li>
+<li>RoPE</li>
+</ul>
+<h1 id="attention"><a class="header" href="#attention">Attention</a></h1>
+<ul>
+<li>MHA</li>
+<li>GQA</li>
+<li>MQA</li>
+</ul>
+<h1 id="损失函数"><a class="header" href="#损失函数">损失函数</a></h1>
+<ul>
+<li></li>
+</ul>
+<h1 id="optimizer"><a class="header" href="#optimizer">Optimizer</a></h1>
+<ul>
+<li>AdamW</li>
+</ul>
+<h1 id="projects"><a class="header" href="#projects">Projects</a></h1>
+<h2 id="transformer-1"><a class="header" href="#transformer-1">Transformer</a></h2>
+<ul>
+<li>Layer Norm</li>
+<li>ReLU</li>
+</ul>
+<h2 id="meta-llamagpt-3"><a class="header" href="#meta-llamagpt-3">Meta-LLaMA(GPT-3)</a></h2>
+<ul>
+<li>RMSNorm</li>
+<li>SwiGLU</li>
+<li>RoPE</li>
+<li>token
+<ul>
+<li>1 2048</li>
+<li>2 4096</li>
+</ul>
+</li>
+<li>GQA</li>
+</ul>
+<h2 id="stanford-alpaca"><a class="header" href="#stanford-alpaca">Stanford Alpaca</a></h2>
+<ul>
+<li>Self-Instruct</li>
+</ul>
+<h2 id="chatglm"><a class="header" href="#chatglm">ChatGLM</a></h2>
+<ul>
+<li>FlashAttention</li>
+<li></li>
+</ul>
+<h2 id="deepspeed-chat"><a class="header" href="#deepspeed-chat">DeepSpeed-Chat</a></h2>
+<h2 id="deepseek"><a class="header" href="#deepseek">DeepSeek</a></h2>
+<h1 id="多模态"><a class="header" href="#多模态">多模态</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="transformer-2"><a class="header" href="#transformer-2">Transformer</a></h1>
 
                     </main>
 
